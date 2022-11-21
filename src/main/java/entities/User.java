@@ -1,21 +1,27 @@
+package entities;
+
 public class User {
-    private int[] homeCooridnates;
+    private int homeLongitude;
+    private int homeLatitude;
+
     private String email;
     private String name;
     private int uid;
     public User(int[] coords, String userEmail, String name, int uid){
-        this.homeCooridnates = coords;
+        this.homeLatitude = coords[0];
+        this.homeLongitude = coords[1];
         this.email = userEmail;
         this.name = name;
         this.uid = uid;
     }
 
-    public int[] getHomeCooridnates() {
-        return homeCooridnates;
+    public int[] getHomeCoordinates() {
+        return new int[]{this.homeLatitude, this.homeLongitude};
     }
 
-    public void setHomeCooridnates(int[] homeCooridnates) {
-        this.homeCooridnates = homeCooridnates;
+    public void setHomeCoordinates(int[] homeCoordinates) {
+        this.homeLatitude = homeCoordinates[0];
+        this.homeLongitude = homeCoordinates[1];
     }
 
     public String getEmail() {
