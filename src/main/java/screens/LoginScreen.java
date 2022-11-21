@@ -7,16 +7,18 @@ import java.awt.event.ActionListener;
 
 public class LoginScreen extends JPanel implements ActionListener {
 
-    /*LoginController controller;*/
+    private LoginController controller;
+    JTextField usernameField;
+    JTextField passwordField;
 
-    public LoginScreen(/*LoginController controller*/){
-        /*this.controller = controller;*/
+    public LoginScreen(LoginController controller){
+        this.controller = controller;
         JLabel title = new JLabel("Login");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel usernameLabel = new JLabel("Username");
-        JTextField usernameField = new JTextField(15);
+        this.usernameField = new JTextField(15);
         JLabel passwordLabel = new JLabel("Password");
-        JTextField passwordField = new JTextField(15);
+        this.passwordField = new JTextField(15);
         JPanel usernamePanel = new JPanel();
         usernamePanel.add(usernameLabel);
         usernamePanel.add(usernameField);
@@ -35,6 +37,12 @@ public class LoginScreen extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand());
+        try{
+            this.controller.login(this.usernameField.getText(), this.passwordField.getText());
+            JOptionPane.showMessageDialog(this, this.usernameField.getText() + "logged in");
+        }catch(Exception loginException){
+            JOptionPane.showMessageDialog(this, loginException.getMessage());
+        }
     }
 
 }
