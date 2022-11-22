@@ -36,7 +36,6 @@ public class LoginScreen extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
         try{
             this.controller.login(this.usernameField.getText(), this.passwordField.getText());
             JOptionPane.showMessageDialog(this, this.usernameField.getText() + "logged in");

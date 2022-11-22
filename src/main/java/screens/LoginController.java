@@ -10,8 +10,10 @@ public class LoginController {
         this.inputBoundary = inputBoundary;
     }
 
-     LoginResponse login(String username, String password){
+     LoggedInScreen login(String username, String password){
         LoginRequest request = new LoginRequest(username, password);
-        return inputBoundary.login(request);
+        LoginResponse response = inputBoundary.login(request);
+        LoggedInScreen updatedScreen = new LoggedInScreen(response);
+        return updatedScreen;
     }
 }
