@@ -31,6 +31,8 @@ public class LoginScreen extends JPanel implements ActionListener, Screen {
         this.add(usernamePanel);
         this.add(passwordPanel);
         this.add(loginBtn);
+
+
     }
 
     @Override
