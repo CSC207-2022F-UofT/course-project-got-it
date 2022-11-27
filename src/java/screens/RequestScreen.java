@@ -30,14 +30,14 @@ public class RequestScreen extends JPanel implements ActionListener {
         JLabel title = new JLabel("Delivery Request");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel itemsInfo = new LabelTextPanel(
-                new JLabel("Enter items for delivery"), items);
-        LabelTextPanel itemNotesInfo = new LabelTextPanel(
-                new JLabel("Enter any item details/notes"), itemNotes);
-        LabelTextPanel deliveryAddressInfo = new LabelTextPanel(
-                new JLabel("Enter delivery address"), deliveryAddress);
-        LabelTextPanel deliveryNotesInfo = new LabelTextPanel(
-                new JLabel("Enter any delivery requests/notes"), deliveryNotes);
+        JLabel itemsInfo = new JLabel("Enter items for delivery");
+        this.items = new JTextField[10];
+        JLabel itemNotesInfo = new JLabel("Enter any item details/notes");
+        this.itemNotes = new JTextField();
+        JLabel deliveryAddressInfo = new JLabel("Enter delivery address");
+        this.deliveryAddress = new JTextField();
+        JLabel deliveryNotesInfo = new JLabel("Enter any delivery requests/notes");
+        this.deliveryNotes = new JTextField();
 
         JButton submit = new JButton("Submit Request");
         JButton cancel = new JButton("Cancel Request");
