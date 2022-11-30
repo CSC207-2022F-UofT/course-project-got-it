@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginScreen extends JPanel implements ActionListener {
+public class LoginScreen extends JPanel implements ActionListener, Screen {
 
     private LoginController controller;
     JTextField emailField;
