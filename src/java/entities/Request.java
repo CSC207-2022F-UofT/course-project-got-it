@@ -4,11 +4,11 @@ package entities;
 
 public class Request {
 
-    private String[] items;
-    private String itemNotes;
-    private String itemAddress;
-    private String deliveryAddress;
-    private String deliveryNotes;
+    private final String[] items;
+    private final String itemNotes;
+    private final String itemAddress;
+    private final String deliveryAddress;
+    private final String deliveryNotes;
 
     Request(String[] items, String itemNotes, String itemAddress, String deliveryAddress,
             String deliveryNotes) {
