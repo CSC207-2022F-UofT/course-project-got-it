@@ -8,20 +8,32 @@ import javax.swing.*;
 import java.awt.*;
 
 public class App {
+
+    private final String mongoURI;
+    private CardLayout cardLayout;
+    public JPanel screens;
+
+    public App(){
+        this.mongoURI = System.getenv("MONGOURI");
+        this.cardLayout = new CardLayout();
+        this.screens = new JPanel(cardLayout);
+    }
     public static void main(String[] args){
-        String mongoURI = System.getenv("MONGOURI");
-        JFrame application = new JFrame("Got It");
-        CardLayout cardLayout = new CardLayout();
-        JPanel screens = new JPanel(cardLayout);
-        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame mainFrame = new JFrame("Got It");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        App application = new App();
+        application.showLogin();
+        mainFrame.add(application.screens);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
+    }
+
+    public void showLogin(){
         LoginDBGateway dbGateway = new DatabaseUser(mongoURI);
         LoginInputBoundary inputBoundary = new LoginInteractor(dbGateway);
         LoginController loginController = new LoginController(inputBoundary);
         LoginScreen login = new LoginScreen(loginController);
-        screens.add(login, "login");
-        cardLayout.show(screens, "login");
-        application.add(screens);
-        application.pack();
-        application.setVisible(true);
+        this.screens.add(login, "login");
+        this.cardLayout.show(screens, "login");
     }
 }
