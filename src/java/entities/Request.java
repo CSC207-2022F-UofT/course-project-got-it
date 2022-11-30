@@ -1,47 +1,32 @@
 package entities;
 
-import java.util.ArrayList;
+// Entity layer
+
 public class Request {
 
-    private ArrayList<String> items;
-
+    private String[] items;
     private String itemNotes;
-
+    private String itemAddress;
     private String deliveryAddress;
+    private String deliveryNotes;
 
-    public ArrayList<String> getItems() {
-        return items;
-    }
-
-    public void setItems(ArrayList<String> items) {
+    Request(String[] items, String itemNotes, String itemAddress, String deliveryAddress,
+            String deliveryNotes) {
         this.items = items;
-    }
-
-    public String getItemNotes() {
-        return itemNotes;
-    }
-
-    public void setItemNotes(String itemNotes) {
         this.itemNotes = itemNotes;
-    }
-
-    public String getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(String deliveryAddress) {
+        this.itemAddress = itemAddress;
         this.deliveryAddress = deliveryAddress;
-    }
-
-    public String getDeliveryNotes() {
-        return deliveryNotes;
-    }
-
-    public void setDeliveryNotes(String deliveryNotes) {
         this.deliveryNotes = deliveryNotes;
     }
 
-    private String deliveryNotes;
-
+    public String[] getItems() {
+        return items;
+    }
+    public String getItemNotes() { return itemNotes; }
+    public String getItemAddress() { return itemAddress; }
+    public String getDeliveryAddress() { return deliveryAddress; }
+    public String getDeliveryNotes() {
+        return deliveryNotes;
+    }
 
 }
