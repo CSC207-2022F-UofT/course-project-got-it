@@ -1,11 +1,11 @@
 package LoginUseCase;
 
-import entities.User;
+import screens.Presenter;
 
 public class LoginInteractor implements LoginInputBoundary{
 
-    private final LoginDBGateway gateway;
-    public LoginInteractor(LoginDBGateway dbGateway){
+    private final DatabaseGateway gateway;
+    public LoginInteractor(DatabaseGateway dbGateway){
         this.gateway = dbGateway;
     }
     @Override

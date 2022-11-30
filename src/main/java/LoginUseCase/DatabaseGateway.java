@@ -1,6 +1,6 @@
 package LoginUseCase;
 
-public interface LoginDBGateway {
+public interface DatabaseGateway {
     boolean validateAndLogin(String email, String password);
 
 }

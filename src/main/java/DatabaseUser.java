@@ -4,17 +4,14 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 import com.mongodb.*;
 import com.mongodb.client.*;
-import LoginUseCase.LoginDBGateway;
+import LoginUseCase.DatabaseGateway;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Updates;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 
-import java.util.ArrayList;
-
-public class DatabaseUser implements LoginDBGateway{
+public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
     private MongoCollection<Document> usersCollection;
 
