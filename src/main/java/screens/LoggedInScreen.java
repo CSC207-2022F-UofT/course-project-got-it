@@ -10,18 +10,17 @@ import java.awt.event.ActionListener;
 
 public class LoggedInScreen extends JPanel implements ActionListener {
 
-    public LoggedInScreen(){
-        JLabel title = new JLabel("Got It");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-    }
-
     public LoggedInScreen(LoginResponse response) {
         JLabel title = new JLabel("Got It");
-        JLabel username = new JLabel(response.getEmail());
-        JLabel loggedIn = new JLabel("Logged In");
+        JLabel loggedIn;
+        if(response.isLoggedIn()){
+            loggedIn = new JLabel("Logged In");
+        }
+        else{
+            loggedIn = new JLabel("Not Logged In");
+        }
         this.add(title);
         this.add(loggedIn);
-        this.add(username);
     }
 
 

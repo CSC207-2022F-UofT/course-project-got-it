@@ -2,10 +2,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.ServerApi;
-import com.mongodb.ServerApiVersion;
+import com.mongodb.*;
 import com.mongodb.client.*;
 import LoginUseCase.LoginDBGateway;
 import com.mongodb.client.model.Filters;
@@ -33,28 +30,23 @@ public class DatabaseUser implements LoginDBGateway{
                         .serverApi(ServerApi.builder()
                                 .version(ServerApiVersion.V1).build())
                         .build();
-        try(MongoClient mongoClient = MongoClients.create(settings)){
-            MongoDatabase mainDB = mongoClient.getDatabase("main");
-            this.usersCollection = mainDB.getCollection("users");
-        }catch(Exception e) {
-            System.out.println(e);
-        }
+        MongoClient mongoClient = MongoClients.create(settings);
+        MongoDatabase mainDB = mongoClient.getDatabase("main");
+        this.usersCollection = mainDB.getCollection("users");
     }
 
     @Override
     public boolean validateAndLogin(String email, String password) {
-        System.out.println("here");
+        System.out.println("test");
         Bson filter = Filters.and(Filters.eq("email", email),Filters.eq("password", password));
-        boolean loggedIn = (boolean) usersCollection.find(filter).first().get("loggedIn");
-        if(usersCollection.countDocuments(filter) == 1 && loggedIn){
-            try{
-                Bson updateLogIn = Updates.set("loggedIn", true);
-                usersCollection.updateOne(filter, updateLogIn);
+        try{
+            if(this.usersCollection.countDocuments(filter) == 1){
+                System.out.println("test123");
                 return true;
-            }catch(Exception loginFailure){
-                return false;
-            }
-        };
+            };
+        } catch (MongoException me) {
+            System.err.println("An error occurred: " + me);
+        }
         return false;
     }
 }

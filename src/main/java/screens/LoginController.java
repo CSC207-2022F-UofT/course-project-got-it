@@ -13,7 +13,6 @@ public class LoginController {
      LoggedInScreen login(String username, String password){
         LoginRequest request = new LoginRequest(username, password);
         LoginResponse response = inputBoundary.login(request);
-        LoggedInScreen updatedScreen = new LoggedInScreen(response);
-        return updatedScreen;
+        return new LoggedInScreen(response);
     }
 }
