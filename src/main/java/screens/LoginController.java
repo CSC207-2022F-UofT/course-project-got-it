@@ -6,13 +6,20 @@ import LoginUseCase.LoginResponse;
 public class LoginController {
 
     final LoginInputBoundary inputBoundary;
-    public LoginController(LoginInputBoundary inputBoundary){
+    private Presenter presenter;
+    public LoginController(LoginInputBoundary inputBoundary, Presenter presenter){
         this.inputBoundary = inputBoundary;
+        this.presenter = presenter;
     }
 
-     LoggedInScreen login(String username, String password){
+     public void login(String username, String password){
         LoginRequest request = new LoginRequest(username, password);
         LoginResponse response = inputBoundary.login(request);
-        return new LoggedInScreen(response);
+        if(response.isLoggedIn()){
+            this.presenter.addScreen(new LoggedInScreen(response));
+        }
+        else{
+            this.presenter.addScreen(new LoginFailed());
+        }
     }
 }
