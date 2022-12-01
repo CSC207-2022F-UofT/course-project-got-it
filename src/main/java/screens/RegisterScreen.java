@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class RegisterScreen extends JPanel implements ActionListener {
+public class RegisterScreen extends JPanel implements ActionListener, Screen {
 
     private RegisterController controller;
 
@@ -15,9 +15,7 @@ public class RegisterScreen extends JPanel implements ActionListener {
     JTextField passwordField;
     JTextField repeatpasswordField;
 
-    public RegisterScreen(RegisterController controller) {
-        this.controller = controller;
-
+    public RegisterScreen() {
         JLabel title = new JLabel("Register Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel emailLabel = new JLabel("Email");
@@ -62,5 +60,10 @@ public class RegisterScreen extends JPanel implements ActionListener {
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(this, exception.getMessage());
         }
+    }
+
+    @Override
+    public void setController(Controller controller) {
+        this.controller = (RegisterController) controller;
     }
 }
