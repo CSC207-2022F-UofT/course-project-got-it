@@ -1,5 +1,5 @@
 package screens;
 
 public interface PresenterObserver {
-    public void updateScreen(Screen newScreen);
+    public void updateScreen(String screenName, Screen newScreen);
 }

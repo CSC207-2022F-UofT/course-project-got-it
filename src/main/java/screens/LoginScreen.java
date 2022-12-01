@@ -11,8 +11,7 @@ public class LoginScreen extends JPanel implements ActionListener, Screen {
     JTextField emailField;
     JTextField passwordField;
 
-    public LoginScreen(LoginController controller){
-        this.controller = controller;
+    public LoginScreen(){
         JLabel title = new JLabel("Login");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel usernameLabel = new JLabel("Email");
@@ -32,6 +31,11 @@ public class LoginScreen extends JPanel implements ActionListener, Screen {
         this.add(usernamePanel);
         this.add(passwordPanel);
         this.add(loginBtn);
+    }
+
+    @Override
+    public void setController(Controller controller) {
+        this.controller = (LoginController) controller;
     }
 
     @Override

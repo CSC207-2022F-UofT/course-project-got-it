@@ -1,5 +1,7 @@
 package LoginUseCase;
 
+import screens.Presenter;
+
 public interface LoginInputBoundary {
-    LoginResponse login(LoginRequest loginRequest);
+    void login(LoginRequest loginRequest);
 }

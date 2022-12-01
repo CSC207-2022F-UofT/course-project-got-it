@@ -2,21 +2,23 @@ package LoginUseCase;
 
 import screens.Presenter;
 
-public class LoginInteractor implements LoginInputBoundary{
+public class LoginInteractor implements LoginInputBoundary, Interactor{
 
     private final DatabaseGateway gateway;
-    public LoginInteractor(DatabaseGateway dbGateway){
+    private final Presenter presenter;
+    public LoginInteractor(DatabaseGateway dbGateway, Presenter presenter){
         this.gateway = dbGateway;
+        this.presenter = presenter;
     }
     @Override
-    public LoginResponse login(LoginRequest loginRequest) {
+    public void login(LoginRequest loginRequest) {
         if(gateway.validateAndLogin(loginRequest.getEmail(), loginRequest.getPassword())){
             System.out.println("logged in");
-            return new LoginResponse(true, loginRequest.getEmail(), loginRequest.getPassword());
+            this.presenter.loginSuccess(new LoginResponse(true,
+                    loginRequest.getEmail(), loginRequest.getPassword()));
         }
         else{
-            System.out.println("Not logged in");
-            return new LoginResponse(false);
+            this.presenter.loginFailed();
         }
     }
 }
