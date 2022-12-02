@@ -36,6 +36,29 @@ public class Presenter{
             screenObserver.updateScreen(this.currentScreen, this.screens.get(this.currentScreen));
         }
     }
+    public void showHomescreen(){
+        screens.Homescreen homescreen = new screens.Homescreen();
+        this.currentScreen = "homescreen";
+        addScreen(this.currentScreen, homescreen);
+    }
+    public void to_profile(){
+        Profilescreen profilescreen = new Profilescreen();
+        this.currentScreen = "profile";
+        addScreen(this.currentScreen, profilescreen);
+    }
+
+    public void to_Newrequest(){
+        Newrequestscreen newrequestscreen = new Newrequestscreen();
+        this.currentScreen = "newrequest";
+        addScreen(this.currentScreen, newrequestscreen);
+    }
+
+    public void to_Pastrequests(){
+        screens.Pastrequestsscreen pastrequestsscreen = new screens.Pastrequestsscreen();
+        this.currentScreen = "pastrequests";
+        addScreen(this.currentScreen, pastrequestsscreen);
+    }
+
 
     public void registerFailView(){
         RegisterFailed registerFailed = new RegisterFailed();
