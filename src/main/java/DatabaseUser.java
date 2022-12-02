@@ -4,7 +4,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 import com.mongodb.*;
 import com.mongodb.client.*;
-import LoginUseCase.DatabaseGateway;
+import dbGateway.DatabaseGateway;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;

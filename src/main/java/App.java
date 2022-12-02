@@ -1,5 +1,4 @@
-import LoginUseCase.DatabaseGateway;
-import LoginUseCase.Interactor;
+import dbGateway.DatabaseGateway;
 import LoginUseCase.LoginInputBoundary;
 import LoginUseCase.LoginInteractor;
 import screens.*;
@@ -7,7 +6,6 @@ import screens.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-import java.util.List;
 
 public class App implements PresenterObserver {
 
