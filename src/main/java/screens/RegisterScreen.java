@@ -56,7 +56,6 @@ public class RegisterScreen extends JPanel implements ActionListener, Screen {
     public void actionPerformed(ActionEvent e) {
         try {
             this.controller.create(this.emailField.getText(), this.passwordField.getText(), this.repeatpasswordField.getText());
-            JOptionPane.showMessageDialog(this, this.emailField.getText() + "created");
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(this, exception.getMessage());
         }

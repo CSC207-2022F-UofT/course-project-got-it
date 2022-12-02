@@ -10,13 +10,12 @@ public class User {
     private String password;
     private String name;
     private String uid;
-    public User(int[] coords, String userEmail, String password, String name, String uid, boolean loggedIn){
+    public User(int[] coords, String userEmail, String password, String name, boolean loggedIn){
         this.password = password;
         this.homeLatitude = coords[0];
         this.homeLongitude = coords[1];
         this.email = userEmail;
         this.name = name;
-        this.uid = uid;
         this.loggedIn = loggedIn;
     }
 
@@ -51,14 +50,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
     }
 
     public String getName() {

@@ -1,5 +1,5 @@
 package RegisterUseCase;
 
 public interface RegisterInputBoundary {
-    RegisterResponse create(RegisterRequest registerRequest);
+    void create(RegisterRequest registerRequest);
 }
