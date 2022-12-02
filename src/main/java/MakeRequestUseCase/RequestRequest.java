@@ -43,7 +43,7 @@ public class RequestRequest {
     }
 
     public String getDescription() {
-        return email;
+        return this.description;
     }
 
     public void setReq_loc(String req_loc) {
