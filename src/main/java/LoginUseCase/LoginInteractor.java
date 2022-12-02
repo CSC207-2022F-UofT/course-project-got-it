@@ -1,5 +1,6 @@
 package LoginUseCase;
 
+import DatabaseGateway.DatabaseGateway;
 import screens.Presenter;
 
 public class LoginInteractor implements LoginInputBoundary, Interactor{
