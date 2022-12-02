@@ -37,10 +37,23 @@ public class Presenter{
         }
     }
 
-    public void start(){
+    public void registerFailView(){
+        RegisterFailed registerFailed = new RegisterFailed();
+        this.currentScreen = "registerFailed";
+        this.addScreen(this.currentScreen, registerFailed);
+
+    }
+
+    public void registerSuccessView(){
         LoginScreen loginScreen = new LoginScreen();
         this.currentScreen = "login";
         addScreen(this.currentScreen, loginScreen);
+    }
+
+    public void start(){
+        RegisterScreen registerScreen = new RegisterScreen();
+        this.currentScreen = "register";
+        addScreen(this.currentScreen, registerScreen);
     }
 
 

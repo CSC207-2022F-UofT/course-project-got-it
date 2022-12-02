@@ -1,33 +1,35 @@
 package RegisterUseCase;
 
+import DatabaseGateway.DatabaseGateway;
 import entities.User;
 import entities.UserFactory;
+import screens.Presenter;
 
 public class RegisterInteractor implements RegisterInputBoundary {
-    private final RegisterDBGateway gateway;
+    private final DatabaseGateway gateway;
     private final UserFactory factory;
-    private final RegisterPresenter presenter;
+    private final Presenter presenter;
 
-    public RegisterInteractor(RegisterDBGateway DBgateway, UserFactory factory, RegisterPresenter presenter){
+    public RegisterInteractor(DatabaseGateway DBgateway, UserFactory factory, Presenter presenter){
         this.gateway = DBgateway;
         this.factory = factory;
         this.presenter = presenter;
     }
 
     @Override
-    public RegisterResponse create(RegisterRequest request){
+    public void create(RegisterRequest request){
         if (gateway.exists(request.getEmail())){
-            return presenter.makeFailView();
+            presenter.registerFailView();
         } else if (!request.getPassword().equals(request.getRepeatPassword())) {
-            return presenter.makeFailView();
+            presenter.registerFailView();
         }
         int[] a = {1, 2};
-        User user = factory.create(a, request.getEmail(), request.getPassword(), "abc", "");
+        User user = factory.create(a, request.getEmail(), request.getPassword(), "abc");
 
-        RegisterDBRequest DBmodel = new RegisterDBRequest(user.getEmail(), user.getPassword());
+        RegisterDBRequest DBmodel = new RegisterDBRequest(user.getHomeCoordinates(), user.getEmail(), user.getPassword(), user.getName());
         gateway.save(DBmodel);
 
         RegisterResponse accountResponse = new RegisterResponse(user.getEmail());
-        return presenter.makeSuccessView();
+        presenter.registerSuccessView();
     }
 }
