@@ -17,7 +17,6 @@ public class Presenter{
         this.screenObservers = new ArrayList<PresenterObserver>();
         this.screens = new LinkedHashMap<String, Screen>();
     }
-
     public void loginSuccess(LoginResponse response){
         LoggedInScreen loginSuccess = new LoggedInScreen(response.getEmail());
         this.currentScreen = "loginSuccess";
@@ -47,6 +46,18 @@ public class Presenter{
         NewRequestScreen makeRequestScreen = new NewRequestScreen();
         this.currentScreen = "makeRequest";
         addScreen(this.currentScreen, makeRequestScreen);
+    }
+
+    public void showMakeRequestSuccess(){
+        RequestMadeScreen requestMadeScreen = new RequestMadeScreen();
+        this.currentScreen = "requestMade";
+        addScreen(this.currentScreen, requestMadeScreen);
+    }
+
+    public void showMakeRequestFail(){
+        RequestFailedScreen requestFailedScreen = new RequestFailedScreen();
+        this.currentScreen = "requestFailed";
+        addScreen(this.currentScreen, requestFailedScreen);
     }
 
     public void addScreen(String screenName, Screen screen){
