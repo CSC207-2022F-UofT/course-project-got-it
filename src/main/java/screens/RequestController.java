@@ -1,4 +1,4 @@
-package MakeRequestUseCase;
+package screens;
 import MakeRequestUseCase.RequestInputBoundary;
 import MakeRequestUseCase.RequestRequest;
 import MakeRequestUseCase.RequestResponse;
