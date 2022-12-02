@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 public class RequestFailedScreen extends JPanel implements Screen, ActionListener {
 
+    private Controller controller;
     public RequestFailedScreen(){
         JLabel title = new JLabel("Request Cannot Be Made");
         JLabel loggedIn = new JLabel("Request Not Made");
@@ -17,11 +18,11 @@ public class RequestFailedScreen extends JPanel implements Screen, ActionListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //To be implemented
     }
 
     @Override
     public void setController(Controller controller) {
-
+        this.controller = controller;
     }
 }
