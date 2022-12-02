@@ -1,3 +1,5 @@
+import MakeRequestUseCase.RequestInputBoundary;
+import MakeRequestUseCase.RequestInteractor;
 import dbGateway.DatabaseGateway;
 import LoginUseCase.LoginInputBoundary;
 import LoginUseCase.LoginInteractor;
@@ -24,6 +26,8 @@ public class App implements PresenterObserver {
         this.screenMap = new HashMap<>();
         this.screenMap.put("login", new LoginController(
                 (LoginInputBoundary)new LoginInteractor(this.dbGateway, this.presenter)));
+        this.screenMap.put("makeRequest", new RequestController(
+                (RequestInputBoundary) new RequestInteractor(this.dbGateway, this.presenter)));
     }
     public static void main(String[] args){
         JFrame mainFrame = new JFrame("Got It");
