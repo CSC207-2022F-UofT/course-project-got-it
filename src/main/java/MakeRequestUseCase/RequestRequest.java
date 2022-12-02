@@ -5,12 +5,13 @@ import java.util.List;
 
 public class RequestRequest {
 
-    private String req_loc, item_loc, description, requester;
-    public RequestRequest(String req_loc, String item_loc, String description, String requester){
+    private String req_loc, item_loc, description, requester, deliveryNotes;
+    public RequestRequest(String req_loc, String item_loc, String description, String requester, String deliveryNotes){
         this.req_loc = req_loc;
         this.item_loc = item_loc;
         this.description = description;
         this.requester = requester;
+        this.deliveryNotes = deliveryNotes;
     }
 
     public List<String> inputs(){
@@ -30,11 +31,11 @@ public class RequestRequest {
         return requester;
     }
 
-    public String setItem_loc(String item_loc) {
+    public String getItem_loc() {
         return item_loc;
     }
 
-    public void getItem_loc() {
+    public void setItem_loc(String item_loc) {
         this.item_loc = item_loc;
     }
 
@@ -52,5 +53,13 @@ public class RequestRequest {
 
     public String getReq_loc() {
         return req_loc;
+    }
+
+    public String getDeliveryNotes(){
+        return this.deliveryNotes;
+    }
+
+    public void setDeliveryNotes(String newNotes){
+        this.deliveryNotes = newNotes;
     }
 }
