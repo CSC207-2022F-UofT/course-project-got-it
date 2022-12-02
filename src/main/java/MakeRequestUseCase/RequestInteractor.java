@@ -2,14 +2,17 @@ package MakeRequestUseCase;
 
 import dbGateway.DatabaseGateway;
 import entities.User;
+import screens.Presenter;
 
 import java.util.List;
 
 public class RequestInteractor implements RequestInputBoundary{
 
     private final DatabaseGateway gateway;
-    public RequestInteractor(DatabaseGateway dbGateway){
+    private final Presenter presenter;
+    public RequestInteractor(DatabaseGateway dbGateway, Presenter presenter){
         this.gateway = dbGateway;
+        this.presenter = presenter;
     }
     @Override
     public RequestResponse request(RequestRequest requestRequest) { //check response validitiy
