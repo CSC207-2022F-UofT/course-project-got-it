@@ -9,19 +9,19 @@ public class RequestScreen extends JPanel implements ActionListener {
     /**
      * Array of items entered by the user
      */
-    JTextField[] items = new JTextField[10];
+    JTextField[] items;
     /**
      * Any details/notes for the items entered by the user
      */
-    JTextField itemNotes = new JTextField();
+    JTextField itemNotes;
     /**
      * The delivery address entered by the user
      */
-    JTextField deliveryAddress = new JTextField();
+    JTextField deliveryAddress;
     /**
      * Any delivery requests/notes entered by the user
      */
-    JTextField deliveryNotes = new JTextField();
+    JTextField deliveryNotes;
 
     /**
      * A window with a title and a JButton
