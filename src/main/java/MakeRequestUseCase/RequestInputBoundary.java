@@ -1,5 +1,5 @@
 package MakeRequestUseCase;
 
 public interface RequestInputBoundary {
-    RequestResponse request(RequestRequest requestRequest);
+    void request(RequestRequest requestRequest);
 }
