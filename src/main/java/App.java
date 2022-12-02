@@ -2,6 +2,7 @@ import LoginUseCase.DatabaseGateway;
 import LoginUseCase.Interactor;
 import LoginUseCase.LoginInputBoundary;
 import LoginUseCase.LoginInteractor;
+import HomescreenUseCase.HomescreenInteractor;
 import screens.*;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class App implements PresenterObserver {
         this.screens = new JPanel(cardLayout);
         this.dbGateway = new DatabaseUser(mongoURI);
         this.screenMap = new HashMap<>();
+        this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter)));
         this.screenMap.put("login", new LoginController(
                 (LoginInputBoundary)new LoginInteractor(this.dbGateway, this.presenter)));
     }
