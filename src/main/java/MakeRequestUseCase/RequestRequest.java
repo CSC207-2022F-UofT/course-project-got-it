@@ -1,5 +1,8 @@
 package MakeRequestUseCase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RequestRequest {
 
     private String req_loc, item_loc, description, requester;
@@ -10,8 +13,13 @@ public class RequestRequest {
         this.requester = requester;
     }
 
-    public List[String] inputs(){
-        return [req_loc, requester, item_loc, description]
+    public List<String> inputs(){
+        List<String> inputs = new ArrayList<>();
+        inputs.add(this.req_loc);
+        inputs.add(this.item_loc);
+        inputs.add(this.requester);
+        inputs.add(this.description);
+        return inputs;
     }
 
     public void setRequester(String requester) {
