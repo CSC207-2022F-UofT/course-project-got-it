@@ -2,6 +2,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
+import MakeRequestUseCase.RequestRequest;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import dbGateway.DatabaseGateway;
@@ -45,5 +46,10 @@ public class DatabaseUser implements DatabaseGateway {
             System.err.println("An error occurred: " + me);
         }
         return false;
+    }
+
+    @Override
+    public void storeRequestInfo(RequestRequest requestRequest) {
+
     }
 }
