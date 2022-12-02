@@ -15,13 +15,12 @@ public class RequestInteractor implements RequestInputBoundary{
         this.presenter = presenter;
     }
     @Override
-    public RequestResponse request(RequestRequest requestRequest) { //check response validitiy
-        if(checkForAnyEmptyField(requestRequest.inputs())){ // checks if any field is empty
-            gateway.storeRequestInfo(requestRequest); // store in DB (TO BE implemented)
-            return new RequestResponse(true);
+    public void request(RequestRequest requestRequest) { //check response validitiy
+        if(checkForAnyEmptyField(requestRequest.inputs()) && gateway.storeRequestInfo(requestRequest)){ // checks if any field is empty
+            this.presenter.showMakeRequestSuccess();
         }
-        else{ // if any required field is blank
-            return new RequestResponse(false);
+        else{
+            this.presenter.showMakeRequestFail();
         }
     }
 
