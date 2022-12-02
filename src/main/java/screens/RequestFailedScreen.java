@@ -1,16 +1,14 @@
 package screens;
 
-import MakeRequestUseCase.RequestResponse;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RequestMadeScreen extends JPanel implements ActionListener, Screen {
+public class RequestFailedScreen extends JPanel implements Screen, ActionListener {
 
-    public RequestMadeScreen(){
-        JLabel title = new JLabel("Request Has Been Made!");
-        JLabel loggedIn = new JLabel("Request Made");
+    public RequestFailedScreen(){
+        JLabel title = new JLabel("Request Cannot Be Made");
+        JLabel loggedIn = new JLabel("Request Not Made");
         JButton confirmBtn = new JButton("Ok");
         this.add(title);
         this.add(loggedIn);
