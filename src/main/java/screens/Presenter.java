@@ -43,6 +43,11 @@ public class Presenter{
         addScreen(this.currentScreen, loginScreen);
     }
 
+    public void showMakeRequest(){
+        NewRequestScreen makeRequestScreen = new NewRequestScreen();
+        this.currentScreen = "makeRequest";
+        addScreen(this.currentScreen, makeRequestScreen);
+    }
 
     public void addScreen(String screenName, Screen screen){
         this.screens.put(screenName, screen);
