@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RequestScreen extends JPanel implements ActionListener {
+public class RequestScreen extends JPanel implements ActionListener, Screen {
+
+    private Controller controller;
     /**
      * Array of items entered by the user
      */
@@ -62,5 +64,10 @@ public class RequestScreen extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    @Override
+    public void setController(Controller controller) {
+        this.controller = controller;
     }
 }
