@@ -3,7 +3,7 @@ import MakeRequestUseCase.RequestInputBoundary;
 import MakeRequestUseCase.RequestRequest;
 import MakeRequestUseCase.RequestResponse;
 
-public class RequestController {
+public class RequestController implements Controller {
 
     final RequestInputBoundary inputBoundary;
     public RequestController(RequestInputBoundary inputBoundary){
