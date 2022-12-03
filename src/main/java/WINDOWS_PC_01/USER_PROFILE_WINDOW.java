@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class User_Profile_Window extends JFrame implements ActionListener {
+public class USER_PROFILE_WINDOW extends JFrame implements ActionListener {
     // Uncomment the main method and run it to visualize the window. #PC_01.
     private final Canvas Background;
     private final JTextField Name;
@@ -26,7 +26,7 @@ public class User_Profile_Window extends JFrame implements ActionListener {
         this.Save.setOpaque(true);
         this.LP.setOpaque(true);
     }
-    public User_Profile_Window(String User_Email, String User_Password){
+    public USER_PROFILE_WINDOW(String User_Email, String User_Password){
         // For questions regarding constructor parameters please see below.
         assert User_Email != null;
         assert User_Password != null;
