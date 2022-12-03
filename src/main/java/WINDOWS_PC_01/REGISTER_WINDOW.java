@@ -23,6 +23,7 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
         this.Password_1.setOpaque(true);
     }
     public REGISTER_WINDOW(){
+        this.setTitle("REGISTER_WINDOW. ");
         this.Background = new Canvas(){
             @Override
             public void paint(Graphics g){
