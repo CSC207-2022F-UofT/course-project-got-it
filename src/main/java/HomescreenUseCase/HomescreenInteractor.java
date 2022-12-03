@@ -9,15 +9,15 @@ public class HomescreenInteractor {
     }
 
     public void navigateProfile(){
-        this.presenter.to_profile();
+        this.presenter.showProfile();
     }
 
     public void navigateNewrequest(){
-        this.presenter.to_Newrequest();
+        this.presenter.showMakeRequest();
     }
 
     public void navigatePastrequests(){
-        this.presenter.to_Pastrequests();
+        this.presenter.showPastRequests();
     }
 }
 
