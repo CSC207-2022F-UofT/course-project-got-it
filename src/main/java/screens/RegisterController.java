@@ -7,8 +7,8 @@ public class RegisterController {
     final RegisterInputBoundary inputBoundary;
 
     public RegisterController(RegisterInputBoundary inputBoundary) {this.inputBoundary = inputBoundary;}
-    RegisterResponse create(String email, String pass1, String pass2){
-        RegisterRequest request = new RegisterRequest(email, pass1, pass2);
+    RegisterResponse create(String name, double[] coords, String email, String pass1, String pass2){
+        RegisterRequest request = new RegisterRequest(name, coords, email, pass1, pass2);
 
         return inputBoundary.create(request);
     }
