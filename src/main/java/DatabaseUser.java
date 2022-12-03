@@ -13,8 +13,13 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.Set;
+
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
+    private HashMap<String, Object> loggedInUser;
 
     private MongoCollection<Document> usersCollection;
     private MongoCollection<Document> requestsCollection;
@@ -42,12 +47,26 @@ public class DatabaseUser implements DatabaseGateway {
         Bson filter = Filters.and(Filters.eq("email", email),Filters.eq("password", password));
         try{
             if(this.usersCollection.countDocuments(filter) == 1){
+                this.loggedInUser = new HashMap<>();
+                Document userQuery = this.usersCollection.find(filter).first();
+                Set<String> keys = Objects.requireNonNull(userQuery).keySet();
+                System.out.println("\n\n\n\n");
+                for(String key: keys){
+                    System.out.println(key);
+                    System.out.println(userQuery.get(key));
+                    this.loggedInUser.put(key, userQuery.get(key));
+                }
+                System.out.println("\n\n\n\n");
                 return true;
             };
         } catch (MongoException error) {
             System.err.println("An error occurred: " + error);
         }
         return false;
+    }
+    @Override
+    public HashMap<String, Object> getLoggedInUser(){
+        return this.loggedInUser;
     }
 
     @Override
