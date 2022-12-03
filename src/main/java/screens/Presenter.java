@@ -35,29 +35,61 @@ public class Presenter{
             screenObserver.updateScreen(this.currentScreen, this.screens.get(this.currentScreen));
         }
     }
+    public void showHomescreen(){
+        screens.Homescreen homescreen = new screens.Homescreen();
+        this.currentScreen = "homescreen";
+        addScreen(this.currentScreen, homescreen);
+    }
+    public void to_profile(){
+        Profilescreen profilescreen = new Profilescreen();
+        this.currentScreen = "profile";
+        addScreen(this.currentScreen, profilescreen);
+    }
 
-    public void start(){
+    public void to_Newrequest(){
+        Newrequestscreen newrequestscreen = new Newrequestscreen();
+        this.currentScreen = "newrequest";
+        addScreen(this.currentScreen, newrequestscreen);
+    }
+
+    public void to_Pastrequests(){
+        screens.Pastrequestsscreen pastrequestsscreen = new screens.Pastrequestsscreen();
+        this.currentScreen = "pastrequests";
+        addScreen(this.currentScreen, pastrequestsscreen);
+    }
+
+
+    public void registerFailView(){
+        RegisterFailed registerFailed = new RegisterFailed();
+        this.currentScreen = "registerFailed";
+        this.addScreen(this.currentScreen, registerFailed);
+
+    }
+
+    public void registerSuccessView(){
         LoginScreen loginScreen = new LoginScreen();
         this.currentScreen = "login";
         addScreen(this.currentScreen, loginScreen);
     }
-
     public void showMakeRequest(){
         NewRequestScreen makeRequestScreen = new NewRequestScreen();
         this.currentScreen = "makeRequest";
         addScreen(this.currentScreen, makeRequestScreen);
     }
-
     public void showMakeRequestSuccess(){
         RequestMadeScreen requestMadeScreen = new RequestMadeScreen();
         this.currentScreen = "requestMade";
         addScreen(this.currentScreen, requestMadeScreen);
     }
-
     public void showMakeRequestFail(){
         RequestFailedScreen requestFailedScreen = new RequestFailedScreen();
         this.currentScreen = "requestFailed";
         addScreen(this.currentScreen, requestFailedScreen);
+    }
+    public void start(){
+        RegisterScreen registerScreen = new RegisterScreen();
+        this.currentScreen = "register";
+        addScreen(this.currentScreen, registerScreen);
     }
 
     public void addScreen(String screenName, Screen screen){

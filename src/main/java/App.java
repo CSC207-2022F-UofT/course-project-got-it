@@ -1,8 +1,12 @@
 import MakeRequestUseCase.RequestInputBoundary;
 import MakeRequestUseCase.RequestInteractor;
 import dbGateway.DatabaseGateway;
+import DatabaseGateway.DatabaseGateway;
 import LoginUseCase.LoginInputBoundary;
 import LoginUseCase.LoginInteractor;
+import RegisterUseCase.RegisterInteractor;
+import entities.UserFactory;
+import HomescreenUseCase.HomescreenInteractor;
 import screens.*;
 
 import javax.swing.*;
@@ -24,6 +28,11 @@ public class App implements PresenterObserver {
         this.screens = new JPanel(cardLayout);
         this.dbGateway = new DatabaseUser(mongoURI);
         this.screenMap = new HashMap<>();
+        this.screenMap.put(
+                "login", new LoginController(new LoginInteractor(this.dbGateway, this.presenter)));
+        this.screenMap.put(
+                "register", new RegisterController(new RegisterInteractor(this.dbGateway, new UserFactory(), this.presenter)));
+        this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter)));
         this.screenMap.put("login", new LoginController(
                 (LoginInputBoundary)new LoginInteractor(this.dbGateway, this.presenter)));
         this.screenMap.put("makeRequest", new RequestController(

@@ -3,9 +3,10 @@ import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 import MakeRequestUseCase.RequestRequest;
+import DatabaseGateway.DatabaseGateway;
+import RegisterUseCase.RegisterDBRequest;
 import com.mongodb.*;
 import com.mongodb.client.*;
-import dbGateway.DatabaseGateway;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -38,20 +39,19 @@ public class DatabaseUser implements DatabaseGateway {
 
     @Override
     public boolean validateAndLogin(String email, String password) {
-        System.out.println("test");
         Bson filter = Filters.and(Filters.eq("email", email),Filters.eq("password", password));
         try{
             if(this.usersCollection.countDocuments(filter) == 1){
-                System.out.println("test123");
                 return true;
             };
-        } catch (MongoException me) {
-            System.err.println("An error occurred: " + me);
+        } catch (MongoException error) {
+            System.err.println("An error occurred: " + error);
         }
         return false;
     }
 
     @Override
+
     public boolean storeRequestInfo(RequestRequest requestRequest) {
         Document newRequest = new Document();
         newRequest.append("requester", requestRequest.getRequester());
@@ -66,5 +66,32 @@ public class DatabaseUser implements DatabaseGateway {
             System.err.println("An error occurred: " + me);
         }
         return false;
+    }
+
+    public boolean exists(String email) {
+        Bson filter = Filters.and(Filters.eq("email", email));
+        try{
+            if(this.usersCollection.countDocuments(filter) == 1){
+                return true;
+            };
+        } catch (MongoException error){
+            System.err.println("An error occurred" + error);
+        }
+        return false;
+    }
+
+    @Override
+    public void save(RegisterDBRequest request) {
+        Document newUser = new Document();
+        newUser.append("name", request.getName());
+        newUser.append("email", request.getEmail());
+        newUser.append("password", request.getPassword());
+        newUser.append("longitude", request.getLongitude());
+        newUser.append("latitude", request.getLatitude());
+        try{
+            this.usersCollection.insertOne(newUser);
+        }catch (MongoException error){
+            System.out.println("error");
+        }
     }
 }
