@@ -17,6 +17,7 @@ public class LoginInteractor implements LoginInputBoundary, Interactor{
             System.out.println("logged in");
             this.presenter.loginSuccess(new LoginResponse(true,
                     loginRequest.getEmail(), loginRequest.getPassword()));
+            this.presenter.showHomescreen();
         }
         else{
             this.presenter.loginFailed();

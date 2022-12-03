@@ -1,6 +1,5 @@
 import MakeRequestUseCase.RequestInputBoundary;
 import MakeRequestUseCase.RequestInteractor;
-import dbGateway.DatabaseGateway;
 import DatabaseGateway.DatabaseGateway;
 import LoginUseCase.LoginInputBoundary;
 import LoginUseCase.LoginInteractor;
@@ -8,7 +7,6 @@ import RegisterUseCase.RegisterInteractor;
 import entities.UserFactory;
 import HomescreenUseCase.HomescreenInteractor;
 import screens.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
@@ -44,7 +42,7 @@ public class App implements PresenterObserver {
         Presenter presenter = new Presenter();
         App application = new App(presenter);
         presenter.addObserver(application);
-        presenter.start();
+        presenter.registerSuccessView();
         mainFrame.add(application.screens);
         mainFrame.pack();
         mainFrame.setVisible(true);

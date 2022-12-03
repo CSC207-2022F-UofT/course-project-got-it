@@ -1,6 +1,6 @@
 package MakeRequestUseCase;
 
-import dbGateway.DatabaseGateway;
+import DatabaseGateway.DatabaseGateway;
 import entities.User;
 import screens.Presenter;
 

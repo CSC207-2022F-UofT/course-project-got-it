@@ -1,5 +1,6 @@
 package DatabaseGateway;
 
+import MakeRequestUseCase.RequestRequest;
 import RegisterUseCase.RegisterDBRequest;
 
 public interface DatabaseGateway {
@@ -7,4 +8,6 @@ public interface DatabaseGateway {
 
     boolean exists(String email);
     void save(RegisterDBRequest request);
+
+    boolean storeRequestInfo(RequestRequest requestRequest);
 }

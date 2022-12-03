@@ -50,7 +50,6 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
         buttons.add(back);
         buttons.add(create);
 
-        back.addActionListener(this);
         create.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

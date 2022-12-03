@@ -40,24 +40,16 @@ public class Presenter{
         this.currentScreen = "homescreen";
         addScreen(this.currentScreen, homescreen);
     }
-    public void to_profile(){
+    public void showProfile(){
         Profilescreen profilescreen = new Profilescreen();
         this.currentScreen = "profile";
         addScreen(this.currentScreen, profilescreen);
     }
-
-    public void to_Newrequest(){
-        Newrequestscreen newrequestscreen = new Newrequestscreen();
-        this.currentScreen = "newrequest";
-        addScreen(this.currentScreen, newrequestscreen);
-    }
-
-    public void to_Pastrequests(){
-        screens.Pastrequestsscreen pastrequestsscreen = new screens.Pastrequestsscreen();
+    public void showPastRequests(){
+        Pastrequestsscreen pastrequestsscreen = new Pastrequestsscreen();
         this.currentScreen = "pastrequests";
         addScreen(this.currentScreen, pastrequestsscreen);
     }
-
 
     public void registerFailView(){
         RegisterFailed registerFailed = new RegisterFailed();
