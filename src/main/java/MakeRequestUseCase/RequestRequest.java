@@ -5,9 +5,10 @@ import java.util.List;
 
 public class RequestRequest {
 
-    private String req_loc, item_loc, description, requester, deliveryNotes;
-    public RequestRequest(String req_loc, String item_loc, String description, String requester, String deliveryNotes){
+    private String req_loc, item_loc, description, requester, deliveryNotes, itemName;
+    public RequestRequest(String itemName, String req_loc, String item_loc, String description, String requester, String deliveryNotes){
         this.req_loc = req_loc;
+        this.itemName = itemName
         this.item_loc = item_loc;
         this.description = description;
         this.requester = requester;
@@ -23,6 +24,13 @@ public class RequestRequest {
         return inputs;
     }
 
+    public void setItemName(String name){
+        this.itemName = name;
+    }
+
+    public String getItemName(){
+        return this.itemName;
+    }
     public void setRequester(String requester) {
         this.req_loc = requester;
     }
