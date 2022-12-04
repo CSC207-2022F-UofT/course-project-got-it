@@ -6,33 +6,66 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Objects;
 
-public class Homescreen extends JPanel implements ActionListener, Screen {
+public class Homescreen extends JFrame implements ActionListener, Screen {
 
     private HomescreenController controller;
-
+    private final Canvas Background;
+    private final JButton Profile;
+    private final JButton New_Request;
+    private final JButton Past_Request;
+    private final JLayeredPane LP;
+    public void f0(){
+        // Ignore this method. #PC_01.
+        this.LP.setOpaque(true);
+        this.Background.setSize(0, 0);
+        this.Profile.setOpaque(true);
+        this.New_Request.setOpaque(true);
+        this.Past_Request.setOpaque(true);
+    }
     public Homescreen() {
-        JLabel title = new JLabel("Home Screen");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.Background = new Canvas(){
+            @Override
+            public void paint(Graphics g){
+                g.setFont(new Font("Monaco", Font.BOLD, 30));
+                g.setColor(Color.BLACK);
+                g.drawString("Welcome to Got It. ", 20, 40);
+            }
+        };
+        this.Background.setBounds(0, 0, 500, 300);
+        this.Background.setBackground(Color.pink);
+        this.setTitle("GOT_IT.");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.requestFocus(true);
+        this.setSize(500, 300);
+        this.LP = new JLayeredPane();
+        LP.setBounds(0, 0, 500, 300);
+        this.Profile = new JButton("Profile");
+        Profile.setBounds(50, 85, 130, 130);
+        Profile.setOpaque(true);
+        Profile.setBackground(Color.pink);
+        Profile.setActionCommand("navigateProfile");
+        this.New_Request = new JButton("New Request");
+        New_Request.setBounds(180, 85, 130, 130);
+        New_Request.setOpaque(true);
+        New_Request.setBackground(Color.pink);
+        New_Request.setActionCommand("navigateNewrequest");
+        this.Past_Request = new JButton("Past Requests");
+        Past_Request.setBounds(310, 85, 130, 130);
+        Past_Request.setOpaque(true);
+        Past_Request.setBackground(Color.pink);
+        Past_Request.setActionCommand("navigatePastrequests");
+        LP.add(Past_Request, Integer.valueOf(0));
+        LP.add(New_Request, Integer.valueOf(0));
+        LP.add(Profile, Integer.valueOf(0));
+        LP.add(Background, Integer.valueOf(0));
+        this.add(LP);
+        this.setVisible(true);
 
-        JButton profile = new JButton("My Profile");
-        profile.setActionCommand("navigateProfile");
-        JButton new_request = new JButton("New Request");
-        new_request.setActionCommand("navigateNewrequest");
-        JButton past_request = new JButton("Past Requests");
-        past_request.setActionCommand("navigatePastrequests");
-        JPanel buttons = new JPanel();
-        buttons.add(profile);
-        buttons.add(new_request);
-        buttons.add(past_request);
 
-        profile.addActionListener(this);
-        new_request.addActionListener(this);
-        past_request.addActionListener(this);
-
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-
-        this.add(title);
-        this.add(buttons);
+        Profile.addActionListener(this);
+        New_Request.addActionListener(this);
+        Past_Request.addActionListener(this);
     }
 
     @Override
@@ -44,5 +77,10 @@ public class Homescreen extends JPanel implements ActionListener, Screen {
     public void setController(Controller controller) {
         this.controller = (HomescreenController) controller;
     }
+
+    public static void main(String[] args) {
+               new Homescreen();
+            }
+
 }
 
