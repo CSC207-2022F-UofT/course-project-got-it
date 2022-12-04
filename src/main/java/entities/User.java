@@ -1,8 +1,8 @@
 package entities;
 
 public class User {
-    private int homeLongitude;
-    private int homeLatitude;
+    private double homeLongitude;
+    private double homeLatitude;
 
     private String email;
     private boolean loggedIn;
@@ -10,28 +10,44 @@ public class User {
     private String password;
     private String name;
     private String uid;
-    public User(int[] coords, String userEmail, String password, String name, boolean loggedIn){
+    public User(double[] coords, String userEmail, String password, String name){
         this.password = password;
         this.homeLatitude = coords[0];
         this.homeLongitude = coords[1];
         this.email = userEmail;
         this.name = name;
-        this.loggedIn = loggedIn;
+        this.loggedIn = true;
     }
 
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
+    public User(){
+        this.loggedIn = false;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
+    public double[] getHomeCoordinates() {
+        return new double[]{this.homeLatitude, this.homeLongitude};
     }
 
-    public int[] getHomeCoordinates() {
-        return new int[]{this.homeLatitude, this.homeLongitude};
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public void setHomeCoordinates(int[] homeCoordinates) {
+    public String getUid(){
+        if(this.loggedIn){
+            return this.uid;
+        }
+        return "NOT_LOGGED_IN";
+    }
+
+    public void setLoggedIn() {
+        if(this.password.length() >= 1 && this.email.length() >= 1 && this.name.length() >= 1){
+            this.loggedIn = true;
+        }
+        else{
+            this.loggedIn = false;
+        }
+    }
+
+    public void setHomeCoordinates(double[] homeCoordinates) {
         this.homeLatitude = homeCoordinates[0];
         this.homeLongitude = homeCoordinates[1];
     }
@@ -41,11 +57,17 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        if(this.loggedIn){
+            return password;
+        }
+        return "NOT_LOGGED_IN";
     }
 
     public String getEmail() {
-        return email;
+        if(this.loggedIn){
+            return email;
+        }
+        return "NOT_LOGGED_IN";
     }
 
     public void setEmail(String email) {
@@ -53,7 +75,10 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        if(this.loggedIn){
+            return name;
+        }
+        return "NOT_LOGGED_IN";
     }
 
     public void setName(String name) {

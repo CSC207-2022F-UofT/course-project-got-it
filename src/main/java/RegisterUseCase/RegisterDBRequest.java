@@ -3,10 +3,10 @@ package RegisterUseCase;
 public class RegisterDBRequest {
     private final String email;
     private String password;
-    private int longitude;
+    private double longitude;
     private String name;
-    private int latitude;
-    public RegisterDBRequest(int[] coords, String email, String password, String name){
+    private double latitude;
+    public RegisterDBRequest(double[] coords, String email, String password, String name){
         this.email = email;
         this.password = password;
         this.longitude = coords[0];
@@ -14,11 +14,11 @@ public class RegisterDBRequest {
         this.name = name;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
