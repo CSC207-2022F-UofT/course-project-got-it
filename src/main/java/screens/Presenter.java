@@ -41,12 +41,13 @@ public class Presenter{
         addScreen(this.currentScreen, homescreen);
     }
     public void showProfile(){
-        Profilescreen profilescreen = new Profilescreen();
+        double[] a = {1.0, 2.0};
+        Profilescreen profilescreen = new Profilescreen("",a,"", "");
         this.currentScreen = "profile";
         addScreen(this.currentScreen, profilescreen);
     }
     public void showPastRequests(){
-        Pastrequestsscreen pastrequestsscreen = new Pastrequestsscreen();
+        Pastrequestsscreen pastrequestsscreen = new Pastrequestsscreen("","","");
         this.currentScreen = "pastrequests";
         addScreen(this.currentScreen, pastrequestsscreen);
     }
