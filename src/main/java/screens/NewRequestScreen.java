@@ -5,69 +5,94 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NewRequestScreen extends JPanel implements ActionListener, Screen{
+public class NewRequestScreen extends JFrame implements ActionListener, Screen{
     private RequestController controller;
 
-    JTextField items;
-    JTextField itemDescription;
-    JTextField deliveryAddress;
-    JTextField deliveryDescription;
-    JTextField itemLocation;
-
+    private final Canvas Background;
+    private final JTextField Item_Name;
+    private final JTextField Item_Location;
+    private final JTextField Delivery_Location;
+    private final JTextField Item_Description;
+    private final JButton Back;
+    private final JButton Create;
+    private final JLayeredPane LP;
+    public void f0(){
+        // Ignore this method. #PC_01.
+        this.LP.setOpaque(true);
+        this.Background.setSize(0, 0);
+        this.Item_Description.setOpaque(true);
+        this.Item_Location.setOpaque(true);
+        this.Item_Name.setOpaque(true);
+        this.Back.setOpaque(true);
+        this.Create.setOpaque(true);
+        this.Delivery_Location.setOpaque(true);
+    }
     public NewRequestScreen() {
-        JLabel title = new JLabel("Request Screen");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel itemsLabel = new JLabel("Items");
-        this.items = new JTextField(15);
-        JLabel itemDescriptionLabel = new JLabel("Item Note");
-        this.itemDescription = new JTextField(15);
-        JLabel deliveryAddressLabel = new JLabel("Delivery Address");
-        this.deliveryAddress = new JTextField(15);
-        this.itemLocation = new JTextField(15);
-        JLabel itemLocationLabel = new JLabel("Item Location");
-        JLabel deliveryDescriptionLabel = new JLabel("Delivery Description");
-        this.deliveryDescription = new JTextField(15);
-        JPanel itemsPanel = new JPanel();
-        itemsPanel.add(itemsLabel);
-        itemsPanel.add(items);
-        JPanel itemDescriptionPanel = new JPanel();
-        itemDescriptionPanel.add(itemDescriptionLabel);
-        itemDescriptionPanel.add(itemDescription);
-        JPanel deliveryAddressPanel = new JPanel();
-        deliveryAddressPanel.add(deliveryAddressLabel);
-        deliveryAddressPanel.add(deliveryAddress);
-        JPanel deliveryDescriptionPanel = new JPanel();
-        deliveryDescriptionPanel.add(deliveryDescriptionLabel);
-        deliveryDescriptionPanel.add(deliveryDescription);
-        JPanel itemLocationPanel = new JPanel();
-        itemLocationPanel.add(itemLocationLabel);
-        itemLocationPanel.add(itemLocation);
+        this.Background = new Canvas(){
+            @Override
+            public void paint(Graphics g){
+                g.setFont(new Font("Monaco", Font.BOLD, 30));
+                g.setColor(Color.BLACK);
+                g.drawString("New Request. ", 9, 35);
+                g.setFont(new Font("Monaco", Font.BOLD, 20));
+                g.drawString("Item Name", 30, 65);
+                g.drawString("Item Location", 30, 129);
+                g.drawString("Delivery Location", 30, 194);
+                g.drawString("Item Description", 30, 259);
+            }
+        };
+        Background.setBounds(0, 0, 300, 400);
+        Background.setBackground(Color.pink);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(300, 400);
+        this.setTitle("New_Request.");
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.requestFocus(true);
+        this.LP = new JLayeredPane();
+        LP.setBounds(0, 0, 300, 400);
+        this.Item_Name = new JTextField();
+        Item_Name.setBounds(30, 75, 241, 30);
+        Item_Name.setOpaque(true);
+        Item_Name.setBackground(Color.white);
+        this.Item_Location = new JTextField();
+        Item_Location.setBounds(30, 140, 241, 30);
+        Item_Location.setOpaque(true);
+        Item_Location.setBackground(Color.white);
+        this.Delivery_Location = new JTextField();
+        Delivery_Location.setBounds(30, 205, 241, 30);
+        Delivery_Location.setOpaque(true);
+        Delivery_Location.setBackground(Color.white);
+        this.Item_Description = new JTextField();
+        Item_Description.setBounds(30, 270, 241, 60);
+        Item_Description.setOpaque(true);
+        Item_Description.setBackground(Color.white);
+        this.Back = new JButton("Back");
+        Back.setBounds(10, 340, 75, 25);
+        Back.setOpaque(true);
+        Back.setBackground(Color.pink);
+        this.Create = new JButton("Create");
+        Create.setBounds(215, 340, 75, 25);
+        Create.setOpaque(true);
+        Create.setBackground(Color.pink);
+        LP.add(Create, Integer.valueOf(0));
+        LP.add(Back, Integer.valueOf(0));
+        LP.add(Item_Description, Integer.valueOf(0));
+        LP.add(Delivery_Location, Integer.valueOf(0));
+        LP.add(Item_Location, Integer.valueOf(0));
+        LP.add(Item_Name, Integer.valueOf(0));
+        LP.add(Background, Integer.valueOf(0));
+        this.add(LP);
+        this.setVisible(true);
 
-        JButton back = new JButton("Back");
-        JButton create = new JButton("Create");
-
-        JPanel buttons = new JPanel();
-        buttons.add(back);
-        buttons.add(create);
-
-        create.addActionListener(this);
-
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        this.add(title);
-        this.add(itemsPanel);
-        this.add(itemDescriptionPanel);
-        this.add(itemLocationPanel);
-        this.add(deliveryAddressPanel);
-        this.add(deliveryDescriptionPanel);
-        this.add(buttons);
+        Create.addActionListener(this);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.controller.request(this.deliveryAddress.getText(), this.itemLocation.getText(),
-                this.itemDescription.getText(), "abc", this.deliveryDescription.getText());
+        this.controller.request(this.Delivery_Location.getText(), this.Item_Location.getText(),
+                this.Item_Description.getText(), "abc", this.Delivery_Location.getText());
     }
 
     @Override
