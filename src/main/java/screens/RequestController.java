@@ -10,8 +10,8 @@ public class RequestController implements Controller {
         this.inputBoundary = inputBoundary;
     }
 
-    public void request(String req_loc, String item_loc, String description, String requester, String deliveryNotes){
-        RequestRequest request = new RequestRequest(req_loc, item_loc, description, requester, deliveryNotes);
+    public void request(String itemName, String req_loc, String item_loc, String description, String requester, String deliveryNotes){
+        RequestRequest request = new RequestRequest(itemName, req_loc, item_loc, description, requester, deliveryNotes);
         inputBoundary.request(request);
     }
 }

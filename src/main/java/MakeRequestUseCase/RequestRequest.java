@@ -8,20 +8,11 @@ public class RequestRequest {
     private String req_loc, item_loc, description, requester, deliveryNotes, itemName;
     public RequestRequest(String itemName, String req_loc, String item_loc, String description, String requester, String deliveryNotes){
         this.req_loc = req_loc;
-        this.itemName = itemName
+        this.itemName = itemName;
         this.item_loc = item_loc;
         this.description = description;
         this.requester = requester;
         this.deliveryNotes = deliveryNotes;
-    }
-
-    public List<String> inputs(){
-        List<String> inputs = new ArrayList<>();
-        inputs.add(this.req_loc);
-        inputs.add(this.item_loc);
-        inputs.add(this.requester);
-        inputs.add(this.description);
-        return inputs;
     }
 
     public void setItemName(String name){
