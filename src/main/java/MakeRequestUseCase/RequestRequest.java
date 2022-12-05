@@ -1,12 +1,13 @@
 package MakeRequestUseCase;
 
-import java.util.ArrayList;
-import java.util.List;
+import entities.User;
 
 public class RequestRequest {
 
-    private String req_loc, item_loc, description, requester, deliveryNotes, itemName;
-    public RequestRequest(String itemName, String req_loc, String item_loc, String description, String requester, String deliveryNotes){
+    private String req_loc, item_loc, description, deliveryNotes, itemName;
+    private User requester;
+    public RequestRequest(String itemName, String req_loc, String item_loc, String description,
+                          String deliveryNotes, User requester){
         this.req_loc = req_loc;
         this.itemName = itemName;
         this.item_loc = item_loc;
@@ -26,7 +27,7 @@ public class RequestRequest {
         this.req_loc = requester;
     }
 
-    public String getRequester() {
+    public User getRequester() {
         return requester;
     }
 
