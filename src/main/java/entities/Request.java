@@ -9,17 +9,27 @@ public class Request {
 
     private final String itemName;
     private final String itemDescription;
-    private final Double[] itemAddress;
-    private final Double[] deliveryAddress;
+    private final double[] itemAddress;
+    private final double[] deliveryAddress;
     private final String deliveryNotes;
+    private User requester;
 
-    public Request(String itemName, String itemDescription, Double[] itemAddress, Double[] deliveryAddress,
-            String deliveryNotes) {
+    public Request(String itemName, String itemDescription, double[] itemAddress, double[] deliveryAddress,
+            String deliveryNotes, User requester) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemAddress = itemAddress;
         this.deliveryAddress = deliveryAddress;
         this.deliveryNotes = deliveryNotes;
+        this.requester = requester;
+    }
+
+    public User getRequester() {
+        return requester;
+    }
+
+    public void setRequester(User requester){
+        this.requester = requester;
     }
 
     public Object[] getDetails(){
@@ -30,8 +40,8 @@ public class Request {
         return itemName;
     }
     public String getitemDescription() { return itemDescription; }
-    public Double[] getItemAddress() { return itemAddress; }
-    public Double[] getDeliveryAddress() { return deliveryAddress; }
+    public double[] getItemAddress() { return itemAddress; }
+    public double[] getDeliveryAddress() { return deliveryAddress; }
     public String getDeliveryNotes() {
         return deliveryNotes;
     }
