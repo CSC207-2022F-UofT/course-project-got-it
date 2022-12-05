@@ -1,5 +1,7 @@
 package screens;
 
+import entities.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,12 +28,9 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
         this.Save.setOpaque(true);
         this.LP.setOpaque(true);
     }
-    public Profilescreen(String User_Name, double[] User_Address, String User_Email, String User_Password) {
+    public Profilescreen() {
         // For questions regarding constructor parameters please see below.
-        assert User_Name != null;
-        assert User_Address != null;
-        assert User_Email != null;
-        assert User_Password != null;
+        //assert user != null;
         // Since the user already logged in our program and had input their email and password
         // I assume that we keep track of the userEmail and password in order to show
         // such info on the screen. #PC_01.
@@ -89,10 +88,11 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
         LP.add(Address, Integer.valueOf(0));
         LP.add(Name, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
-        Name.setText(User_Name);
-        Address.setText(Arrays.toString(User_Address));
-        Email.setText(User_Email);
-        Password.setText(User_Password);
+        Name.setText("");
+        double[] a = {1,2};
+        Address.setText(Arrays.toString(a));
+        Email.setText("");
+        Password.setText("");
         this.add(LP);
         this.setVisible(true);
     }

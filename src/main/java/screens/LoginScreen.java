@@ -71,7 +71,8 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
         this.add(LP);
         this.setVisible(true);
 
-
+        Sign_Up.addActionListener(this);
+        Log_In.addActionListener(this);
     }
 
 

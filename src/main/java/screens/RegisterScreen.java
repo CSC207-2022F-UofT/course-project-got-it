@@ -98,6 +98,8 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
         LP.add(Background, Integer.valueOf(0));
         this.add(LP);
         this.setVisible(true);
+
+        Sign_Up.addActionListener(this);
     }
 
 
