@@ -67,7 +67,7 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
     @Override
     public void actionPerformed(ActionEvent e) {
         this.controller.request(this.itemName.getText(), this.deliveryAddress.getText(), this.itemLocation.getText(),
-                this.itemDescription.getText(), "abc", this.deliveryDescription.getText());
+                this.itemDescription.getText(), this.deliveryDescription.getText());
     }
 
     @Override
