@@ -70,6 +70,8 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
         LP.add(BackGround, Integer.valueOf(0));
         this.add(LP);
         this.setVisible(true);
+
+
     }
 
 

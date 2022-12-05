@@ -50,23 +50,23 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
             }
         };
         Background.setBackground(new Color(255,192,203));
-        Background.setBounds(0, 0, 450, 400);
+        Background.setBounds(0, 0, 450, 610);
         this.LP = new JLayeredPane();
         LP.setBounds(0, 0, 450, 610);
         LP.setOpaque(true);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.requestFocus(true);
-        this.setSize(450, 400);
+        this.setSize(450, 610);
         this.Name = new JTextField();
         Name.setBounds(80, 110, 265, 30);
         Name.setOpaque(true);
         Name.setBackground(new Color(255, 255, 255));
-        this.Longitude = new JPasswordField();
+        this.Longitude = new JTextField();
         Longitude.setBounds(80, 180, 265, 30);
         Longitude.setOpaque(true);
         Longitude.setBackground(new Color(255, 255, 255));
-        this.Latitude = new JPasswordField();
+        this.Latitude = new JTextField();
         Latitude.setBounds(80, 250, 265, 30);
         Latitude.setOpaque(true);
         Latitude.setBackground(new Color(255, 255, 255));
