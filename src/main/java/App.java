@@ -38,8 +38,7 @@ public class App implements PresenterObserver {
                 "register", new RegisterController(new RegisterInteractor(this.dbGateway, new UserFactory(), this.presenter)));
         this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter)));
         this.screenMap.put("makeRequest", new RequestController(
-                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter)));
-        this.apiGateway.getGeocode("1600 Pennsylvania Ave NW, Washington DC");
+                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter), this.currentUser));
     }
     public static void main(String[] args){
         JFrame mainFrame = new JFrame("Got It");
@@ -47,7 +46,7 @@ public class App implements PresenterObserver {
         Presenter presenter = new Presenter();
         App application = new App(presenter);
         presenter.addObserver(application);
-        presenter.start();
+        presenter.registerSuccessView();
         mainFrame.add(application.screens);
         mainFrame.pack();
         mainFrame.setVisible(true);
