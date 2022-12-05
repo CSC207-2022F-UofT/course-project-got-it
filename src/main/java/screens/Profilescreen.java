@@ -7,12 +7,6 @@ import java.awt.event.ActionListener;
 public class Profilescreen extends JPanel implements ActionListener, Screen{
 
 
-
-
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
 

@@ -32,7 +32,6 @@ public class ERROR_WINDOW extends JFrame implements ActionListener {
         this.setSize(400, 190);
         this.setResizable(false);
 //        this.setLocation(new Point(x, y));
-//        You can manipulate the location of this window by using line 15. #PC_01.
         this.setLocationRelativeTo(null);
         this.requestFocus(true);
         this.setLocationRelativeTo(null);

@@ -69,9 +69,9 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
         this.add(LP);
         this.setVisible(true);
     }
-//    public static void main(String[] P0) {
-//        new REGISTER_WINDOW();
-//    }
+    public static void main(String[] P0) {
+        new REGISTER_WINDOW();
+    }
 //    Uncomment codes above and run it to see the window. #PC_01.
     @Override
     public void actionPerformed(ActionEvent e) {

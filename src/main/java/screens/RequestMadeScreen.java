@@ -26,4 +26,5 @@ public class RequestMadeScreen extends JPanel implements ActionListener, Screen 
     public void setController(Controller controller) {
 
     }
+
 }
