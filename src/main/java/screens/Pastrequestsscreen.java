@@ -64,6 +64,9 @@ public class Pastrequestsscreen extends JFrame implements ActionListener, Screen
         this.add(LP);
         this.setVisible(true);
 
+
+}
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
