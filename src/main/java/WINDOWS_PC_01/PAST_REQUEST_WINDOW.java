@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 public class PAST_REQUEST_WINDOW extends JFrame implements ActionListener {
     //Uncomment the main method and run it to visualize this window. #PC_01.
-    //Test_00.
     private final Canvas Background;
     private final JLayeredPane LP;
     private final JButton Past_Request_0;
