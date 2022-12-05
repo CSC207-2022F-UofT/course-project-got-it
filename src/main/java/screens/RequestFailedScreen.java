@@ -26,8 +26,4 @@ public class RequestFailedScreen extends JPanel implements Screen, ActionListene
         this.controller = controller;
     }
 
-    public static void main(String[] args) {
-        JFrame f = new JFrame();
-        f.setSize(500, 500);
-    }
 }
