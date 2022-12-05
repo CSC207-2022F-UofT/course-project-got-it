@@ -9,11 +9,11 @@ public class Request {
 
     private final String itemName;
     private final String itemDescription;
-    private final double[] itemAddress;
-    private final double[] deliveryAddress;
+    private final Double[] itemAddress;
+    private final Double[] deliveryAddress;
     private final String deliveryNotes;
 
-    public Request(String itemName, String itemDescription, double[] itemAddress, double[] deliveryAddress,
+    public Request(String itemName, String itemDescription, Double[] itemAddress, Double[] deliveryAddress,
             String deliveryNotes) {
         this.itemName = itemName;
         this.itemDescription = itemDescription;
@@ -30,8 +30,8 @@ public class Request {
         return itemName;
     }
     public String getitemDescription() { return itemDescription; }
-    public double[] getItemAddress() { return itemAddress; }
-    public double[] getDeliveryAddress() { return deliveryAddress; }
+    public Double[] getItemAddress() { return itemAddress; }
+    public Double[] getDeliveryAddress() { return deliveryAddress; }
     public String getDeliveryNotes() {
         return deliveryNotes;
     }
