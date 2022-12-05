@@ -2,6 +2,7 @@ package DatabaseGateway;
 
 import MakeRequestUseCase.RequestRequest;
 import RegisterUseCase.RegisterDBRequest;
+import entities.Request;
 
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ public interface DatabaseGateway {
     boolean exists(String email);
     void save(RegisterDBRequest request);
 
-    boolean storeRequestInfo(RequestRequest requestRequest);
+    boolean storeRequestInfo(Request requestRequest);
 
     HashMap<String, Object> getLoggedInUser();
 }
