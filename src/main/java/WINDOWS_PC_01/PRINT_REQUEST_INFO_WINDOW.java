@@ -16,7 +16,7 @@ public class PRINT_REQUEST_INFO_WINDOW extends JFrame implements ActionListener 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(600,600);
         this.add(LP);
-        LP.add();
+//        LP.add();
         this.setVisible(true);
 
     }
