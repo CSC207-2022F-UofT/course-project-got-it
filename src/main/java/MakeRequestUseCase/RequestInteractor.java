@@ -6,6 +6,7 @@ import entities.Request;
 import entities.User;
 import screens.Presenter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RequestInteractor implements RequestInputBoundary{
@@ -20,10 +21,12 @@ public class RequestInteractor implements RequestInputBoundary{
     }
     @Override
     public void request(RequestRequest requestRequest) {
-        Object[] itemGeoCode = this.apiGateway.getGeocode(requestRequest.getItem_loc());
-        Object[] deliveryGeoCode = this.apiGateway.getGeocode(requestRequest.getReq_loc());
-        Request requestObj = new Request(requestRequest.getItemName(), requestRequest.getDescription(), (Double[]) itemGeoCode, (Double[]) deliveryGeoCode, requestRequest.getDeliveryNotes());
-        if(checkForAnyEmptyField(requestObj.getDetails()) && dbGateway.storeRequestInfo(requestRequest)){
+        double[] itemGeoCode = this.apiGateway.getGeocode(requestRequest.getItem_loc());
+        double[] deliveryGeoCode = this.apiGateway.getGeocode(requestRequest.getReq_loc());
+        Request requestObj = new Request(requestRequest.getItemName(), requestRequest.getDescription(),
+                itemGeoCode, deliveryGeoCode, requestRequest.getDeliveryNotes(), requestRequest.getRequester());
+        if(checkForAnyEmptyField(requestObj.getDetails()) && itemGeoCode.length > 1 && deliveryGeoCode.length > 1
+                && dbGateway.storeRequestInfo(requestObj)){
             this.presenter.showMakeRequestSuccess();
         }
         else{
