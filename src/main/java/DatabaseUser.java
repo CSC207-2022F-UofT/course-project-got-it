@@ -8,11 +8,13 @@ import RegisterUseCase.RegisterDBRequest;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
+import entities.Request;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
@@ -70,14 +72,16 @@ public class DatabaseUser implements DatabaseGateway {
     }
 
     @Override
-
-    public boolean storeRequestInfo(RequestRequest requestRequest) {
+    public boolean storeRequestInfo(Request request) {
+        System.out.println(Arrays.toString(request.getDeliveryAddress()));
+        System.out.println(Arrays.toString(request.getItemAddress()));
         Document newRequest = new Document();
-        newRequest.append("requester", requestRequest.getRequester());
-        newRequest.append("description", requestRequest.getDescription());
-        newRequest.append("deliveryAddress", requestRequest.getReq_loc());
-        newRequest.append("itemAddress", requestRequest.getItem_loc());
-        newRequest.append("deliveryNotes", requestRequest.getDeliveryNotes());
+        newRequest.append("requester", request.getRequester().getUid());
+        newRequest.append("description", request.getitemDescription());
+        newRequest.append("deliveryAddress", Arrays.asList(request.getDeliveryAddress()[0], request.getDeliveryAddress()[1]));
+        newRequest.append("itemAddress", Arrays.asList(request.getItemAddress()[0], request.getItemAddress()[1]));
+        newRequest.append("deliveryNotes", request.getDeliveryNotes());
+        System.out.println(newRequest);
         try{
             this.requestsCollection.insertOne(newRequest);
             return true;
