@@ -90,7 +90,7 @@ public class Presenter{
     }
 
     public String back() { // Fix variable
-        Map.Entry<String, Screen> lastElement;
+        Map.Entry<String, Screen> lastElement = screens.entrySet().iterator().next();
         while (screens.entrySet().iterator().hasNext()) {
             lastElement = screens.entrySet().iterator().next();
         }
