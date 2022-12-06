@@ -89,13 +89,15 @@ public class Presenter{
         notifyObservers();
     }
 
-    public void back(){
-        while(screens.entrySet().iterator().hasNext()){
-            screens.entrySet().iterator().next();
+    public String back() { // Fix variable
+        Map.Entry<String, Screen> lastElement;
+        while (screens.entrySet().iterator().hasNext()) {
+            lastElement = screens.entrySet().iterator().next();
         }
+        return lastElement.getKey();
     }
-    public void showPreviousScreen(){ // Needs to be fully implemented
-        //screens.remove();
-        //this.currentScreen = this.screens[-1];
+    public void showPreviousScreen(){
+        screens.remove(back());
+        this.currentScreen = back();
     }
 }
