@@ -8,6 +8,7 @@ import screens.Presenter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class RequestInteractor implements RequestInputBoundary{
 
@@ -25,9 +26,15 @@ public class RequestInteractor implements RequestInputBoundary{
         double[] deliveryGeoCode = this.apiGateway.getGeocode(requestRequest.getReq_loc());
         Request requestObj = new Request(requestRequest.getItemName(), requestRequest.getDescription(),
                 itemGeoCode, deliveryGeoCode, requestRequest.getDeliveryNotes(), requestRequest.getRequester());
-        if(checkForAnyEmptyField(requestObj.getDetails()) && itemGeoCode.length > 1 && deliveryGeoCode.length > 1
-                && dbGateway.storeRequestInfo(requestObj)){
-            this.presenter.showMakeRequestSuccess();
+        String requestID = dbGateway.storeRequestInfo(requestObj);
+        if(checkForAnyEmptyField(requestObj.getDetails()) && itemGeoCode.length > 1 && deliveryGeoCode.length > 1 &&
+                !Objects.equals(requestID, "save_failed")){
+            if(this.dbGateway.assignClosestDriver(requestID)){
+                this.presenter.showMakeRequestSuccess();
+            }
+            else{
+                this.presenter.showMakeRequestFail();
+            }
         }
         else{
             this.presenter.showMakeRequestFail();

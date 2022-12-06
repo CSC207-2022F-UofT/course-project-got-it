@@ -12,7 +12,9 @@ public interface DatabaseGateway {
     boolean exists(String email);
     void save(RegisterDBRequest request);
 
-    boolean storeRequestInfo(Request requestRequest);
+    String storeRequestInfo(Request requestRequest);
+
+    boolean assignClosestDriver(String requestID);
 
     HashMap<String, Object> getLoggedInUser();
 }
