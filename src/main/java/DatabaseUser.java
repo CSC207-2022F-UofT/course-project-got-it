@@ -105,8 +105,8 @@ public class DatabaseUser implements DatabaseGateway {
         newUser.append("name", request.getName());
         newUser.append("email", request.getEmail());
         newUser.append("password", request.getPassword());
-        newUser.append("longitude", request.getLongitude());
-        newUser.append("latitude", request.getLatitude());
+        newUser.append("address", request.getAddress());
+
         try{
             this.usersCollection.insertOne(newUser);
         }catch (MongoException error){

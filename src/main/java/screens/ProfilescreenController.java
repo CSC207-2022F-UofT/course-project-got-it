@@ -14,7 +14,7 @@ public class ProfilescreenController implements Controller{
         this.interactor = interactor;
         this.user = interactor.user;
     }
-    public void change(String name, String email, String password, double[] coords){
+    public void change(String name, String email, String password, String address){
         if(!(Objects.equals(name, this.user.getName()))){
             interactor.changeName(name);
         }
@@ -26,8 +26,8 @@ public class ProfilescreenController implements Controller{
             interactor.changeEmail(email);
             System.out.println(this.user.getEmail());
         }
-        if(!(Arrays.equals(coords, this.user.getHomeCoordinates()))){
-            interactor.changeAddress(coords);
+        if(!(Objects.equals(address, this.user.getaddress()))){
+            interactor.changeAddress(address);
         }
 
 }}

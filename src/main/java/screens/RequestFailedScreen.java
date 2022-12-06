@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RequestFailedScreen extends JPanel implements Screen, ActionListener {
+public class RequestFailedScreen extends JFrame implements Screen, ActionListener {
 
     private Controller controller;
     public RequestFailedScreen(){

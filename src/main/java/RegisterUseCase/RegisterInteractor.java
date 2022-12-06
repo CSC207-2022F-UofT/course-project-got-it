@@ -23,10 +23,10 @@ public class RegisterInteractor implements RegisterInputBoundary {
         } else if (!request.getPassword().equals(request.getRepeatPassword())) {
             presenter.registerFailView();
         }
-        double[] a = {request.getLongitude(), request.getLatitude()};
-        User user = factory.create(a, request.getEmail(), request.getPassword(), request.getName());
 
-        RegisterDBRequest DBmodel = new RegisterDBRequest(user.getHomeCoordinates(), user.getEmail(), user.getPassword(), user.getName());
+        User user = factory.create(request.getAddress(), request.getEmail(), request.getPassword(), request.getName());
+
+        RegisterDBRequest DBmodel = new RegisterDBRequest(user.getaddress(), user.getEmail(), user.getPassword(), user.getName());
         gateway.save(DBmodel);
 
         RegisterResponse accountResponse = new RegisterResponse(user.getEmail());

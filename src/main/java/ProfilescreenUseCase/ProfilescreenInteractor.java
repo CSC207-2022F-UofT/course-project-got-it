@@ -28,7 +28,7 @@ public class ProfilescreenInteractor {
         this.user.setPassword(password);
     }
 
-    public void changeAddress(double[] coords){
-        this.user.setHomeCoordinates(coords);
+    public void changeAddress(String address) {
+        this.user.setAddress(address);
     }
 }

@@ -29,7 +29,7 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
         this.Save.setOpaque(true);
         this.LP.setOpaque(true);
     }
-    public Profilescreen() {
+    public Profilescreen(String userName, String address, String email, String password) {
         // For questions regarding constructor parameters please see below.
         //assert user != null;
         // Since the user already logged in our program and had input their email and password
@@ -89,15 +89,15 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
         LP.add(Address, Integer.valueOf(0));
         LP.add(Name, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
-        Name.setText("");
-        double[] a = {};
-        Address.setText(Arrays.toString(a));
-        Email.setText("this.controller.user.getEmail()");
-        Password.setText("this.controller.user.getPassword()");
+        Name.setText(userName);
+        Address.setText(address);
+        Email.setText(email);
+        Password.setText(password);
         this.add(LP);
         this.setVisible(true);
 
         Save.addActionListener(this);
+        Back.addActionListener(this);
     }
 
 
@@ -110,7 +110,7 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
     public void actionPerformed(ActionEvent e) {
         String password = Arrays.toString(this.Password.getPassword());
         String email = this.Email.getText();
-        double[] address = {1,2};
+        String address = this.Address.getText();
         String name = this.Name.getText();
         this.controller.change(name, email, password, address);
     }

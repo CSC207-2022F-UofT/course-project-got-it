@@ -1,8 +1,7 @@
 package entities;
 
 public class User {
-    private double homeLongitude;
-    private double homeLatitude;
+    private String address;
 
     private String email;
     private boolean loggedIn;
@@ -10,10 +9,9 @@ public class User {
     private String password;
     private String name;
     private String uid;
-    public User(double[] coords, String userEmail, String password, String name){
+    public User(String address, String userEmail, String password, String name){
         this.password = password;
-        this.homeLatitude = coords[0];
-        this.homeLongitude = coords[1];
+        this.address = address;
         this.email = userEmail;
         this.name = name;
         this.loggedIn = true;
@@ -23,8 +21,8 @@ public class User {
         this.loggedIn = false;
     }
 
-    public double[] getHomeCoordinates() {
-        return new double[]{this.homeLatitude, this.homeLongitude};
+    public String getaddress() {
+        return this.address;
     }
 
     public void setUid(String uid) {
@@ -47,9 +45,8 @@ public class User {
         }
     }
 
-    public void setHomeCoordinates(double[] homeCoordinates) {
-        this.homeLatitude = homeCoordinates[0];
-        this.homeLongitude = homeCoordinates[1];
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setPassword(String password) {

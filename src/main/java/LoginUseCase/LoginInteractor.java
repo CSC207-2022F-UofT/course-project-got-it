@@ -19,10 +19,7 @@ public class LoginInteractor implements LoginInputBoundary, Interactor{
     public void login(LoginRequest loginRequest) {
         if(gateway.validateAndLogin(loginRequest.getEmail(), loginRequest.getPassword())){
             HashMap<String, Object> dbUser = gateway.getLoggedInUser();
-            this.currentUser.setHomeCoordinates(new double[]{
-                    (double)dbUser.get("longitude"),
-                    (double)dbUser.get("latitude")
-            });
+            this.currentUser.setAddress( (String) dbUser.get("address"));
             this.currentUser.setName((String)dbUser.get("name"));
             this.currentUser.setPassword((String)dbUser.get("password"));
             this.currentUser.setEmail((String)dbUser.get("email"));
@@ -35,5 +32,9 @@ public class LoginInteractor implements LoginInputBoundary, Interactor{
         else{
             this.presenter.loginFailed();
         }
+    }
+
+    public void navigateSignup(){
+        this.presenter.start();
     }
 }

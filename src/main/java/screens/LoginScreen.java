@@ -50,7 +50,9 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
         this.Password = new JPasswordField();
         this.LP = new JLayeredPane();
         this.Sign_Up = new JButton("Sign Up");
+        this.Sign_Up.setActionCommand("signup");
         this.Log_In = new JButton("Log In");
+        this.Log_In.setActionCommand("login");
         Email.setBounds(70, 140, 290, 35);
         Email.setOpaque(true);
         Email.setBackground(Color.WHITE);
@@ -75,9 +77,6 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
         Log_In.addActionListener(this);
     }
 
-
-
-
     @Override
     public void setController(Controller controller) {
         this.controller = (LoginController) controller;
@@ -86,7 +85,12 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
     @Override
     public void actionPerformed(ActionEvent e) {
         try{
-            this.controller.login(this.Email.getText(), Arrays.toString(this.Password.getPassword()));
+            if(e.getActionCommand() == "login"){
+                this.controller.login(this.Email.getText(), Arrays.toString(this.Password.getPassword()));
+            }
+            if(e.getActionCommand() == "signup"){
+                this.controller.navigateSignup();
+            }
         }catch(Exception loginException){
             JOptionPane.showMessageDialog(this, loginException.getMessage());
         }

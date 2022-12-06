@@ -42,9 +42,8 @@ public class Presenter{
         this.currentScreen = "homescreen";
         addScreen(this.currentScreen, homescreen);
     }
-    public void showProfile(){
-
-        Profilescreen profilescreen = new Profilescreen();
+    public void showProfile(String name, String address, String email, String password){
+        Profilescreen profilescreen = new Profilescreen(name, address, email, password);
         this.currentScreen = "profilescreen";
         addScreen(this.currentScreen, profilescreen);
     }
