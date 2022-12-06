@@ -88,4 +88,14 @@ public class Presenter{
         this.screens.put(screenName, screen);
         notifyObservers();
     }
+
+    public void back(){
+        while(screens.entrySet().iterator().hasNext()){
+            screens.entrySet().iterator().next();
+        }
+    }
+    public void showPreviousScreen(){ // Needs to be fully implemented
+        //screens.remove();
+        //this.currentScreen = this.screens[-1];
+    }
 }
