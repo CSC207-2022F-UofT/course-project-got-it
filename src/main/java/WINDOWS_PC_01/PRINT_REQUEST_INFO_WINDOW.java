@@ -17,12 +17,19 @@ public class PRINT_REQUEST_INFO_WINDOW extends JFrame implements ActionListener 
     private final JTextField Time_Of_Delivery;
     private final JButton Back;
     public void f0(){
+        // Please ignore this method. #PC_01.
         this.Background.setBackground(Color.BLACK);
         this.LP.setBackground(Color.WHITE);
         this.Item_Name.setBackground(Color.black);
         this.Item_Description.setBackground(Color.BLACK);
         this.Item_Location.setBackground(Color.BLACK);
+        this.Delivery_Location.setBackground(Color.black);
+        this.Driver.setBackground(Color.pink);
+        this.Delivery_Status.setBackground(Color.BLACK);
+        this.Time_Of_Delivery.setBackground(Color.BLUE);
+        this.Back.setBackground(Color.BLUE);
     }
+    //TODO: Pass parameters in the order below so the window can display the info.
     public PRINT_REQUEST_INFO_WINDOW(String Item_Name_0, String Item_description_0
     , String Item_Location_0, String Delivery_Location_0, String Driver_0,
                                      String Delivery_Status_0, String Time_Of_Delivery_0){
