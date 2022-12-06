@@ -88,8 +88,8 @@ public class DatabaseUser implements DatabaseGateway {
 
     @Override
     public boolean assignClosestDriver(String requestID) {
-        Bson filter = Filters.in("_id", new ObjectId(requestID));
-        Document request = this.requestsCollection.find(filter).first();
+        Bson requestFilter = Filters.in("_id", new ObjectId(requestID));
+        Document request = this.requestsCollection.find(requestFilter).first();
         HashMap<Double, Document> distanceDriverMap = new HashMap<>();
         double smallestDistance = Double.POSITIVE_INFINITY;
         try{
@@ -108,8 +108,11 @@ public class DatabaseUser implements DatabaseGateway {
                     distanceDriverMap.put(distance, driver);
                 }
             }
-            Bson update = Updates.set("driver", distanceDriverMap.get(smallestDistance).get("_id").toString());
-            this.requestsCollection.updateOne(filter, update);
+            Bson requestUpdate = Updates.set("driver", distanceDriverMap.get(smallestDistance).get("_id").toString());
+            Bson driverUpdate = Updates.set("available", false);
+            Bson driverFilter = Filters.in("_id", distanceDriverMap.get(smallestDistance).get("_id"));
+            this.requestsCollection.updateOne(requestFilter, requestUpdate);
+            this.driversCollection.updateOne(driverFilter, driverUpdate);
             return true;
         }catch(MongoException error){
             System.out.println(error);
