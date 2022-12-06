@@ -89,7 +89,7 @@ public class Presenter{
         notifyObservers();
     }
 
-    public String back() { // Fix variable
+    public String back() {
         Map.Entry<String, Screen> lastElement = screens.entrySet().iterator().next();
         while (screens.entrySet().iterator().hasNext()) {
             lastElement = screens.entrySet().iterator().next();
@@ -99,5 +99,6 @@ public class Presenter{
     public void showPreviousScreen(){
         screens.remove(back());
         this.currentScreen = back();
+        notifyObservers();
     }
 }
