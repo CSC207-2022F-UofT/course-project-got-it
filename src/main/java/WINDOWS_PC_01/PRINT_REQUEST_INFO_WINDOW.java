@@ -97,10 +97,10 @@ public class PRINT_REQUEST_INFO_WINDOW extends JFrame implements ActionListener 
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new PRINT_REQUEST_INFO_WINDOW("Item_Name_Text", "Item_Description_Text",
-                "Item_Location_Text", "Delivery_Location_Text", "Driver_Text", "Delivery_Status_Text", "Time_Text");
-    }
+//    public static void main(String[] args) {
+//        new PRINT_REQUEST_INFO_WINDOW("Item_Name_Text", "Item_Description_Text",
+//                "Item_Location_Text", "Delivery_Location_Text", "Driver_Text", "Delivery_Status_Text", "Time_Text");
+//    }
     @Override
     public void actionPerformed(ActionEvent e) {
 
