@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginFailed extends JPanel implements ActionListener, Screen{
+public class LoginFailed extends JFrame implements ActionListener, Screen{
 
     private Controller controller;
     public LoginFailed() {

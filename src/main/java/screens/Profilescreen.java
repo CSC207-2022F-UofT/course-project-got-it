@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class Profilescreen extends JFrame implements ActionListener, Screen{
+    private ProfilescreenController controller;
     private final Canvas Background;
     private final JTextField Name;
     private final JTextField Address;
@@ -89,12 +90,14 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
         LP.add(Name, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
         Name.setText("");
-        double[] a = {1,2};
+        double[] a = {};
         Address.setText(Arrays.toString(a));
-        Email.setText("");
-        Password.setText("");
+        Email.setText("this.controller.user.getEmail()");
+        Password.setText("this.controller.user.getPassword()");
         this.add(LP);
         this.setVisible(true);
+
+        Save.addActionListener(this);
     }
 
 
@@ -105,11 +108,15 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        String password = Arrays.toString(this.Password.getPassword());
+        String email = this.Email.getText();
+        double[] address = {1,2};
+        String name = this.Name.getText();
+        this.controller.change(name, email, password, address);
     }
 
     @Override
-    public void setController(Controller controller) {
-
+    public void setController(Controller controller)  {
+        this.controller = (ProfilescreenController) controller;
     }
 }

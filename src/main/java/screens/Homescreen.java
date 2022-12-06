@@ -78,9 +78,7 @@ public class Homescreen extends JFrame implements ActionListener, Screen {
         this.controller = (HomescreenController) controller;
     }
 
-    public static void main(String[] args) {
-               new Homescreen();
-            }
+
 
 }
 

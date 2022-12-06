@@ -1,6 +1,7 @@
 package screens;
 
 import LoginUseCase.LoginResponse;
+import entities.User;
 
 import javax.swing.*;
 import java.lang.reflect.Array;
@@ -12,6 +13,7 @@ public class Presenter{
     private final ArrayList<PresenterObserver> screenObservers;
     private final LinkedHashMap<String, Screen> screens;
     private String currentScreen;
+
 
     public Presenter(){
         this.screenObservers = new ArrayList<PresenterObserver>();
@@ -41,9 +43,9 @@ public class Presenter{
         addScreen(this.currentScreen, homescreen);
     }
     public void showProfile(){
-        double[] a = {1.0, 2.0};
-        Profilescreen profilescreen = new Profilescreen("",a,"", "");
-        this.currentScreen = "profile";
+
+        Profilescreen profilescreen = new Profilescreen();
+        this.currentScreen = "profilescreen";
         addScreen(this.currentScreen, profilescreen);
     }
     public void showPastRequests(){
