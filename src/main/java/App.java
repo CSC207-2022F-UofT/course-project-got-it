@@ -3,6 +3,7 @@ import MakeRequestUseCase.RequestInteractor;
 import DatabaseGateway.DatabaseGateway;
 import LoginUseCase.LoginInteractor;
 import RegisterUseCase.RegisterInteractor;
+import UserResponseWindowUseCase.UserResponseInteractor;
 import entities.User;
 import entities.UserFactory;
 import HomescreenUseCase.HomescreenInteractor;
@@ -36,6 +37,10 @@ public class App implements PresenterObserver {
         this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter)));
         this.screenMap.put("makeRequest", new RequestController(
                 (RequestInputBoundary) new RequestInteractor(this.dbGateway, this.presenter)));
+        this.screenMap.put("loginFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        //this.screenMap.put("makeRequest", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        this.screenMap.put("registerFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        this.screenMap.put("requestFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
     }
     public static void main(String[] args){
         JFrame mainFrame = new JFrame("Got It");

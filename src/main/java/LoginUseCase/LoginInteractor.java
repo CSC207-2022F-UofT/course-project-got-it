@@ -36,4 +36,5 @@ public class LoginInteractor implements LoginInputBoundary, Interactor{
             this.presenter.loginFailed();
         }
     }
+    public void back() {this.presenter.showPreviousScreen();}
 }

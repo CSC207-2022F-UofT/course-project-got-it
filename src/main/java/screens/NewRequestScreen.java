@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class NewRequestScreen extends JPanel implements ActionListener, Screen{
     private RequestController controller;
@@ -44,6 +45,8 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
         itemLocationPanel.add(itemLocation);
 
         JButton back = new JButton("Back");
+        back.setActionCommand("back");
+        back.addActionListener(this);
         JButton create = new JButton("Create");
 
         JPanel buttons = new JPanel();
@@ -66,6 +69,10 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(Objects.equals(e.getActionCommand(), "back")){
+            this.controller.goBack();
+
+        }
         this.controller.request(this.deliveryAddress.getText(), this.itemLocation.getText(),
                 this.itemDescription.getText(), "abc", this.deliveryDescription.getText());
     }

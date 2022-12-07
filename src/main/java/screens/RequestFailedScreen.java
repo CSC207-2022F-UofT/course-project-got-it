@@ -3,14 +3,18 @@ package screens;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class RequestFailedScreen extends JPanel implements Screen, ActionListener {
 
-    private Controller controller;
+    private UserResponseController controller;
     public RequestFailedScreen(){
         JLabel title = new JLabel("Request Cannot Be Made");
         JLabel loggedIn = new JLabel("Request Not Made");
         JButton confirmBtn = new JButton("Ok");
+        JButton back = new JButton("back");
+        back.setActionCommand("back");
+        back.addActionListener(this);
         this.add(title);
         this.add(loggedIn);
         this.add(confirmBtn);
@@ -18,11 +22,14 @@ public class RequestFailedScreen extends JPanel implements Screen, ActionListene
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //To be implemented
+        System.out.println(e.getActionCommand());
+        if(Objects.equals(e.getActionCommand(), "back")){
+            this.controller.goBack();
+        }
     }
 
     @Override
     public void setController(Controller controller) {
-        this.controller = controller;
+        this.controller = (UserResponseController) controller;
     }
 }

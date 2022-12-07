@@ -88,17 +88,12 @@ public class Presenter{
         this.screens.put(screenName, screen);
         notifyObservers();
     }
-
-    public String back() {
-        Map.Entry<String, Screen> lastElement = screens.entrySet().iterator().next();
-        while (screens.entrySet().iterator().hasNext()) {
-            lastElement = screens.entrySet().iterator().next();
-        }
-        return lastElement.getKey();
-    }
     public void showPreviousScreen(){
-        screens.remove(back());
-        this.currentScreen = back();
+        Object[] keys = screens.keySet().toArray();
+        Object lastScreen = keys[keys.length - 1];
+        Object secondLast = keys[keys.length - 2];
+        screens.remove(lastScreen.toString());
+        this.currentScreen = secondLast.toString();
         notifyObservers();
     }
 }

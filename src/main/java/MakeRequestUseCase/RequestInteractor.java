@@ -24,6 +24,11 @@ public class RequestInteractor implements RequestInputBoundary{
         }
     }
 
+    @Override
+    public void goBack() {
+        presenter.showPreviousScreen();
+    }
+
     public boolean checkForAnyEmptyField(List inputs){
         for (Object input : inputs) {
             if (input == ""){
