@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class HOME_WINDOW extends JFrame implements ActionListener{
     // Uncomment the main method and run it to visualize the window. #PC_01.
+    // PC_02.
     private final Canvas Background;
     private final JButton Profile;
     private final JButton New_Request;
