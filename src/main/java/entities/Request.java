@@ -2,29 +2,46 @@ package entities;
 
 // Entity layer
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Request {
 
-    private final String[] items;
-    private final String itemNotes;
-    private final String itemAddress;
-    private final String deliveryAddress;
+    private final String itemName;
+    private final String itemDescription;
+    private final double[] itemAddress;
+    private final double[] deliveryAddress;
     private final String deliveryNotes;
+    private User requester;
 
-    Request(String[] items, String itemNotes, String itemAddress, String deliveryAddress,
-            String deliveryNotes) {
-        this.items = items;
-        this.itemNotes = itemNotes;
+    public Request(String itemName, String itemDescription, double[] itemAddress, double[] deliveryAddress,
+                   String deliveryNotes, User requester) {
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
         this.itemAddress = itemAddress;
         this.deliveryAddress = deliveryAddress;
         this.deliveryNotes = deliveryNotes;
+        this.requester = requester;
     }
 
-    public String[] getItems() {
-        return items;
+    public User getRequester() {
+        return requester;
     }
-    public String getItemNotes() { return itemNotes; }
-    public String getItemAddress() { return itemAddress; }
-    public String getDeliveryAddress() { return deliveryAddress; }
+
+    public void setRequester(User requester){
+        this.requester = requester;
+    }
+
+    public Object[] getDetails(){
+        return new Object[]{this.itemName, this.itemDescription, this.itemAddress, this.deliveryAddress, this.deliveryNotes};
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+    public String getitemDescription() { return itemDescription; }
+    public double[] getItemAddress() { return itemAddress; }
+    public double[] getDeliveryAddress() { return deliveryAddress; }
     public String getDeliveryNotes() {
         return deliveryNotes;
     }
