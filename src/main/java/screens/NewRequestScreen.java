@@ -13,6 +13,7 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
     private final JTextField Item_Location;
     private final JTextField Delivery_Location;
     private final JTextField Item_Description;
+    private final JTextField Delivery_Description;
     private final JButton Back;
     private final JButton Create;
     private final JLayeredPane LP;
@@ -26,6 +27,7 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
         this.Back.setOpaque(true);
         this.Create.setOpaque(true);
         this.Delivery_Location.setOpaque(true);
+        this.Delivery_Description.setOpaque(true);
     }
     public NewRequestScreen() {
         this.Background = new Canvas(){
@@ -38,19 +40,20 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
                 g.drawString("Item Name", 30, 65);
                 g.drawString("Item Location", 30, 129);
                 g.drawString("Delivery Location", 30, 194);
-                g.drawString("Item Description", 30, 259);
+                g.drawString("Delivery Description", 30, 259);
+                g.drawString("Item Description", 30, 347);
             }
         };
-        Background.setBounds(0, 0, 300, 400);
+        Background.setBounds(0, 0, 300, 600);
         Background.setBackground(Color.pink);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(300, 400);
+        this.setSize(300, 600);
         this.setTitle("New_Request.");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.requestFocus(true);
         this.LP = new JLayeredPane();
-        LP.setBounds(0, 0, 300, 400);
+        LP.setBounds(0, 0, 300, 600);
         this.Item_Name = new JTextField();
         Item_Name.setBounds(30, 75, 241, 30);
         Item_Name.setOpaque(true);
@@ -63,22 +66,27 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
         Delivery_Location.setBounds(30, 205, 241, 30);
         Delivery_Location.setOpaque(true);
         Delivery_Location.setBackground(Color.white);
+        this.Delivery_Description = new JTextField();
+        Delivery_Description.setBounds(30, 270, 241, 60);
+        Delivery_Description.setOpaque(true);
+        Delivery_Description.setBackground(Color.white);
         this.Item_Description = new JTextField();
-        Item_Description.setBounds(30, 270, 241, 60);
+        Item_Description.setBounds(30, 355, 241, 60);
         Item_Description.setOpaque(true);
         Item_Description.setBackground(Color.white);
         this.Back = new JButton("Back");
-        Back.setBounds(10, 340, 75, 25);
+        Back.setBounds(10, 435, 75, 25);
         Back.setOpaque(true);
         Back.setBackground(Color.pink);
         this.Create = new JButton("Create");
-        Create.setBounds(215, 340, 75, 25);
+        Create.setBounds(215, 435, 75, 25);
         Create.setOpaque(true);
         Create.setBackground(Color.pink);
         LP.add(Create, Integer.valueOf(0));
         LP.add(Back, Integer.valueOf(0));
         LP.add(Item_Description, Integer.valueOf(0));
         LP.add(Delivery_Location, Integer.valueOf(0));
+        LP.add(Delivery_Description, Integer.valueOf(0));
         LP.add(Item_Location, Integer.valueOf(0));
         LP.add(Item_Name, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
@@ -86,13 +94,14 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
         this.setVisible(true);
 
         Create.addActionListener(this);
+        //Back.addActionListener(this);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.controller.request(this.Delivery_Location.getText(), this.Item_Location.getText(),
-                this.Item_Description.getText(), "abc", this.Delivery_Location.getText());
+        this.controller.request(this.Item_Name.getText(), this.Delivery_Location.getText(), this.Item_Location.getText(),
+                this.Item_Description.getText(), this.Delivery_Description.getText());
     }
 
     @Override

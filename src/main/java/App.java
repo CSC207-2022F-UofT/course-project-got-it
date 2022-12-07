@@ -1,3 +1,4 @@
+import APIGateway.APIGateway;
 import MakeRequestUseCase.RequestInputBoundary;
 import MakeRequestUseCase.RequestInteractor;
 import DatabaseGateway.DatabaseGateway;
@@ -10,13 +11,13 @@ import HomescreenUseCase.HomescreenInteractor;
 import screens.*;
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class App implements PresenterObserver {
 
     private final Presenter presenter;
     public JPanel screens;
+    private final APIGateway apiGateway;
     private final DatabaseGateway dbGateway;
     private final HashMap<String, Controller> screenMap;
     private User currentUser;
@@ -25,9 +26,11 @@ public class App implements PresenterObserver {
     public App(Presenter presenter){
         this.window = new JFrame("Got It");
         String mongoURI = System.getenv("MONGOURI");
+        String apiKey = System.getenv("APIKEY");
         this.currentUser = new User();
         this.presenter = presenter;
         this.dbGateway = new DatabaseUser(mongoURI);
+        this.apiGateway = new PositionStackAPI(apiKey);
         this.screenMap = new HashMap<>();
         this.screenMap.put(
                 "login", new LoginController(new LoginInteractor(this.dbGateway, this.presenter, this.currentUser)));
@@ -36,7 +39,7 @@ public class App implements PresenterObserver {
         this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter, this.currentUser)));
         this.screenMap.put("profilescreen", new screens.ProfilescreenController(new ProfilescreenInteractor(this.dbGateway,this.currentUser, this.presenter)));
         this.screenMap.put("makeRequest", new RequestController(
-                (RequestInputBoundary) new RequestInteractor(this.dbGateway, this.presenter)));
+                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter), this.currentUser));
     }
 
     public void setWindow(JFrame window) {
@@ -51,11 +54,6 @@ public class App implements PresenterObserver {
         App application = new App(presenter);
         presenter.addObserver(application);
         presenter.registerSuccessView();
-        JFrame window = application.getWindow();
-        window.add(application.screens);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.pack();
-        window.setVisible(true);
     }
 
     @Override
