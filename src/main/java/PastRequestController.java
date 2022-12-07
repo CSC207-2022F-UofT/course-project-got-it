@@ -2,7 +2,7 @@ package screens;
 
 import PastRequestUseCase.PastRequestInputBoundary;
 import PastRequestUseCase.PastRequestRequest;
-import entities.User
+import entities.User;
 
 public class PastRequestController implements Controller {
     final PastRequestInputBoundary inputBoundary;
