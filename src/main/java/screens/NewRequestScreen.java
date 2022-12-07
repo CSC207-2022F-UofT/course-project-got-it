@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class NewRequestScreen extends JPanel implements ActionListener, Screen{
     private RequestController controller;
 
-    JTextField items;
+    JTextField itemName;
     JTextField itemDescription;
     JTextField deliveryAddress;
     JTextField deliveryDescription;
@@ -17,8 +17,8 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
     public NewRequestScreen() {
         JLabel title = new JLabel("Request Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JLabel itemsLabel = new JLabel("Items");
-        this.items = new JTextField(15);
+        JLabel itemNameLabel = new JLabel("itemName");
+        this.itemName = new JTextField(15);
         JLabel itemDescriptionLabel = new JLabel("Item Note");
         this.itemDescription = new JTextField(15);
         JLabel deliveryAddressLabel = new JLabel("Delivery Address");
@@ -28,8 +28,8 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
         JLabel deliveryDescriptionLabel = new JLabel("Delivery Description");
         this.deliveryDescription = new JTextField(15);
         JPanel itemsPanel = new JPanel();
-        itemsPanel.add(itemsLabel);
-        itemsPanel.add(items);
+        itemsPanel.add(itemNameLabel);
+        itemsPanel.add(itemName);
         JPanel itemDescriptionPanel = new JPanel();
         itemDescriptionPanel.add(itemDescriptionLabel);
         itemDescriptionPanel.add(itemDescription);
@@ -66,8 +66,8 @@ public class NewRequestScreen extends JPanel implements ActionListener, Screen{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.controller.request(this.deliveryAddress.getText(), this.itemLocation.getText(),
-                this.itemDescription.getText(), "abc", this.deliveryDescription.getText());
+        this.controller.request(this.itemName.getText(), this.deliveryAddress.getText(), this.itemLocation.getText(),
+                this.itemDescription.getText(), this.deliveryDescription.getText());
     }
 
     @Override
