@@ -1,5 +1,8 @@
 package LoginUseCase;
 
+/**
+ * Response to user entering correct credentials
+ */
 public class LoginResponse {
 
     private boolean loggedIn;
