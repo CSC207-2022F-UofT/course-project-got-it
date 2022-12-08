@@ -10,7 +10,7 @@ public class Request {
     private final String itemName;
     private final String itemDescription;
     private final double[] itemAddress;
-    private LocalTime startTime;
+    private String startTime;
     private final double[] deliveryAddress;
     private final String deliveryNotes;
     private User requester;
@@ -47,14 +47,14 @@ public class Request {
     public String getDeliveryNotes() {
         return deliveryNotes;
     }
-    public void setStartTime(LocalTime time) {
+    public void setStartTime(String time) {
         this.startTime = time;
     }
 
     public String getRequestId(){return this.requestId;}
     public void setRequestId(String requestId){this.requestId = requestId;}
 
-    public LocalTime getStartTime() {
+    public String getStartTime() {
         return this.startTime;
     }
 

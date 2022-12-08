@@ -4,10 +4,10 @@ import DatabaseGateway.DatabaseGateway;
 import entities.User;
 import entities.Request;
 import screens.Presenter;
-
 import java.time.LocalTime;
 import java.util.*;
 import java.lang.*;
+import geocode.geocodeDistanceHelper;
 
 public class DeliveryInteractor implements DeliveryInputBoundary{
 
@@ -25,47 +25,42 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
         // getting locations (get using currentUser and db)
         User user = deliveryRequest.getUser();
         double[] userLocation = user.getHomeCoordinates();
-        Request[] requestInfo = gateway.getRequests(user.getUid());  // DB function
-
+        ArrayList<Request> requestInfo = gateway.getRequests(user);  // DB function
+        geocodeDistanceHelper helper = new geocodeDistanceHelper();
         HashMap<String, String> requestTimes = new HashMap<>();
         for (Request request : requestInfo) {
             // calculating time
-            double[] driverLocation = gateway.getDriverLocation(request.getRequester()); // DB function
+            double[] driverLocation = gateway.getDriverLocation(request.getRequestId()); // DB function
             double[] itemLocation = request.getItemAddress();
 
-            long distance = (long)distance_km(driverLocation, itemLocation) +
-                    (long)distance_km(itemLocation, userLocation);
-            long totalTime = (long)(distance / AVG_SPEED); // should be nano
-
-            LocalTime estimatedArrival = request.getStartTime().plusNanos(totalTime);
+            long distance = (long) helper.getDistance(driverLocation[0], driverLocation[1], itemLocation[0],
+                    itemLocation[1]) +
+                    (long) helper.getDistance(itemLocation[0], itemLocation[1], userLocation[0], userLocation[1]);
+            long totalTime = (long) (distance / AVG_SPEED); // should be nano
+            System.out.println("TIME:");
+            System.out.println(request.getStartTime());
+            LocalTime estimatedArrival = LocalTime.parse(request.getStartTime()).plusNanos(totalTime);
             String arrivalFinal = estimatedArrival.getHour() + ":" + estimatedArrival.getMinute();
 
             //long startNano = request.getStartTime().values().toArray(a)[0].get;
-            if (LocalTime.now().isAfter(estimatedArrival)){
+            if (LocalTime.now().isAfter(estimatedArrival)) {
                 gateway.completeRequest(request.getRequestId());
-            }
-            else
+                // gateway.driverAvailable()
+            } else {
                 requestTimes.put(request.getItemName(), arrivalFinal);
+            }
         }
-        if (requestTimes.isEmpty())
-            presenter.noRequests();
-        else
-            presenter.statusScreen(requestTimes);
-    }
-
-    public static double distance_km(double[] d1, double[] d2){
-        double lat1 = Math.toRadians(d1[0]);
-        double lat2 = Math.toRadians(d2[0]);
-        double lon1 = Math.toRadians(d2[1]);
-        double lon2 = Math.toRadians(d1[1]);
-
-        double lon = lon2 - lon1;
-        double lat = lat2 - lat1;
-        double a = Math.pow(Math.sin(lat / 2), 2)
-                + Math.cos(lat1) * Math.cos(lat2)
-                * Math.pow(Math.sin(lon / 2),2);
-
-        double c = 2 * Math.asin(Math.sqrt(a));
-        return(c * 6371);
+        if (requestTimes.isEmpty()){
+            //presenter.noRequests();
+            System.out.println("\n\n\n\n");
+            System.out.println(requestTimes);
+            System.out.println("\n\n\n\n");
+        }
+        else{
+            System.out.println("\n\n\n\n");
+            System.out.println(requestTimes);
+            System.out.println("\n\n\n\n");
+            //presenter.statusScreen(requestTimes);
+        }
     }
 }

@@ -5,6 +5,7 @@ import RegisterUseCase.RegisterDBRequest;
 import entities.Request;
 import entities.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface DatabaseGateway {
@@ -21,7 +22,7 @@ public interface DatabaseGateway {
 
     void completeRequest(String requestId);
 
-    double[] getDriverLocation(User requester);
+    double[] getDriverLocation(String requestId);
 
-    Request[] getRequests(String uid);
+    ArrayList<Request> getRequests(User user);
 }

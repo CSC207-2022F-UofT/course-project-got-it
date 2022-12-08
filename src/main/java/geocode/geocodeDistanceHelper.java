@@ -1,3 +1,5 @@
+package geocode;
+
 public class geocodeDistanceHelper {
     public double getDistance(double longA, double latA, double longB, double latB){
         double longitudeARadians = Math.toRadians(longA);

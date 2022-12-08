@@ -38,7 +38,7 @@ public class App implements PresenterObserver {
                 "register", new RegisterController(new RegisterInteractor(this.dbGateway, new UserFactory(), this.presenter)));
         this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter)));
         this.screenMap.put("makeRequest", new RequestController(
-                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter), this.currentUser));
+                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter, this.currentUser), this.currentUser));
     }
     public static void main(String[] args){
         JFrame mainFrame = new JFrame("Got It");

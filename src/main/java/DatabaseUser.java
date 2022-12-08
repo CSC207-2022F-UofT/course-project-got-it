@@ -9,13 +9,16 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import entities.Request;
 import entities.User;
+import geocode.geocodeDistanceHelper;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import java.time.LocalTime;
 import java.util.*;
+import java.util.logging.Filter;
 
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
@@ -77,9 +80,11 @@ public class DatabaseUser implements DatabaseGateway {
         newRequest.append("deliveryNotes", request.getDeliveryNotes());
         newRequest.append("startTime", request.getStartTime());
         newRequest.append("completed", false);
-
         try{
             this.requestsCollection.insertOne(newRequest);
+            System.out.println("\n\n\n\n\n");
+            System.out.println(newRequest.get("_id").toString());
+            System.out.println("\n\n\n\n\n");
             return newRequest.get("_id").toString();
         }catch(MongoException me){
             System.err.println("An error occurred: " + me);
@@ -89,19 +94,41 @@ public class DatabaseUser implements DatabaseGateway {
 
     @Override
     public void completeRequest(String requestID) {
-
+        Bson filter = Filters.in("_id", new ObjectId(requestID));
+        Bson update = Updates.set("completed", true);
+        this.requestsCollection.updateOne(filter, update);
     }
 
     @Override
-    public double[] getDriverLocation(User requester) {
-
-        return
+    public double[] getDriverLocation(String requestID) {
+        System.out.println(requestID);
+        Bson filter = Filters.in("_id", new ObjectId(requestID));
+        Document request = this.requestsCollection.find(filter).first();
+        assert request != null;
+        String driverId = (String) request.get("driver");
+        Bson driverFilter = Filters.in("_id", new ObjectId(driverId));
+        Document driver = this.driversCollection.find(driverFilter).first();
+        assert driver != null;
+        return new double[]{(double) driver.get("latitude"), (double) driver.get("longitude")};
     }
 
     @Override
-    public Request[] getRequests(String uid) {
-
-        return
+    public ArrayList<Request> getRequests(User user) {
+        Bson filter = Filters.and(Filters.eq("completed", false), Filters.eq("requester", user.getUid()));
+        FindIterable<Document> requests = this.requestsCollection.find(filter);
+        ArrayList<Request> allValidRequests = new ArrayList<>();
+        for(Document request : requests){
+            ArrayList<Double> itemAddress = (ArrayList<Double>) request.get("itemAddress");
+            double[] itemAddressArray = {itemAddress.get(0), itemAddress.get(1)};
+            ArrayList<Double> deliveryAddress = (ArrayList<Double>) request.get("deliveryAddress");
+            double[] deliveryAddressArray = {deliveryAddress.get(0), deliveryAddress.get(1)};
+            Request newRequest = new Request((String) request.get("name"), (String) request.get("description"),
+                    itemAddressArray, deliveryAddressArray, (String) request.get("deliveryNotes"), user);
+            newRequest.setRequestId((request.get("_id").toString()));
+            newRequest.setStartTime(request.get("startTime").toString());
+            allValidRequests.add(newRequest);
+        }
+        return allValidRequests;
     }
 
     @Override
