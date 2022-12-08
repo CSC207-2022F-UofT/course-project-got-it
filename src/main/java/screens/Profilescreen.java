@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * JFrame for profile screen which displays the user's name, password, email and password, with the option to change information
+ */
 public class Profilescreen extends JFrame implements ActionListener, Screen, Backable{
     private ProfilescreenController controller;
     private UserResponseController backController;
