@@ -73,6 +73,7 @@ public class DatabaseUser implements DatabaseGateway {
     @Override
     public String storeRequestInfo(Request request) {
         Document newRequest = new Document();
+        newRequest.append("name", request.getItemName());
         newRequest.append("requester", request.getRequester().getUid());
         newRequest.append("description", request.getitemDescription());
         newRequest.append("deliveryAddress", Arrays.asList(request.getDeliveryAddress()[0], request.getDeliveryAddress()[1]));
@@ -136,12 +137,12 @@ public class DatabaseUser implements DatabaseGateway {
     @Override
     public void save(RegisterDBRequest request) {
         Document newUser = new Document();
+        System.out.println(request.toString());
         newUser.append("name", request.getName());
         newUser.append("email", request.getEmail());
         newUser.append("password", request.getPassword());
         newUser.append("longitude", request.getLongitude());
         newUser.append("latitude", request.getLatitude());
-
         try{
             this.usersCollection.insertOne(newUser);
         }catch (MongoException error){
