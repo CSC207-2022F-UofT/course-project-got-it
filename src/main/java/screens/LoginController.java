@@ -12,8 +12,13 @@ public class LoginController implements Controller {
         this.inputBoundary = inputBoundary;
     }
 
-     public void login(String username, String password){
-        LoginRequest request = new LoginRequest(username, password);
+    public void navigateSignup(){
+        inputBoundary.navigateSignup();
+    }
+     public void login(String email, String password){
+        LoginRequest request = new LoginRequest(email, password);
         inputBoundary.login(request);
     }
+
+
 }

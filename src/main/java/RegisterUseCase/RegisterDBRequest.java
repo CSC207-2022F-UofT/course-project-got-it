@@ -4,13 +4,14 @@ public class RegisterDBRequest {
     private final String email;
     private String password;
     private double longitude;
-    private String name;
     private double latitude;
-    public RegisterDBRequest(double[] coords, String email, String password, String name){
+    private String name;
+
+    public RegisterDBRequest(double longitude, double latitude, String email, String password, String name){
         this.email = email;
         this.password = password;
-        this.longitude = coords[0];
-        this.latitude = coords[1];
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.name = name;
     }
 
@@ -20,6 +21,14 @@ public class RegisterDBRequest {
 
     public double getLatitude() {
         return latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public String getName(){

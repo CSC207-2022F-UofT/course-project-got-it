@@ -1,40 +1,29 @@
 package screens;
 
 import LoginUseCase.LoginResponse;
+import entities.User;
 
 import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
-/**
- * Decides what screen to show, initially will be login screen
- * The presenter uses the observer design patten where the observer is the app and the presenter is observable
- * Whenever the hashmap changes, the app observes it
- */
+//Decides what screen to show, initially will be register
 public class Presenter{
 
     private final ArrayList<PresenterObserver> screenObservers;
     private final LinkedHashMap<String, Screen> screens;
     private String currentScreen;
 
+
     public Presenter(){
         this.screenObservers = new ArrayList<PresenterObserver>();
         this.screens = new LinkedHashMap<String, Screen>();
     }
-
-    /**
-     * Displays the login success view when the user successfully logs in
-     * @param response when the user logs in
-     */
     public void loginSuccess(LoginResponse response){
         LoggedInScreen loginSuccess = new LoggedInScreen(response.getEmail());
         this.currentScreen = "loginSuccess";
         this.addScreen(this.currentScreen, loginSuccess);
     }
-    /**
-     * Displays the login failed view when the user attempts to log in with the wrong credentials
-     * and prompts the user to reenter the correct credentials
-     */
     public void loginFailed(){
         LoginFailed failedScreen = new LoginFailed();
         this.currentScreen = "loginFailed";
@@ -53,13 +42,14 @@ public class Presenter{
         this.currentScreen = "homescreen";
         addScreen(this.currentScreen, homescreen);
     }
-    public void showProfile(){
-        Profilescreen profilescreen = new Profilescreen();
-        this.currentScreen = "profile";
+    public void showProfile(String name, String address, String email, String password){
+        System.out.println(name + " " + address + " " + email + " " + password);
+        Profilescreen profilescreen = new Profilescreen(name, address, email, password);
+        this.currentScreen = "profilescreen";
         addScreen(this.currentScreen, profilescreen);
     }
     public void showPastRequests(){
-        Pastrequestsscreen pastrequestsscreen = new Pastrequestsscreen();
+        Pastrequestsscreen pastrequestsscreen = new Pastrequestsscreen("","","");
         this.currentScreen = "pastrequests";
         addScreen(this.currentScreen, pastrequestsscreen);
     }
@@ -98,19 +88,23 @@ public class Presenter{
     }
 
     public void addScreen(String screenName, Screen screen){
+        System.out.println(screens.get(this.currentScreen));
         this.screens.put(screenName, screen);
         notifyObservers();
     }
 
-    /**
-     * Removes the current screen and replaces with previous screen
-     */
-    public void showPreviousScreen(){
+    public void showPreviousScreen() {
         Object[] keys = screens.keySet().toArray();
         Object lastScreen = keys[keys.length - 1];
         Object secondLast = keys[keys.length - 2];
         screens.remove(lastScreen.toString());
         this.currentScreen = secondLast.toString();
         notifyObservers();
+    }
+
+    public void showCurrentrequest() {
+        Currentrequestscreen currentrequestscreen = new Currentrequestscreen("","","","","","", "");
+        this.currentScreen = "currenttrequests";
+        addScreen(this.currentScreen, currentrequestscreen);
     }
 }

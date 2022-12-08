@@ -2,6 +2,8 @@ package DatabaseGateway;
 
 import MakeRequestUseCase.RequestRequest;
 import RegisterUseCase.RegisterDBRequest;
+import entities.Request;
+import entities.User;
 
 import java.util.HashMap;
 
@@ -11,7 +13,11 @@ public interface DatabaseGateway {
     boolean exists(String email);
     void save(RegisterDBRequest request);
 
-    boolean storeRequestInfo(RequestRequest requestRequest);
+    String storeRequestInfo(Request requestRequest);
+
+    boolean assignClosestDriver(String requestID);
 
     HashMap<String, Object> getLoggedInUser();
+
+    boolean updateUser(User user);
 }
