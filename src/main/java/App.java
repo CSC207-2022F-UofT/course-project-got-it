@@ -34,6 +34,8 @@ public class App implements PresenterObserver {
         this.apiGateway = new PositionStackAPI(apiKey);
         this.screenMap = new HashMap<>();
         this.screenMap.put(
+                "requestFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        this.screenMap.put(
                 "login", new LoginController(new LoginInteractor(this.dbGateway, this.apiGateway, this.presenter, this.currentUser)));
         this.screenMap.put(
                 "register", new RegisterController(new RegisterInteractor(this.dbGateway, this.apiGateway, new UserFactory(), this.presenter)));

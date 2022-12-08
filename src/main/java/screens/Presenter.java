@@ -77,7 +77,7 @@ public class Presenter{
         addScreen(this.currentScreen, requestMadeScreen);
     }
     public void showMakeRequestFail(){
-        RequestFailedScreen requestFailedScreen = new RequestFailedScreen();
+        RequestMakeFailed requestFailedScreen = new RequestMakeFailed();
         this.currentScreen = "requestFailed";
         addScreen(this.currentScreen, requestFailedScreen);
     }

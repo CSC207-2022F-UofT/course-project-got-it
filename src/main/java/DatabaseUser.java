@@ -110,6 +110,9 @@ public class DatabaseUser implements DatabaseGateway {
                     distanceDriverMap.put(distance, driver);
                 }
             }
+            if(distanceDriverMap.size() < 1){
+                return false;
+            }
             Bson requestUpdate = Updates.set("driver", distanceDriverMap.get(smallestDistance).get("_id").toString());
             Bson driverUpdate = Updates.set("available", false);
             Bson driverFilter = Filters.in("_id", distanceDriverMap.get(smallestDistance).get("_id"));
