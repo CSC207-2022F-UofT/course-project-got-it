@@ -1,28 +1,63 @@
 package screens;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
+
 
 public class LoginFailed extends JFrame implements ActionListener, Screen{
-
-    private Controller controller;
+    private UserResponseController controller;
+    private final JLayeredPane LP;
+    private final Canvas Background;
+    private final JButton Try_Again;
+    public void f0(){
+        // Ignore this method. #PC_01.
+        this.LP.setOpaque(true);
+        this.Background.setSize(0, 0);
+        this.Try_Again.setOpaque(true);
+    }
     public LoginFailed() {
-        JLabel title = new JLabel("Login Failed");
-        JLabel loggedIn = new JLabel("Not Logged In");
-        JButton back = new JButton("back");
-        this.add(title);
-        this.add(loggedIn);
-        this.add(back);
+        this.setTitle("Error_00");
+        this.Background = new Canvas() {
+            @Override
+            public void paint(Graphics g) {
+                g.setFont(new Font("Monaco", Font.BOLD, 12));
+                g.drawString("Sorry, Login failed", 118, 50);
+                g.drawString("Please provide a valid email address and password", 25, 75);
+            }
+        };
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.Background.setBounds(0, 0, 400, 190);
+        Background.setBackground(new Color(255, 255, 255));
+        this.setSize(400, 190);
+        this.setResizable(false);
+        //        this.setLocation(new Point(x, y));
+        //        You can manipulate the location of this window by using line 15. #PC_01.
+        this.setLocationRelativeTo(null);
+        this.requestFocus(true);
+        this.setLocationRelativeTo(null);
+        this.Try_Again = new JButton("Try Again");
+        Try_Again.setBounds(140, 115, 120, 30);
+        Try_Again.setOpaque(true);
+        Try_Again.setBackground(new Color(255, 255, 255));
+        this.LP = new JLayeredPane();
+        LP.setBounds(0, 0, 400, 190);
+        LP.add(Try_Again, Integer.valueOf(0));
+        LP.add(Background, Integer.valueOf(0));
+        this.add(LP);
+        this.setVisible(true);
+        Try_Again.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("click");
+        this.controller.goBack();
     }
 
     @Override
     public void setController(Controller controller) {
-        this.controller = controller;
+        this.controller = (UserResponseController) controller;
     }
 }
