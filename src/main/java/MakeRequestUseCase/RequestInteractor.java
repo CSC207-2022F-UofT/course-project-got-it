@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Interactor for request that stores the new request information to the database
+ */
 public class RequestInteractor implements RequestInputBoundary{
 
     private final DatabaseGateway dbGateway;
