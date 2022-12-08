@@ -5,8 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Pastrequestsscreen extends JFrame implements ActionListener, Screen{
+public class Pastrequestsscreen extends JFrame implements ActionListener, Screen, Backable{
     private RequestController controller;
+    private UserResponseController backController;
     private final Canvas Background;
     private final JLayeredPane LP;
     private final JButton Past_Request_0;
@@ -63,17 +64,22 @@ public class Pastrequestsscreen extends JFrame implements ActionListener, Screen
         LP.add(Background);
         this.add(LP);
         this.setVisible(true);
+        this.Back.addActionListener(this);
 
 
 }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.backController.goBack();
 
     }
 
     @Override
     public void setController(Controller controller) {
-
+        this.controller = (RequestController) controller;
+    }
+    public void setBackController(UserResponseController backController){
+        this.backController = backController;
     }
 }
