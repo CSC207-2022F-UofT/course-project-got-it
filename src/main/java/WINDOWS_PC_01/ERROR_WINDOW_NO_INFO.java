@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //GOod morning.0011
-public class ERROR_WINDOW extends JFrame implements ActionListener {
+public class ERROR_WINDOW_NO_INFO extends JFrame implements ActionListener {
     // Uncomment the main method and run it to visualize the window. #PC_01.
     private final JLayeredPane LP;
     private final Canvas Background;
@@ -16,14 +16,14 @@ public class ERROR_WINDOW extends JFrame implements ActionListener {
         this.Background.setSize(0, 0);
         this.Try_Again.setOpaque(true);
     }
-    public ERROR_WINDOW(){
+    public ERROR_WINDOW_NO_INFO(){
         this.setTitle("Error_00");
         this.Background = new Canvas(){
             @Override
             public void paint(Graphics g){
                 g.setFont(new Font("Monaco", Font.BOLD, 25));
-                g.drawString("Sorry, your account could", 9, 40);
-                g.drawString("not be created. ", 85, 90);
+                g.drawString("Sorry, we can't find your", 9, 40);
+                g.drawString("account.", 130, 90);
             }
         };
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -36,7 +36,6 @@ public class ERROR_WINDOW extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.requestFocus(true);
         this.setLocationRelativeTo(null);
-//        this.setLocation(630, 300);
         this.Try_Again = new JButton("Try Again. ");
         Try_Again.setBounds(140, 115, 120, 30);
         Try_Again.setOpaque(true);
@@ -50,13 +49,13 @@ public class ERROR_WINDOW extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 //    public static void main(String[] args) {
-//        new ERROR_WINDOW();
+//        new ERROR_WINDOW_NO_INFO();
 //    }
-//    Uncomment codes above and run it to see the window. #PC_01.
+    //    Uncomment codes above and run it to see the window. #PC_01.
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         // TODO: Implement this method so buttons can work correctly. #PC_01.
-        if(e.getSource() == this. Try_Again){
+        if(e.getSource() == this.Try_Again){
             this.setVisible(false);
         }
     }

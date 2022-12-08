@@ -12,9 +12,13 @@ public class NEW_REQUEST_WINDOW extends JFrame implements ActionListener {
     private final JTextField Item_Location;
     private final JTextField Delivery_Location;
     private final JTextField Item_Description;
+    private final JTextField User_X;
+    private final JTextField User_Y;
     private final JButton Back;
     private final JButton Create;
     private final JLayeredPane LP;
+    private final GI_Server Server;
+    private final User U;
     public void f0(){
         // Ignore this method. #PC_01.
         this.LP.setOpaque(true);
@@ -26,7 +30,9 @@ public class NEW_REQUEST_WINDOW extends JFrame implements ActionListener {
         this.Create.setOpaque(true);
         this.Delivery_Location.setOpaque(true);
     }
-    public NEW_REQUEST_WINDOW(){
+    public NEW_REQUEST_WINDOW(GI_Server S0, User u){
+        this.Server = S0;
+        this.U = u;
         this.Background = new Canvas(){
             @Override
             public void paint(Graphics g){
@@ -34,6 +40,9 @@ public class NEW_REQUEST_WINDOW extends JFrame implements ActionListener {
                 g.setColor(Color.BLACK);
                 g.drawString("New Request. ", 9, 35);
                 g.setFont(new Font("Monaco", Font.BOLD, 20));
+                g.drawString("Item Name.", 30, 65);
+                g.drawString("X:", 161, 65);
+                g.drawString("Y:", 225, 65);
                 g.drawString("Item Name", 30, 65);
                 g.drawString("Item Location", 30, 129);
                 g.drawString("Delivery Location", 30, 194);
@@ -46,7 +55,7 @@ public class NEW_REQUEST_WINDOW extends JFrame implements ActionListener {
         this.setSize(300, 400);
         this.setTitle("New_Request.");
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
+        this.setLocation(630, 300);
         this.requestFocus(true);
         this.LP = new JLayeredPane();
         LP.setBounds(0, 0, 300, 400);
@@ -66,14 +75,26 @@ public class NEW_REQUEST_WINDOW extends JFrame implements ActionListener {
         Item_Description.setBounds(30, 270, 241, 60);
         Item_Description.setOpaque(true);
         Item_Description.setBackground(Color.white);
+        this.User_X = new JTextField();
+        User_X.setBounds(185, 41, 30, 30);
+        User_X.setOpaque(true);
+        User_X.setBackground(Color.white);
+        this.User_Y = new JTextField();
+        User_Y.setBounds(249, 41, 30, 30);
+        User_Y.setOpaque(true);
+        User_Y.setBackground(Color.white);
         this.Back = new JButton("Back");
         Back.setBounds(10, 340, 75, 25);
         Back.setOpaque(true);
         Back.setBackground(Color.pink);
+        Back.addActionListener(this);
         this.Create = new JButton("Create");
         Create.setBounds(215, 340, 75, 25);
         Create.setOpaque(true);
         Create.setBackground(Color.pink);
+        Create.addActionListener(this);
+        LP.add(User_X, Integer.valueOf(0));
+        LP.add(User_Y, Integer.valueOf(0));
         LP.add(Create, Integer.valueOf(0));
         LP.add(Back, Integer.valueOf(0));
         LP.add(Item_Description, Integer.valueOf(0));
@@ -86,10 +107,28 @@ public class NEW_REQUEST_WINDOW extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO: Implement this method so buttons can work correctly. #PC_01.
+        if(e.getSource() == this.Back){
+            this.setVisible(false);
+            new HOME_WINDOW(this.Server, this.U);
+        }else{
+            assert e.getSource() == this.Create;
+            int x = Integer.parseInt(User_X.getText());
+            int y = Integer.parseInt(User_Y.getText());
+            this.U.setXY(x, y);
+            Driver D = this.Server.find_Cloest_Driver(U);
+            String I_Name = this.Item_Name.getText();
+            String I_Location = this.Item_Location.getText();
+            String Delivery_Location = this.Delivery_Location.getText();
+            String I_Description = this.Item_Description.getText();
+            int Time = this.Server.find_Time(U, D);
+            Request R0 = new Request(U, D, I_Name, I_Location, Delivery_Location, I_Description, Time, false);
+            this.U.addRequest(R0);
+            this.setVisible(false);
+            new PRINT_REQUEST_INFO_WINDOW(this.Server, this.U, R0);
+        }
     }
 //    public static void main(String[] P0) {
-//        new NEW_REQUEST_WINDOW();
+//        new NEW_REQUEST_WINDOW(new GI_Server(), new User("",""));
 //    }
 //    Uncomment codes above and run it to see the window. #PC_01.
 }

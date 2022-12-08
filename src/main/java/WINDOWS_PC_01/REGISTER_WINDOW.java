@@ -13,6 +13,7 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
     private final JPasswordField Password_1;
     private final JButton Sign_Up;
     private final JLayeredPane LP;
+    private final GI_Server Server;
     public void f0(){
         // Ignore this method. #PC_01.
         this.Sign_Up.setOpaque(true);
@@ -22,7 +23,7 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
         this.Password_0.setOpaque(true);
         this.Password_1.setOpaque(true);
     }
-    public REGISTER_WINDOW(){
+    public REGISTER_WINDOW(GI_Server S0){
         this.Background = new Canvas(){
             @Override
             public void paint(Graphics g){
@@ -35,13 +36,15 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
                 g.drawString("Re-Enter Password", 80, 240);
             }
         };
+        this.Server = S0;
         Background.setBackground(new Color(255,192,203));
         Background.setBounds(0, 0, 450, 400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.LP = new JLayeredPane();
         LP.setBounds(0, 0, 450, 400);
         LP.setOpaque(true);
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
+        this.setLocation(630, 300);
         this.setResizable(false);
         this.requestFocus(true);
         this.setSize(450, 400);
@@ -61,6 +64,7 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
         Sign_Up.setOpaque(true);
         Sign_Up.setBackground(new Color(255,192,203));
         Sign_Up.setBounds(300, 300, 90, 40);
+        Sign_Up.addActionListener(this);
         LP.add(Sign_Up ,Integer.valueOf(0));
         LP.add(Password_1, Integer.valueOf(0));
         LP.add(Password_0, Integer.valueOf(0));
@@ -70,11 +74,25 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 //    public static void main(String[] P0) {
-//        new REGISTER_WINDOW();
+//        new REGISTER_WINDOW(new GI_Server());
 //    }
 //    Uncomment codes above and run it to see the window. #PC_01.
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO: Implement this method so buttons can work correctly. #PC_01.
+        if(e.getSource() == this.Sign_Up){
+            String ID = this.Email.getText();
+            String Pass_0 = String.valueOf(this.Password_0.getPassword());
+            String Pass_1 = String.valueOf(this.Password_1.getPassword());
+            boolean is_Equal = Pass_0.equals(Pass_1);
+            boolean is_Empty = ID.isEmpty() || Pass_0.isEmpty() || Pass_1.isEmpty();
+            if(is_Equal && !is_Empty){
+                this.Server.addUser(ID,Pass_0);
+                this.setVisible(false);
+                new LOG_IN_WINDOW(this.Server);
+            }else{
+                new ERROR_WINDOW();
+            }
+        }
     }
 }

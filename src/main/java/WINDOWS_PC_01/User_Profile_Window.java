@@ -15,6 +15,8 @@ public class User_Profile_Window extends JFrame implements ActionListener {
     private final JButton Back;
     private final JButton Save;
     private final JLayeredPane LP;
+    private final User U;
+    private final GI_Server Server;
     public void f0(){
         // Please ignore this method. #PC_01.
         this.Background.setBackground(Color.BLACK);
@@ -26,13 +28,15 @@ public class User_Profile_Window extends JFrame implements ActionListener {
         this.Save.setOpaque(true);
         this.LP.setOpaque(true);
     }
-    public User_Profile_Window(String User_Email, String User_Password){
+    public User_Profile_Window(String n0, String a0, String User_Email, String User_Password, User u, GI_Server S0){
         // For questions regarding constructor parameters please see below.
         assert User_Email != null;
         assert User_Password != null;
         // Since the user already logged in our program and had input their email and password
         // I assume that we keep track of the userEmail and password in order to show
+        this.Server = S0;
         // such info on the screen. #PC_01.
+        this.U = u;
         this.Background = new Canvas(){
             @Override
             public void paint(Graphics g){
@@ -50,7 +54,8 @@ public class User_Profile_Window extends JFrame implements ActionListener {
         Background.setBackground(Color.pink);
         this.setTitle("User_Profile.");
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
+        this.setLocation(630, 300);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.requestFocus(true);
         this.setSize(400, 500);
@@ -76,28 +81,50 @@ public class User_Profile_Window extends JFrame implements ActionListener {
         Back.setBounds(31, 421, 71, 41);
         Back.setOpaque(true);
         Back.setBackground(Color.pink);
+        Back.addActionListener(this);
         LP.add(Back, Integer.valueOf(0));
         this.Save = new JButton("Save");
         Save.setBounds(300, 421, 71, 41);
         Save.setOpaque(true);
         Save.setBackground(Color.pink);
+        Save.addActionListener(this);
         LP.add(Save, Integer.valueOf(0));
         LP.add(Password, Integer.valueOf(0));
         LP.add(Email, Integer.valueOf(0));
         LP.add(Address, Integer.valueOf(0));
         LP.add(Name, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
+        Name.setText(n0);
+        Address.setText(a0);
         Email.setText(User_Email);
         Password.setText(User_Password);
         this.add(LP);
         this.setVisible(true);
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
         // TODO: Implement this method so buttons can work correctly. #PC_01.
+        if(e.getSource() == this.Save){
+            String new_Name = this.Name.getText();
+            String new_Address = this.Address.getText();
+            String new_GI_KEY = this.Email.getText();
+            String new_PASS = String.valueOf(this.Password.getPassword());
+            U.setName(new_Name);
+            U.setAddress(new_Address);
+            U.set_GI_KEY(new_GI_KEY);
+            U.setGI_PASSWORD(new_PASS);
+            this.Name.setText(U.getName());
+            this.Address.setText(U.getAddress());
+            this.Email.setText(U.getGI_KEY());
+            this.Password.setText(U.getGI_PASSWORD());
+        }else{
+            assert e.getSource() == this.Back;
+            this.setVisible(false);
+            new HOME_WINDOW(this.Server, this.U);
+        }
     }
 //    public static void main(String[] args) {
-//        new User_Profile_Window("PC_TEXT_01.", "User_Password");
+//        new User_Profile_Window("PC_TEXT_01.", "User_Password", "", "");
 //    }
 //    Uncomment codes above and run it to see the window. #PC_01.
 }

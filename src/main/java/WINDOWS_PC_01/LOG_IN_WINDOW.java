@@ -12,6 +12,7 @@ public class LOG_IN_WINDOW extends JFrame implements ActionListener {
     private final Canvas BackGround;
     private final JTextField Email;
     private final JPasswordField Password;
+    public final GI_Server Server;
     public void f0(){
         // Ignore this method. #PC_01.
         this.Sign_Up.setOpaque(true);
@@ -21,11 +22,13 @@ public class LOG_IN_WINDOW extends JFrame implements ActionListener {
         this.Email.setOpaque(true);
         this.Password.setOpaque(true);
     }
-    public LOG_IN_WINDOW(){
+    public LOG_IN_WINDOW(GI_Server S){
+        this.Server = S;
         this.setTitle("Log_In_Window");
         this.setSize(450, 450);
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
+        this.setLocation(630, 300);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.BackGround = new Canvas(){
             @Override
@@ -47,7 +50,9 @@ public class LOG_IN_WINDOW extends JFrame implements ActionListener {
         this.Password = new JPasswordField();
         this.LP = new JLayeredPane();
         this.Sign_Up = new JButton("Sign_Up");
+        this.Sign_Up.addActionListener(this);
         this.Log_In = new JButton("Log_In");
+        this.Log_In.addActionListener(this);
         Email.setBounds(70, 140, 290, 35);
         Email.setOpaque(true);
         Email.setBackground(Color.WHITE);
@@ -68,12 +73,36 @@ public class LOG_IN_WINDOW extends JFrame implements ActionListener {
         this.add(LP);
         this.setVisible(true);
     }
-//    public static void main(String[] P0) {
-//        new LOG_IN_WINDOW();
-//    }
 //    Uncomment codes above and run it to see the window. #PC_01.
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
         // TODO: Implement this method so buttons can work correctly. #PC_01.
+        if(e.getSource() == this.Log_In){
+            String ID = this.Email.getText();
+            String PASS = String.valueOf(this.Password.getPassword());
+            if(this.Server.V0(ID, PASS)){
+                this.setVisible(false);
+                new HOME_WINDOW(this.Server, Server.r_User(ID, PASS));
+            }else{
+                new ERROR_WINDOW_NO_INFO();
+            }
+        }else if(e.getSource() == this.Sign_Up){
+            this.setVisible(false);
+            new REGISTER_WINDOW(this.Server);
+        }
+    }
+    public static void main(String[] P0) {
+        GI_Server S0 = new GI_Server();
+        Driver d0 = new Driver("Bob", 10, 30, 48);
+        Driver d1 = new Driver("Sam", 90, 320, 90);
+        Driver d2 = new Driver("Bob", 3, -210, 82);
+        Driver d3 = new Driver("Bob", 399, 210, 72);
+        Driver d4 = new Driver("Bob", 20, 563, 57);
+        S0.add_Driver(d0);
+        S0.add_Driver(d1);
+        S0.add_Driver(d2);
+        S0.add_Driver(d3);
+        S0.add_Driver(d4);
+        new LOG_IN_WINDOW(S0);
     }
 }

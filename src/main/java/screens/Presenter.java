@@ -47,11 +47,11 @@ public class Presenter{
         addScreen(this.currentScreen, profilescreen);
     }
 
-    public void to_Newrequest(){
-        Newrequestscreen newrequestscreen = new Newrequestscreen();
-        this.currentScreen = "newrequest";
-        addScreen(this.currentScreen, newrequestscreen);
-    }
+//    public void to_Newrequest(){
+//        Newrequestscreen newrequestscreen = new Newrequestscreen();
+//        this.currentScreen = "newrequest";
+//        addScreen(this.currentScreen, newrequestscreen);
+//    }
 
     public void to_Pastrequests(){
         screens.Pastrequestsscreen pastrequestsscreen = new screens.Pastrequestsscreen();
