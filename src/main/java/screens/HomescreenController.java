@@ -25,5 +25,9 @@ public class HomescreenController implements Controller{
             System.out.println(source);
             interactor.navigatePastrequests();
         }
+        if(Objects.equals(source, "navigateCurrentrequests")){
+            System.out.println(source);
+            interactor.navigateCurrentrequests();
+        }
     }
 }
