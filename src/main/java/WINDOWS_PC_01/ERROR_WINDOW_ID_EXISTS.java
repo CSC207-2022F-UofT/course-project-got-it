@@ -22,8 +22,8 @@ public class ERROR_WINDOW_ID_EXISTS extends JFrame implements ActionListener {
             @Override
             public void paint(Graphics g){
                 g.setFont(new Font("Monaco", Font.BOLD, 25));
-                g.drawString("Sorry, this ID is already", 9, 40);
-                g.drawString("used by somebody.", 75, 90);
+                g.drawString("Sorry, this Email is ", 45, 40);
+                g.drawString("already registered. ", 60, 90);
             }
         };
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -48,7 +48,7 @@ public class ERROR_WINDOW_ID_EXISTS extends JFrame implements ActionListener {
         this.add(LP);
         this.setVisible(true);
     }
-//        public static void main(String[] args) {
+//                public static void main(String[] args) {
 //        new ERROR_WINDOW_ID_EXISTS();
 //    }
     //    Uncomment codes above and run it to see the window. #PC_01.

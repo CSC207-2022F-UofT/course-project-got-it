@@ -48,9 +48,9 @@ public class ERROR_WINDOW_LENGTH_ERROR extends JFrame implements ActionListener 
         this.add(LP);
         this.setVisible(true);
     }
-            public static void main(String[] args) {
-        new ERROR_WINDOW_LENGTH_ERROR();
-    }
+//            public static void main(String[] args) {
+//        new ERROR_WINDOW_LENGTH_ERROR();
+//    }
     //    Uncomment codes above and run it to see the window. #PC_01.
     @Override
     public void actionPerformed(ActionEvent e) {

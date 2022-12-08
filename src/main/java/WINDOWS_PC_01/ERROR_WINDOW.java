@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class ERROR_WINDOW extends JFrame implements ActionListener {
     // Uncomment the main method and run it to visualize the window. #PC_01.
     private final JLayeredPane LP;
-    private final Canvas Background;
+    public  Canvas Background;
     private final JButton Try_Again;
     public void f0(){
         // Ignore this method. #PC_01.
@@ -16,16 +16,21 @@ public class ERROR_WINDOW extends JFrame implements ActionListener {
         this.Background.setSize(0, 0);
         this.Try_Again.setOpaque(true);
     }
-    public ERROR_WINDOW(){
-        this.setTitle("Error_00");
+    public void setText(String Line_0, String Line_1){
         this.Background = new Canvas(){
             @Override
             public void paint(Graphics g){
                 g.setFont(new Font("Monaco", Font.BOLD, 25));
                 g.drawString("Sorry, your account could", 9, 40);
                 g.drawString("not be created. ", 85, 90);
+                // "Sorry, your account could"
+                // "not be created. "
             }
         };
+    }
+    public ERROR_WINDOW(){
+        this.setTitle("Error_00");
+        setText("Sorry, your account could", "not be created. ");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.Background.setBounds(0, 0, 400, 190);
         Background.setBackground(new Color(255, 255, 255));
@@ -60,4 +65,5 @@ public class ERROR_WINDOW extends JFrame implements ActionListener {
             this.setVisible(false);
         }
     }
+
 }

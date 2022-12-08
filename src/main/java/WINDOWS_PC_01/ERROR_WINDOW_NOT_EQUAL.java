@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class ERROR_WINDOW_NOT_EQUAL extends JFrame implements ActionListener {
     // Uncomment the main method and run it to visualize the window. #PC_01.
     private final JLayeredPane LP;
-    private final Canvas Background;
+    public final Canvas Background;
     private final JButton Try_Again;
     public void f0(){
         // Ignore this method. #PC_01.
@@ -48,9 +48,9 @@ public class ERROR_WINDOW_NOT_EQUAL extends JFrame implements ActionListener {
         this.add(LP);
         this.setVisible(true);
     }
-        public static void main(String[] args) {
-        new ERROR_WINDOW_NOT_EQUAL();
-    }
+//        public static void main(String[] args) {
+//        new ERROR_WINDOW_NOT_EQUAL();
+//    }
     //    Uncomment codes above and run it to see the window. #PC_01.
     @Override
     public void actionPerformed(ActionEvent e){

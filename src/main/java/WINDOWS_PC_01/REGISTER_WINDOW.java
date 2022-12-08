@@ -14,6 +14,7 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
     private final JButton Sign_Up;
     private final JLayeredPane LP;
     private final GI_Server Server;
+    private final JButton Back;
     public void f0(){
         // Ignore this method. #PC_01.
         this.Sign_Up.setOpaque(true);
@@ -65,6 +66,12 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
         Sign_Up.setBackground(new Color(255,192,203));
         Sign_Up.setBounds(300, 300, 90, 40);
         Sign_Up.addActionListener(this);
+        this.Back= new JButton("Back");
+        Back.setOpaque(true);
+        Back.setBackground(new Color(255,192,203));
+        Back.setBounds(49, 300, 90, 40);
+        Back.addActionListener(this);
+        LP.add(Back, Integer.valueOf(0));
         LP.add(Sign_Up ,Integer.valueOf(0));
         LP.add(Password_1, Integer.valueOf(0));
         LP.add(Password_0, Integer.valueOf(0));
@@ -102,6 +109,10 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
                     setEmpty();
                 }
             }
+        }else{
+            assert e.getSource() == this.Back;
+            this.setVisible(false);
+            new LOG_IN_WINDOW(this.Server);
         }
     }
     public String Info_V(String Email, String Password){
