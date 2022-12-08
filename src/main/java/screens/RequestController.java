@@ -4,6 +4,9 @@ import MakeRequestUseCase.RequestRequest;
 import MakeRequestUseCase.RequestResponse;
 import entities.User;
 
+/**
+ * The request controller has a request method which allows the user to create a request
+ */
 public class RequestController implements Controller {
 
     final RequestInputBoundary inputBoundary;
