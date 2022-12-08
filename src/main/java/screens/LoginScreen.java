@@ -40,7 +40,7 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
                 G.setStroke(new BasicStroke(5));
                 G.drawRect(25, 100, 400, 270);
                 g.setFont(new Font("Monaco", Font.BOLD, 20));
-                g.drawString("Email", 70, 130);
+                g.drawString("Username", 70, 130);
                 g.drawString("Password", 70, 220);
             }
         };
@@ -62,7 +62,7 @@ public class LoginScreen extends JFrame implements ActionListener, Screen {
         Sign_Up.setBounds(55, 320, 90, 25);
         Sign_Up.setOpaque(true);
         Sign_Up.setBackground(Color.pink);
-        Log_In.setBounds(165, 300, 135, 25);
+        Log_In.setBounds(265, 320, 90, 25);
         Log_In.setOpaque(true);
         Log_In.setBackground(Color.pink);
         LP.add(Email, Integer.valueOf(0));
