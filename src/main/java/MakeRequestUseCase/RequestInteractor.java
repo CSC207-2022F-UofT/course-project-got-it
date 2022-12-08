@@ -2,7 +2,6 @@ package MakeRequestUseCase;
 
 import APIGateway.APIGateway;
 import DatabaseGateway.DatabaseGateway;
-import DeliveryUseCase.Pair;
 import entities.Request;
 import screens.Presenter;
 
@@ -29,6 +28,8 @@ public class RequestInteractor implements RequestInputBoundary{
         requestObj.setStartTime(LocalTime.now());
 
         String requestID = dbGateway.storeRequestInfo(requestObj);
+        requestObj.setRequestId(requestID);
+
         if(checkForAnyEmptyField(requestObj.getDetails()) && itemGeoCode.length > 1 && deliveryGeoCode.length > 1 &&
                 !Objects.equals(requestID, "save_failed")){
             if(this.dbGateway.assignClosestDriver(requestID)){

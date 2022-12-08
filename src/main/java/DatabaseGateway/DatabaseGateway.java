@@ -3,6 +3,7 @@ package DatabaseGateway;
 import MakeRequestUseCase.RequestRequest;
 import RegisterUseCase.RegisterDBRequest;
 import entities.Request;
+import entities.User;
 
 import java.util.HashMap;
 
@@ -17,4 +18,10 @@ public interface DatabaseGateway {
     boolean assignClosestDriver(String requestID);
 
     HashMap<String, Object> getLoggedInUser();
+
+    void completeRequest(String requestId);
+
+    double[] getDriverLocation(User requester);
+
+    Request[] getRequests(String uid);
 }

@@ -14,6 +14,7 @@ public class Request {
     private final double[] deliveryAddress;
     private final String deliveryNotes;
     private User requester;
+    private String requestId;
 
     public Request(String itemName, String itemDescription, double[] itemAddress, double[] deliveryAddress,
                    String deliveryNotes, User requester) {
@@ -49,6 +50,9 @@ public class Request {
     public void setStartTime(LocalTime time) {
         this.startTime = time;
     }
+
+    public String getRequestId(){return this.requestId;}
+    public void setRequestId(String requestId){this.requestId = requestId;}
 
     public LocalTime getStartTime() {
         return this.startTime;

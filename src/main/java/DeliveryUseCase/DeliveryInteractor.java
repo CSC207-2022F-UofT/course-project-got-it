@@ -30,20 +30,20 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
         HashMap<String, String> requestTimes = new HashMap<>();
         for (Request request : requestInfo) {
             // calculating time
-            double[] driverLocation = gateway.getDriverLocation(request.getID()); // DB function
+            double[] driverLocation = gateway.getDriverLocation(request.getRequester()); // DB function
             double[] itemLocation = request.getItemAddress();
 
             long distance = (long)distance_km(driverLocation, itemLocation) +
                     (long)distance_km(itemLocation, userLocation);
             long totalTime = (long)(distance / AVG_SPEED); // should be nano
 
-            //LocalTime[] a = new LocalTime[1];
             LocalTime estimatedArrival = request.getStartTime().plusNanos(totalTime);
             String arrivalFinal = estimatedArrival.getHour() + ":" + estimatedArrival.getMinute();
 
             //long startNano = request.getStartTime().values().toArray(a)[0].get;
-            if (LocalTime.now().isAfter(estimatedArrival))
-                gateway.completeRequest(request.getID());
+            if (LocalTime.now().isAfter(estimatedArrival)){
+                gateway.completeRequest(request.getRequestId());
+            }
             else
                 requestTimes.put(request.getItemName(), arrivalFinal);
         }

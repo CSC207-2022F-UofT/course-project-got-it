@@ -1,8 +1,6 @@
-import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-import MakeRequestUseCase.RequestRequest;
 import DatabaseGateway.DatabaseGateway;
 import RegisterUseCase.RegisterDBRequest;
 import com.mongodb.*;
@@ -10,13 +8,13 @@ import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import entities.Request;
+import entities.User;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class DatabaseUser implements DatabaseGateway {
@@ -58,7 +56,7 @@ public class DatabaseUser implements DatabaseGateway {
                     this.loggedInUser.put(key, userQuery.get(key));
                 }
                 return true;
-            };
+            }
         } catch (MongoException error) {
             System.err.println("An error occurred: " + error);
         }
@@ -78,6 +76,7 @@ public class DatabaseUser implements DatabaseGateway {
         newRequest.append("itemAddress", Arrays.asList(request.getItemAddress()[0], request.getItemAddress()[1]));
         newRequest.append("deliveryNotes", request.getDeliveryNotes());
         newRequest.append("startTime", request.getStartTime());
+        newRequest.append("completed", false);
 
         try{
             this.requestsCollection.insertOne(newRequest);
@@ -86,6 +85,23 @@ public class DatabaseUser implements DatabaseGateway {
             System.err.println("An error occurred: " + me);
         }
         return "save_failed";
+    }
+
+    @Override
+    public void completeRequest(String requestID) {
+
+    }
+
+    @Override
+    public double[] getDriverLocation(User requester) {
+
+        return
+    }
+
+    @Override
+    public Request[] getRequests(String uid) {
+
+        return
     }
 
     @Override
@@ -148,4 +164,5 @@ public class DatabaseUser implements DatabaseGateway {
             System.out.println("error");
         }
     }
+
 }
