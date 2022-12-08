@@ -26,4 +26,5 @@ public class RequestMadeScreen extends JFrame implements ActionListener, Screen 
     public void setController(Controller controller) {
 
     }
+
 }

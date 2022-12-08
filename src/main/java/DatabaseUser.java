@@ -1,4 +1,3 @@
-import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
@@ -17,8 +16,10 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import java.time.LocalTime;
 import java.util.*;
-// ADD COMPLETEREQUEST, GETDRIVERLOCATION, GETREQUEST
+import java.util.logging.Filter;
+
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
     private HashMap<String, Object> loggedInUser;
@@ -58,7 +59,7 @@ public class DatabaseUser implements DatabaseGateway {
                     this.loggedInUser.put(key, userQuery.get(key));
                 }
                 return true;
-            };
+            }
         } catch (MongoException error) {
             System.err.println("An error occurred: " + error);
         }
@@ -78,6 +79,8 @@ public class DatabaseUser implements DatabaseGateway {
         newRequest.append("deliveryAddress", Arrays.asList(request.getDeliveryAddress()[0], request.getDeliveryAddress()[1]));
         newRequest.append("itemAddress", Arrays.asList(request.getItemAddress()[0], request.getItemAddress()[1]));
         newRequest.append("deliveryNotes", request.getDeliveryNotes());
+        newRequest.append("startTime", request.getStartTime());
+        newRequest.append("completed", false);
         try{
             this.requestsCollection.insertOne(newRequest);
             return newRequest.get("_id").toString();
@@ -85,6 +88,45 @@ public class DatabaseUser implements DatabaseGateway {
             System.err.println("An error occurred: " + me);
         }
         return "save_failed";
+    }
+
+    @Override
+    public void completeRequest(String requestID) {
+        Bson filter = Filters.in("_id", new ObjectId(requestID));
+        Bson update = Updates.set("completed", true);
+        this.requestsCollection.updateOne(filter, update);
+    }
+
+    @Override
+    public double[] getDriverLocation(String requestID) {
+        System.out.println(requestID);
+        Bson filter = Filters.in("_id", new ObjectId(requestID));
+        Document request = this.requestsCollection.find(filter).first();
+        assert request != null;
+        String driverId = (String) request.get("driver");
+        Bson driverFilter = Filters.in("_id", new ObjectId(driverId));
+        Document driver = this.driversCollection.find(driverFilter).first();
+        assert driver != null;
+        return new double[]{(double) driver.get("latitude"), (double) driver.get("longitude")};
+    }
+
+    @Override
+    public ArrayList<Request> getRequests(User user) {
+        Bson filter = Filters.and(Filters.eq("completed", false), Filters.eq("requester", user.getUid()));
+        FindIterable<Document> requests = this.requestsCollection.find(filter);
+        ArrayList<Request> allValidRequests = new ArrayList<>();
+        for(Document request : requests){
+            ArrayList<Double> itemAddress = (ArrayList<Double>) request.get("itemAddress");
+            double[] itemAddressArray = {itemAddress.get(0), itemAddress.get(1)};
+            ArrayList<Double> deliveryAddress = (ArrayList<Double>) request.get("deliveryAddress");
+            double[] deliveryAddressArray = {deliveryAddress.get(0), deliveryAddress.get(1)};
+            Request newRequest = new Request((String) request.get("name"), (String) request.get("description"),
+                    itemAddressArray, deliveryAddressArray, (String) request.get("deliveryNotes"), user);
+            newRequest.setRequestId((request.get("_id").toString()));
+            newRequest.setStartTime(request.get("startTime").toString());
+            allValidRequests.add(newRequest);
+        }
+        return allValidRequests;
     }
 
     @Override
@@ -139,7 +181,6 @@ public class DatabaseUser implements DatabaseGateway {
     @Override
     public void save(RegisterDBRequest request) {
         Document newUser = new Document();
-        System.out.println(request.toString());
         newUser.append("name", request.getName());
         newUser.append("email", request.getEmail());
         newUser.append("password", request.getPassword());
@@ -167,4 +208,6 @@ public class DatabaseUser implements DatabaseGateway {
             return false;
         }
     }
+}
+
 }

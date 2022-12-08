@@ -5,6 +5,7 @@ import RegisterUseCase.RegisterDBRequest;
 import entities.Request;
 import entities.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface DatabaseGateway {
@@ -20,4 +21,10 @@ public interface DatabaseGateway {
     HashMap<String, Object> getLoggedInUser();
 
     boolean updateUser(User user);
+
+    void completeRequest(String requestId);
+
+    double[] getDriverLocation(String requestId);
+
+    ArrayList<Request> getRequests(User user);
 }
