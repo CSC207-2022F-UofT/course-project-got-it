@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-
+/**
+ * JFrame for register failed screen which notifies user that registration failed
+ */
 public class RegisterFailed extends JFrame implements ActionListener, Screen{
 
     private UserResponseController controller;
