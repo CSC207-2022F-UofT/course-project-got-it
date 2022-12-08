@@ -5,6 +5,10 @@ import DatabaseGateway.DatabaseGateway;
 import entities.User;
 import screens.Presenter;
 import java.util.HashMap;
+
+/**
+ * Interactor for login that validates the user login from the database
+ */
 public class LoginInteractor implements LoginInputBoundary, Interactor{
 
     private final DatabaseGateway dbgateway;
