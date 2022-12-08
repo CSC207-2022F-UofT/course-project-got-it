@@ -20,7 +20,7 @@ public class PositionStackAPI implements APIGateway {
         try{
             HttpRequest requestApi = HttpRequest.newBuilder().uri(new URI(uriString)).GET().build();
             HttpClient httpClient = HttpClient.newHttpClient();
-            HttpResponse<String> apiResponse  = httpClient.send(requestApi, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> apiResponse = httpClient.send(requestApi, HttpResponse.BodyHandlers.ofString());
             String responseFormatted = apiResponse.body().replace("{\"data\":[{", "");
             if(responseFormatted.length() < 10){
                 return convertArray(geocode);
@@ -48,5 +48,31 @@ public class PositionStackAPI implements APIGateway {
             result[i] = (double)arr[i];
         }
         return result;
+    }
+
+    @Override
+    public String getAddress(double[] geoCode){
+        String geocodeFormat = Arrays.toString(geoCode)
+                .replace("[", "")
+                .replace("]", "")
+                .replace(" ", "");
+        String uriString = "http://api.positionstack.com/v1/reverse?access_key=" + this.apiKey + "&query=" +
+                geocodeFormat + "&limit=1";
+        try{
+            HttpRequest apiRequest = HttpRequest.newBuilder().uri(new URI(uriString)).build();
+            HttpClient httpClient = HttpClient.newHttpClient();
+            HttpResponse<String> apiResponse = httpClient.send(apiRequest, HttpResponse.BodyHandlers.ofString());
+            String[] responseFormatted = apiResponse.body().replace("{\"data\":[{", "").split(",");
+            for(String keyVal: responseFormatted){
+                String[] splitKeyVal = keyVal.split(":");
+                if(Objects.equals(splitKeyVal[0], "\"name\"")){
+                    return splitKeyVal[1].replace("\"", "").replace("\"", "");
+                }
+            }
+            return null;
+        }catch(Exception error){
+            System.out.println(error);
+            return error.toString();
+        }
     }
 }
