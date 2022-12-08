@@ -14,20 +14,21 @@ public class ProfilescreenController implements Controller{
         this.interactor = interactor;
         this.user = interactor.user;
     }
-    public void change(String name, String email, String password, String address){
+    public void change(String name, String email, String password){
         if(!(Objects.equals(name, this.user.getName()))){
             interactor.changeName(name);
         }
         if(!(Objects.equals(password, this.user.getPassword()))){
-            interactor.changePassword(password);
+            if(!(Objects.equals(password, ""))){
+                interactor.changePassword(password);
+            }
+
         }
 
         if(!(Objects.equals(email, this.user.getEmail()))){
             interactor.changeEmail(email);
             System.out.println(this.user.getEmail());
         }
-        if(!(Objects.equals(address, this.user.getaddress()))){
-            interactor.changeAddress(address);
-        }
+
 
 }}
