@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * JFrame for the new request screen where the user can make a request for an item
+ */
 public class NewRequestScreen extends JFrame implements ActionListener, Screen, Backable{
     private RequestController controller;
     private UserResponseController backController;
