@@ -30,7 +30,7 @@ public class RequestInteractor implements RequestInputBoundary{
         if(checkForAnyEmptyField(requestObj.getDetails()) && itemGeoCode.length > 1 && deliveryGeoCode.length > 1 &&
                 !Objects.equals(requestID, "save_failed")){
             if(this.dbGateway.assignClosestDriver(requestID)){
-                this.presenter.showMakeRequestSuccess();
+                this.presenter.showPreviousScreen();
             }
             else{
                 this.presenter.showMakeRequestFail();
