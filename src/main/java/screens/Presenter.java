@@ -43,6 +43,7 @@ public class Presenter{
         addScreen(this.currentScreen, homescreen);
     }
     public void showProfile(String name, String address, String email, String password){
+        System.out.println(name + " " + address + " " + email + " " + password);
         Profilescreen profilescreen = new Profilescreen(name, address, email, password);
         this.currentScreen = "profilescreen";
         addScreen(this.currentScreen, profilescreen);
@@ -87,7 +88,23 @@ public class Presenter{
     }
 
     public void addScreen(String screenName, Screen screen){
+        System.out.println(screens.get(this.currentScreen));
         this.screens.put(screenName, screen);
         notifyObservers();
+    }
+
+    public void showPreviousScreen() {
+        Object[] keys = screens.keySet().toArray();
+        Object lastScreen = keys[keys.length - 1];
+        Object secondLast = keys[keys.length - 2];
+        screens.remove(lastScreen.toString());
+        this.currentScreen = secondLast.toString();
+        notifyObservers();
+    }
+
+    public void showCurrentrequest() {
+        Currentrequestscreen currentrequestscreen = new Currentrequestscreen("","","","","","", "");
+        this.currentScreen = "currenttrequests";
+        addScreen(this.currentScreen, currentrequestscreen);
     }
 }
