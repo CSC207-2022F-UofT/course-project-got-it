@@ -6,7 +6,11 @@ import javax.swing.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
-//Decides what screen to show, initially will be register
+/**
+ * Decides what screen to show, initially will be login screen
+ * The presenter uses the observer design patten where the observer is the app and the presenter is observable
+ * Whenever the hashmap changes, the app observes it
+ */
 public class Presenter{
 
     private final ArrayList<PresenterObserver> screenObservers;
@@ -17,11 +21,20 @@ public class Presenter{
         this.screenObservers = new ArrayList<PresenterObserver>();
         this.screens = new LinkedHashMap<String, Screen>();
     }
+
+    /**
+     * Displays the login success view when the user successfully logs in
+     * @param response when the user logs in
+     */
     public void loginSuccess(LoginResponse response){
         LoggedInScreen loginSuccess = new LoggedInScreen(response.getEmail());
         this.currentScreen = "loginSuccess";
         this.addScreen(this.currentScreen, loginSuccess);
     }
+    /**
+     * Displays the login failed view when the user attempts to log in with the wrong credentials
+     * and prompts the user to reenter the correct credentials
+     */
     public void loginFailed(){
         LoginFailed failedScreen = new LoginFailed();
         this.currentScreen = "loginFailed";
@@ -88,6 +101,10 @@ public class Presenter{
         this.screens.put(screenName, screen);
         notifyObservers();
     }
+
+    /**
+     * Removes the current screen and replaces with previous screen
+     */
     public void showPreviousScreen(){
         Object[] keys = screens.keySet().toArray();
         Object lastScreen = keys[keys.length - 1];

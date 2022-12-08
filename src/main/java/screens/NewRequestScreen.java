@@ -1,4 +1,7 @@
 package screens;
+/**
+ * JFrame for the new request screen where the user can make a request for a item
+ */
 
 import javax.swing.*;
 import java.awt.*;

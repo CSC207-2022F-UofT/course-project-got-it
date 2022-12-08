@@ -1,5 +1,9 @@
 package screens;
 
+/**
+ * JFrame for login failed view to inform the user about the invalid credentials
+ */
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

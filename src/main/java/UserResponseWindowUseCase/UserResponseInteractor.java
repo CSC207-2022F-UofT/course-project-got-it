@@ -8,6 +8,9 @@ public class UserResponseInteractor {
         this.presenter = presenter;
     }
 
+    /**
+     * The interactor points to the presenter to perform the showPreviousScreen method
+     */
     public void goBack(){
         presenter.showPreviousScreen();
     }
