@@ -16,4 +16,6 @@ public class LoginController implements Controller {
         LoginRequest request = new LoginRequest(email, password);
         inputBoundary.login(request);
     }
+
+
 }
