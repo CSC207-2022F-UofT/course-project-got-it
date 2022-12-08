@@ -14,29 +14,29 @@ class UserTest {
     User user1 = new User(userAddress, email, password, name);
 
     @Test
-    void getHomeCoordinates() {
+    void TestGetHomeCoordinates() {
         assert user1.getHomeCoordinates()[0] == userAddress[0];
         assert user1.getHomeCoordinates()[1] == userAddress[1];
     }
 
     @Test
-    void setUid() {
+    void TestSetUid() {
         user1.setUid("A1B2C3");
     }
 
     @Test
-    void getUid() {
+    void TestGetUid() {
         user1.setUid("LOLOL123");
         assert Objects.equals(user1.getUid(), "LOLOL123");
     }
 
     @Test
-    void setLoggedIn() {
+    void TestSetLoggedIn() {
         user1.setLoggedIn();
     }
 
     @Test
-    void setHomeCoordinates() {
+    void TestSetHomeCoordinates() {
         double[] newCoordinates = {41.669, 96.614};
         user1.setHomeCoordinates(newCoordinates);
         assert user1.getHomeCoordinates()[0] == newCoordinates[0];
@@ -44,18 +44,18 @@ class UserTest {
     }
 
     @Test
-    void getPassword() {
+    void TestGetPassword() {
         user1.setPassword("NewPassword");
         assert Objects.equals(user1.getPassword(), "NewPassword");
     }
 
     @Test
-    void getEmail() {
+    void TestGetEmail() {
         assert Objects.equals(user1.getEmail(), "rob@rgmail.com");
     }
 
     @Test
-    void setEmail() {
+    void TestSetEmail() {
         user1.setEmail("other@gmail.com");
         assert Objects.equals(user1.getEmail(), "other@gmail.com");
     }
@@ -66,7 +66,7 @@ class UserTest {
     }
 
     @Test
-    void setName() {
+    void TestSetName() {
         user1.setName("Paul Line");
         assert Objects.equals(user1.getName(), "Paul Line");
     }

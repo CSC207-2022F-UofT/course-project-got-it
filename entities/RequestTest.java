@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
 class RequestTest {
     String item = ("laptop");
     String description = "13 inch MacBook Pro in room 2200";
@@ -22,18 +19,18 @@ class RequestTest {
     Request itemRequest = new Request(item, description, itemAddress, deliveryAddress, deliveryNotes, requester);
 
     @Test
-    void getRequester() {
+    void TestGetRequester() {
         assert itemRequest.getRequester() == requester;
     }
 
     @Test
-    void setRequester() {
+    void TestSetRequester() {
         itemRequest.setRequester(requester2);
         assert itemRequest.getRequester() == requester2;
     }
 
     @Test
-    void getDetails() {
+    void TestGetDetails() {
         assert itemRequest.getDetails()[0] == item;
         assert itemRequest.getDetails()[1] == description;
         assert itemRequest.getDetails()[2] == itemAddress;
@@ -43,29 +40,29 @@ class RequestTest {
     }
 
     @Test
-    void getItemName() {
+    void TestGetItemName() {
         assert Objects.equals(itemRequest.getItemName(), item);
 
     }
 
     @Test
-    void getitemDescription() {
+    void TestGetitemDescription() {
         assert Objects.equals(itemRequest.getitemDescription(), description);
 
     }
 
     @Test
-    void getItemAddress() {
+    void TestGetItemAddress() {
         assert Arrays.equals(itemRequest.getItemAddress(), itemAddress);
     }
 
     @Test
-    void getDeliveryAddress() {
+    void TestGetDeliveryAddress() {
         assert Arrays.equals(itemRequest.getDeliveryAddress(), deliveryAddress);
     }
 
     @Test
-    void getDeliveryNotes() {
+    void TestGetDeliveryNotes() {
         assert Objects.equals(itemRequest.getDeliveryNotes(), deliveryNotes);
     }
 }
