@@ -1,5 +1,8 @@
 package entities;
 
+/**
+ * Entity later for user that includes longitude, latitude, user email, password, and name
+ */
 public class User {
     private double longitude;
     private double latitude;
