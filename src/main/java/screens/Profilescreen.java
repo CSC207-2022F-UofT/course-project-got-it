@@ -7,9 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Objects;
 
-public class Profilescreen extends JFrame implements ActionListener, Screen{
+public class Profilescreen extends JFrame implements ActionListener, Screen, Backable{
     private ProfilescreenController controller;
+    private UserResponseController backController;
     private final Canvas Background;
     private final JTextField Name;
     private final JTextField Address;
@@ -43,8 +45,8 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
                 g.drawString("User Profile", 23, 50);
                 g.setFont(new Font("Monaco", Font.BOLD, 25));
                 g.drawString("Name", 50, 100);
-                g.drawString("Address", 50, 181);
-                g.drawString("Email", 50, 261);
+                g.drawString("Username", 50, 181);
+                g.drawString("Address", 50, 261);
                 g.drawString("Password", 50, 342);
             }
         };
@@ -62,61 +64,67 @@ public class Profilescreen extends JFrame implements ActionListener, Screen{
         Name.setBounds(50, 115, 300, 35);
         Name.setOpaque(true);
         Name.setBackground(Color.WHITE);
-        this.Address = new JTextField();
-        Address.setBounds(50, 196, 300, 35);
-        Address.setOpaque(true);
-        Address.setBackground(Color.WHITE);
         this.Email = new JTextField();
-        Email.setBounds(50, 277, 300, 35);
+        Email.setBounds(50, 196, 300, 35);
         Email.setOpaque(true);
         Email.setBackground(Color.WHITE);
+        this.Address = new JTextField();
+        Address.setBounds(50, 276, 300, 35);
+        Address.setOpaque(true);
+        Address.setBackground(Color.WHITE);
         this.Password = new JPasswordField();
         Password.setBounds(50, 358, 300, 35);
         Password.setOpaque(true);
         Password.setBackground(Color.WHITE);
+
         this.Back = new JButton("Back");
-        Back.setBounds(31, 421, 71, 41);
+        Back.setBounds(31, 415, 71, 41);
         Back.setOpaque(true);
         Back.setBackground(Color.pink);
-        LP.add(Back, Integer.valueOf(0));
+        this.Back.setActionCommand("back");
         this.Save = new JButton("Save");
-        Save.setBounds(300, 421, 71, 41);
+        Save.setBounds(300, 415, 71, 41);
         Save.setOpaque(true);
         Save.setBackground(Color.pink);
+        this.Save.setActionCommand("save");
+        Name.setText(userName);
+        Email.setText(email);
+        Address.setText(address);
+
+        LP.add(Back, Integer.valueOf(0));
         LP.add(Save, Integer.valueOf(0));
+        LP.add(Address, Integer.valueOf(0));
         LP.add(Password, Integer.valueOf(0));
         LP.add(Email, Integer.valueOf(0));
-        LP.add(Address, Integer.valueOf(0));
         LP.add(Name, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
-        Name.setText(userName);
-        Address.setText(address);
-        Email.setText(email);
-        Password.setText(password);
         this.add(LP);
         this.setVisible(true);
-
         Save.addActionListener(this);
         Back.addActionListener(this);
     }
 
-
-
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        String password = Arrays.toString(this.Password.getPassword());
-        String email = this.Email.getText();
-        String address = this.Address.getText();
-        String name = this.Name.getText();
-        this.controller.change(name, email, password, address);
+        if(Objects.equals(e.getActionCommand(), "save")){
+            String password = Arrays.toString(this.Password.getPassword());
+            String email = this.Email.getText();
+            String name = this.Name.getText();
+            this.controller.change(name, email, password);
+        }
+        if(Objects.equals(e.getActionCommand(), "back")) {
+            this.backController.goBack();
+        }
+
     }
 
     @Override
     public void setController(Controller controller)  {
         this.controller = (ProfilescreenController) controller;
+    }
+
+    @Override
+    public void setBackController(UserResponseController backController){
+        this.backController = backController;
     }
 }
