@@ -1,7 +1,7 @@
 package RegisterUseCase;
 
 /**
- *Request for interactor to make a new user account
+ *Request to interactor to make a new user account
  */
 public class RegisterRequest {
     private String address;
