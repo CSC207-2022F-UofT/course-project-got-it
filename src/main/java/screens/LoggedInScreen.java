@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * JFrame for logged in screen which displays a welcome message to the user
+ */
 public class LoggedInScreen extends JFrame implements ActionListener, Screen{
 
     private Controller controller;
