@@ -10,6 +10,7 @@ import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import entities.Request;
+import entities.User;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -138,12 +139,29 @@ public class DatabaseUser implements DatabaseGateway {
         newUser.append("name", request.getName());
         newUser.append("email", request.getEmail());
         newUser.append("password", request.getPassword());
-        newUser.append("address", request.getAddress());
+        newUser.append("longitude", request.getLongitude());
+        newUser.append("latitude", request.getLatitude());
 
         try{
             this.usersCollection.insertOne(newUser);
         }catch (MongoException error){
             System.out.println("error");
+        }
+    }
+
+    @Override
+    public boolean updateUser(User user){
+        Bson userFilter = Filters.in("_id", new ObjectId(user.getUid()));
+        Bson updates = Updates.combine(
+                Updates.set("name", user.getName()),
+                Updates.set("email", user.getEmail()),
+                Updates.set("password", user.getPassword()));
+        try{
+            this.usersCollection.updateOne(userFilter, updates);
+            return true;
+        }catch(MongoException error){
+            System.out.println(error);
+            return false;
         }
     }
 }
