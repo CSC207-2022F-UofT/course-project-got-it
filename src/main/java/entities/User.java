@@ -1,5 +1,5 @@
 package entities;
-
+//KEEP MINE
 public class User {
     private double longitude;
     private double latitude;
@@ -38,6 +38,9 @@ public class User {
         return latitude;
     }
 
+    public double[] getHomeCoordinates(){
+        return new double[]{this.latitude, this.longitude};
+    }
     public void setUid(String uid) {
         this.uid = uid;
     }

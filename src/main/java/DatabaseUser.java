@@ -2,7 +2,6 @@ import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-import MakeRequestUseCase.RequestRequest;
 import DatabaseGateway.DatabaseGateway;
 import RegisterUseCase.RegisterDBRequest;
 import com.mongodb.*;
@@ -11,15 +10,15 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import entities.Request;
 import entities.User;
+import geocode.geocodeDistanceHelper;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
-import java.lang.reflect.Array;
 import java.util.*;
-
+// ADD COMPLETEREQUEST, GETDRIVERLOCATION, GETREQUEST
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
     private HashMap<String, Object> loggedInUser;

@@ -13,7 +13,7 @@ import screens.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-
+//ADD CURRENT USER TO REQUEST CONTROLLER
 public class App implements PresenterObserver {
 
     private final Presenter presenter;
