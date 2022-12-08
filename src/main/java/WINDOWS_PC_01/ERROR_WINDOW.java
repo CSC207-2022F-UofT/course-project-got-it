@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 //GOod morning.0011
 public class ERROR_WINDOW extends JFrame implements ActionListener {
     // Uncomment the main method and run it to visualize the window. #PC_01.
-    // PC_02.
+    // PC_03.
     private final JLayeredPane LP;
     private final Canvas Background;
     private final JButton Try_Again;
