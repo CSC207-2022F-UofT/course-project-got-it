@@ -5,47 +5,47 @@ import entities.User;
 import entities.Request;
 import screens.Presenter;
 
+import java.time.LocalTime;
 import java.util.*;
 import java.lang.*;
 
 public class DeliveryInteractor implements DeliveryInputBoundary{
 
     private final DatabaseGateway gateway;
-    private final long startTime;
     private final Presenter presenter;
-    final int AVG_SPEED = 60;
+    final double AVG_SPEED = 1.6666667e-11;
 
     public DeliveryInteractor(DatabaseGateway dbGateway, Presenter presenter){
         this.gateway = dbGateway;
         this.presenter = presenter;
-        this.startTime = System.nanoTime();
     }
 
-    // add presenter methods
     @Override
     public void status(DeliveryRequest deliveryRequest){ //check if delivery completed
         // getting locations (get using currentUser and db)
         User user = deliveryRequest.getUser();
         double[] userLocation = user.getHomeCoordinates();
-        Request[] requestInfo = gateway.getRequests(user);  // DB function
+        Request[] requestInfo = gateway.getRequests(user.getUid());  // DB function
 
-        HashMap<String, Integer> requestTimes = new HashMap<>();
+        HashMap<String, String> requestTimes = new HashMap<>();
         for (Request request : requestInfo) {
             // calculating time
-            double[] driverLocation = gateway.getDriverLocation(request.getId()); // DB function
+            double[] driverLocation = gateway.getDriverLocation(request.getID()); // DB function
             double[] itemLocation = request.getItemAddress();
 
-            double distance = distance_km(driverLocation, itemLocation) +
-                    distance_km(itemLocation, userLocation);
-            long nanoToMin = 60000000000L;
-            double time = (distance / AVG_SPEED) * nanoToMin * 60;
+            long distance = (long)distance_km(driverLocation, itemLocation) +
+                    (long)distance_km(itemLocation, userLocation);
+            long totalTime = (long)(distance / AVG_SPEED); // should be nano
 
-            double remaining = (time - (System.nanoTime() - this.startTime)) / nanoToMin;
+            //LocalTime[] a = new LocalTime[1];
+            LocalTime estimatedArrival = request.getStartTime().plusNanos(totalTime);
+            String arrivalFinal = estimatedArrival.getHour() + ":" + estimatedArrival.getMinute();
 
-            if (remaining <= 0)
-                gateway.completeRequest(request.getId());
+            //long startNano = request.getStartTime().values().toArray(a)[0].get;
+            if (LocalTime.now().isAfter(estimatedArrival))
+                gateway.completeRequest(request.getID());
             else
-                requestTimes.put(request.getItemName(), (int)Math.floor(remaining));
+                requestTimes.put(request.getItemName(), arrivalFinal);
         }
         if (requestTimes.isEmpty())
             presenter.noRequests();

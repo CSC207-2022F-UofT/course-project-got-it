@@ -8,14 +8,16 @@ import RegisterUseCase.RegisterDBRequest;
 import com.mongodb.*;
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import entities.Request;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
@@ -23,6 +25,7 @@ public class DatabaseUser implements DatabaseGateway {
 
     private MongoCollection<Document> usersCollection;
     private MongoCollection<Document> requestsCollection;
+    private MongoCollection<Document> driversCollection;
 
     public DatabaseUser(String uri){
         this.mongoURI = new ConnectionString(uri);
@@ -40,6 +43,7 @@ public class DatabaseUser implements DatabaseGateway {
         MongoDatabase mainDB = mongoClient.getDatabase("main");
         this.usersCollection = mainDB.getCollection("users");
         this.requestsCollection = mainDB.getCollection("requests");
+        this.driversCollection = mainDB.getCollection("drivers");
     }
 
     @Override
@@ -50,13 +54,9 @@ public class DatabaseUser implements DatabaseGateway {
                 this.loggedInUser = new HashMap<>();
                 Document userQuery = this.usersCollection.find(filter).first();
                 Set<String> keys = Objects.requireNonNull(userQuery).keySet();
-                System.out.println("\n\n\n\n");
                 for(String key: keys){
-                    System.out.println(key);
-                    System.out.println(userQuery.get(key));
                     this.loggedInUser.put(key, userQuery.get(key));
                 }
-                System.out.println("\n\n\n\n");
                 return true;
             };
         } catch (MongoException error) {
@@ -70,21 +70,56 @@ public class DatabaseUser implements DatabaseGateway {
     }
 
     @Override
-
-    public boolean storeRequestInfo(RequestRequest requestRequest) {
+    public String storeRequestInfo(Request request) {
         Document newRequest = new Document();
-        newRequest.append("requester", requestRequest.getRequester());
-        newRequest.append("description", requestRequest.getDescription());
-        newRequest.append("deliveryAddress", requestRequest.getReq_loc());
-        newRequest.append("itemAddress", requestRequest.getItem_loc());
-        newRequest.append("deliveryNotes", requestRequest.getDeliveryNotes());
+        newRequest.append("requester", request.getRequester().getUid());
+        newRequest.append("description", request.getitemDescription());
+        newRequest.append("deliveryAddress", Arrays.asList(request.getDeliveryAddress()[0], request.getDeliveryAddress()[1]));
+        newRequest.append("itemAddress", Arrays.asList(request.getItemAddress()[0], request.getItemAddress()[1]));
+        newRequest.append("deliveryNotes", request.getDeliveryNotes());
+        newRequest.append("startTime", request.getStartTime());
+
         try{
             this.requestsCollection.insertOne(newRequest);
-            return true;
+            return newRequest.get("_id").toString();
         }catch(MongoException me){
             System.err.println("An error occurred: " + me);
         }
-        return false;
+        return "save_failed";
+    }
+
+    @Override
+    public boolean assignClosestDriver(String requestID) {
+        Bson requestFilter = Filters.in("_id", new ObjectId(requestID));
+        Document request = this.requestsCollection.find(requestFilter).first();
+        HashMap<Double, Document> distanceDriverMap = new HashMap<>();
+        double smallestDistance = Double.POSITIVE_INFINITY;
+        try{
+            FindIterable<Document> drivers = this.driversCollection.find();
+            for(Document driver : drivers){
+                if(driver.get("available", Boolean.class)){
+                    double[] driverCoords = {(double)driver.get("longitude"), (double)driver.get("latitude")};
+                    assert request != null;
+                    ArrayList addressCoords = request.get("itemAddress", ArrayList.class);
+                    geocodeDistanceHelper helper = new geocodeDistanceHelper();
+                    double distance = helper.getDistance(driverCoords[0], driverCoords[1], (double) addressCoords.get(0),
+                            (double) addressCoords.get(1));
+                    if(distance < smallestDistance){
+                        smallestDistance = distance;
+                    }
+                    distanceDriverMap.put(distance, driver);
+                }
+            }
+            Bson requestUpdate = Updates.set("driver", distanceDriverMap.get(smallestDistance).get("_id").toString());
+            Bson driverUpdate = Updates.set("available", false);
+            Bson driverFilter = Filters.in("_id", distanceDriverMap.get(smallestDistance).get("_id"));
+            this.requestsCollection.updateOne(requestFilter, requestUpdate);
+            this.driversCollection.updateOne(driverFilter, driverUpdate);
+            return true;
+        }catch(MongoException error){
+            System.out.println(error);
+            return false;
+        }
     }
 
     public boolean exists(String email) {

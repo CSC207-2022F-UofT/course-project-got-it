@@ -2,14 +2,15 @@ package entities;
 
 // Entity layer
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.time.LocalTime;
+import java.util.HashMap;
 
 public class Request {
 
     private final String itemName;
     private final String itemDescription;
     private final double[] itemAddress;
+    private LocalTime startTime;
     private final double[] deliveryAddress;
     private final String deliveryNotes;
     private User requester;
@@ -44,6 +45,13 @@ public class Request {
     public double[] getDeliveryAddress() { return deliveryAddress; }
     public String getDeliveryNotes() {
         return deliveryNotes;
+    }
+    public void setStartTime(LocalTime time) {
+        this.startTime = time;
+    }
+
+    public LocalTime getStartTime() {
+        return this.startTime;
     }
 
 }
