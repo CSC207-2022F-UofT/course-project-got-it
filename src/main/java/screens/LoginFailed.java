@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-
+/**
+ * JFrame for login failed view to inform the user about the invalid credentials
+ */
 public class LoginFailed extends JFrame implements ActionListener, Screen{
     private UserResponseController controller;
     private final JLayeredPane LP;
