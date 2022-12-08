@@ -7,10 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
+import java.util.Objects;
 
-public class RegisterScreen extends JFrame implements ActionListener, Screen {
+public class RegisterScreen extends JFrame implements ActionListener, Screen, Backable {
 
     private RegisterController controller;
+    private UserResponseController backController;
 
     private final Canvas Background;
     private final JTextField Email;
@@ -19,10 +21,12 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
     private final JPasswordField Password_0;
     private final JPasswordField Password_1;
     private final JButton Sign_Up;
+    private final JButton Back;
     private final JLayeredPane LP;
     public void f0(){
         // Ignore this method. #PC_01.
         this.Sign_Up.setOpaque(true);
+        this.Back.setOpaque(true);
         this.LP.setOpaque(true);
         this.Background.setSize(0, 0);
         this.Name.setOpaque(true);
@@ -41,7 +45,7 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
                 g.setFont(new Font("Monaco", Font.BOLD, 25));
                 g.drawString("Name", 80, 100);
                 g.drawString("Address", 80, 170);
-                g.drawString("Email", 80, 240);
+                g.drawString("Username", 80, 240);
                 g.drawString("Password", 80, 310);
                 g.drawString("Re-Enter Password", 80, 380);
             }
@@ -78,10 +82,18 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
 
 
         this.Sign_Up = new JButton("Sign Up");
+        this.Sign_Up.setActionCommand("signup");
         Sign_Up.setOpaque(true);
         Sign_Up.setBackground(new Color(255,192,203));
         Sign_Up.setBounds(300, 460, 90, 40);
+
+        this.Back = new JButton("Back");
+        this.Back.setActionCommand("back");
+        Back.setOpaque(true);
+        Back.setBackground(new Color(255,192,203));
+        Back.setBounds(180, 460, 90, 40);
         LP.add(Sign_Up ,Integer.valueOf(0));
+        LP.add(Back ,Integer.valueOf(0));
         LP.add(Password_1, Integer.valueOf(0));
         LP.add(Password_0, Integer.valueOf(0));
         LP.add(Email, Integer.valueOf(0));
@@ -92,12 +104,21 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
         this.setVisible(true);
 
         Sign_Up.addActionListener(this);
+        Back.addActionListener(this);
     }
 
 
     public void actionPerformed(ActionEvent e) {
         try {
-            this.controller.create(this.Name.getText(),this.Address.getText(), this.Email.getText(), Arrays.toString(this.Password_0.getPassword()), Arrays.toString(this.Password_1.getPassword()));
+            if(Objects.equals(e.getActionCommand(), "signup")){
+                this.controller.create(this.Name.getText(),this.Address.getText(), this.Email.getText(), Arrays.toString(this.Password_0.getPassword()), Arrays.toString(this.Password_1.getPassword()));
+            }
+            if(Objects.equals(e.getActionCommand(), "back")) {
+                this.backController.goBack();
+            }
+
+
+
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(this, exception.getMessage());
         }
@@ -106,5 +127,10 @@ public class RegisterScreen extends JFrame implements ActionListener, Screen {
     @Override
     public void setController(Controller controller) {
         this.controller = (RegisterController) controller;
+    }
+
+    @Override
+    public void setBackController(UserResponseController backController){
+        this.backController = backController;
     }
 }
