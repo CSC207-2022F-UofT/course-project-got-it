@@ -1,17 +1,18 @@
 package entities;
 
 public class User {
-    private String address;
-
+    private double longitude;
+    private double latitude;
     private String email;
     private boolean loggedIn;
 
     private String password;
     private String name;
     private String uid;
-    public User(String address, String userEmail, String password, String name){
+    public User(double longitude, double latitude, String userEmail, String password, String name){
         this.password = password;
-        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.email = userEmail;
         this.name = name;
         this.loggedIn = true;
@@ -21,8 +22,20 @@ public class User {
         this.loggedIn = false;
     }
 
-    public String getaddress() {
-        return this.address;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
     }
 
     public void setUid(String uid) {
@@ -45,9 +58,6 @@ public class User {
         }
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public void setPassword(String password) {
         this.password = password;
