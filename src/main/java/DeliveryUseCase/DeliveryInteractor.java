@@ -33,15 +33,12 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
             double[] driverLocation = gateway.getDriverLocation(request.getRequestId()); // DB function
             double[] itemLocation = request.getItemAddress();
 
-            long distance = (long) helper.getDistance(driverLocation[0], driverLocation[1], itemLocation[0],
+            long distance = ((long) helper.getDistance(driverLocation[0], driverLocation[1], itemLocation[0],
                     itemLocation[1]) +
-                    (long) helper.getDistance(itemLocation[0], itemLocation[1], userLocation[0], userLocation[1]);
+                    (long) helper.getDistance(itemLocation[0], itemLocation[1], userLocation[0], userLocation[1]))/1000;
             long totalTime = (long) (distance / AVG_SPEED); // should be nano
-            System.out.println("TIME:");
-            System.out.println(request.getStartTime());
             LocalTime estimatedArrival = LocalTime.parse(request.getStartTime()).plusNanos(totalTime);
             String arrivalFinal = estimatedArrival.getHour() + ":" + estimatedArrival.getMinute();
-
             //long startNano = request.getStartTime().values().toArray(a)[0].get;
             if (LocalTime.now().isAfter(estimatedArrival)) {
                 gateway.completeRequest(request.getRequestId());
@@ -51,16 +48,10 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
             }
         }
         if (requestTimes.isEmpty()){
-            //presenter.noRequests();
-            System.out.println("\n\n\n\n");
-            System.out.println(requestTimes);
-            System.out.println("\n\n\n\n");
+            //presenter.deliveryError();
         }
         else{
-            System.out.println("\n\n\n\n");
-            System.out.println(requestTimes);
-            System.out.println("\n\n\n\n");
-            //presenter.statusScreen(requestTimes);
+            //presenter.showDeliveryTime(requestTimes);
         }
     }
 }
