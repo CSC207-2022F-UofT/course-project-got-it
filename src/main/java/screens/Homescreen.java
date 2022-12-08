@@ -13,6 +13,7 @@ public class Homescreen extends JFrame implements ActionListener, Screen {
     private final JButton Profile;
     private final JButton New_Request;
     private final JButton Past_Request;
+    private final JButton Current_Request;
     private final JLayeredPane LP;
     public void f0(){
         // Ignore this method. #PC_01.
@@ -21,6 +22,7 @@ public class Homescreen extends JFrame implements ActionListener, Screen {
         this.Profile.setOpaque(true);
         this.New_Request.setOpaque(true);
         this.Past_Request.setOpaque(true);
+        this.Current_Request.setOpaque(true);
     }
     public Homescreen() {
         this.Background = new Canvas(){
@@ -31,13 +33,13 @@ public class Homescreen extends JFrame implements ActionListener, Screen {
                 g.drawString("Welcome to Got It. ", 20, 40);
             }
         };
-        this.Background.setBounds(0, 0, 500, 300);
+        this.Background.setBounds(0, 0, 620, 350);
         this.Background.setBackground(Color.pink);
         this.setTitle("GOT_IT.");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.requestFocus(true);
-        this.setSize(500, 300);
+        this.setSize(620, 350);
         this.LP = new JLayeredPane();
         LP.setBounds(0, 0, 500, 300);
         this.Profile = new JButton("Profile");
@@ -55,6 +57,13 @@ public class Homescreen extends JFrame implements ActionListener, Screen {
         Past_Request.setOpaque(true);
         Past_Request.setBackground(Color.pink);
         Past_Request.setActionCommand("navigatePastrequests");
+        this.Current_Request = new JButton("Current Request");
+        Current_Request.setBounds(440, 85, 130, 130);
+        Current_Request.setOpaque(true);
+        Current_Request.setBackground(Color.pink);
+        Current_Request.setActionCommand("navigateCurrentrequests");
+
+        LP.add(Current_Request, Integer.valueOf(0));
         LP.add(Past_Request, Integer.valueOf(0));
         LP.add(New_Request, Integer.valueOf(0));
         LP.add(Profile, Integer.valueOf(0));
@@ -66,6 +75,7 @@ public class Homescreen extends JFrame implements ActionListener, Screen {
         Profile.addActionListener(this);
         New_Request.addActionListener(this);
         Past_Request.addActionListener(this);
+        Current_Request.addActionListener(this);
     }
 
     @Override
