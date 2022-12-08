@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * JFrame for request failed screen which shows that the request cannot be made
+ */
 public class RequestFailedScreen extends JFrame implements Screen, ActionListener {
 
     private UserResponseController controller;
