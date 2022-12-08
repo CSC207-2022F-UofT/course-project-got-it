@@ -12,6 +12,7 @@ public class HOME_WINDOW extends JFrame implements ActionListener{
     private final JButton Profile;
     private final JButton New_Request;
     private final JButton Past_Request;
+    private final JButton Back;
     private final JLayeredPane LP;
     private final GI_Server Server;
     private final User U;
@@ -22,6 +23,7 @@ public class HOME_WINDOW extends JFrame implements ActionListener{
         this.Profile.setOpaque(true);
         this.New_Request.setOpaque(true);
         this.Past_Request.setOpaque(true);
+        this.Back.setOpaque(true);
     }
     public HOME_WINDOW(GI_Server S0, User u){
         this.U = u;
@@ -60,6 +62,12 @@ public class HOME_WINDOW extends JFrame implements ActionListener{
         Past_Request.setOpaque(true);
         Past_Request.setBackground(Color.pink);
         Past_Request.addActionListener(this);
+        this.Back = new JButton("Back");
+        Back.setOpaque(true);
+        Back.setBackground(Color.pink);
+        Back.setBounds(13, 230, 90, 40);
+        Back.addActionListener(this);
+        LP.add(Back, Integer.valueOf(0));
         LP.add(Past_Request, Integer.valueOf(0));
         LP.add(New_Request, Integer.valueOf(0));
         LP.add(Profile, Integer.valueOf(0));
