@@ -20,8 +20,4 @@ public class RequestController implements Controller {
         RequestRequest request = new RequestRequest(itemName, req_loc, item_loc, description, deliveryNotes, currentUser);
         inputBoundary.request(request);
     }
-
-    public void goBack(){
-        this.inputBoundary.goBack();
-    }
 }
