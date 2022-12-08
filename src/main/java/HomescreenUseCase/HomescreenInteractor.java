@@ -4,6 +4,9 @@ import APIGateway.APIGateway;
 import entities.User;
 import screens.Presenter;
 
+/**
+ * Interactor for homescreen that helps the presenter to navigate through the screens
+ */
 public class HomescreenInteractor {
     private final Presenter presenter;
     private final User currentUser;
