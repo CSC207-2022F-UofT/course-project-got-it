@@ -1,5 +1,8 @@
 package RegisterUseCase;
 
+/**
+ *
+ */
 public class RegisterResponse {
     String login;
 

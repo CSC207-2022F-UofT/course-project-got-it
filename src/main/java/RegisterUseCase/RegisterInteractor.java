@@ -9,6 +9,9 @@ import screens.Presenter;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ *
+ */
 public class RegisterInteractor implements RegisterInputBoundary {
     private final DatabaseGateway gateway;
     private final UserFactory factory;
