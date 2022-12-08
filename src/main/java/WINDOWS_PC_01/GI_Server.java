@@ -62,5 +62,13 @@ public class GI_Server {
                 + Math.pow(Driver_y - User_y, 2));
         return distance / D.getSpeed();
     }
+    public boolean Has_ID(String ID){
+        for(User U : Info){
+            if(U.getGI_KEY().equals(ID)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -84,15 +84,38 @@ public class REGISTER_WINDOW extends JFrame implements ActionListener {
             String ID = this.Email.getText();
             String Pass_0 = String.valueOf(this.Password_0.getPassword());
             String Pass_1 = String.valueOf(this.Password_1.getPassword());
-            boolean is_Equal = Pass_0.equals(Pass_1);
-            boolean is_Empty = ID.isEmpty() || Pass_0.isEmpty() || Pass_1.isEmpty();
-            if(is_Equal && !is_Empty){
-                this.Server.addUser(ID,Pass_0);
-                this.setVisible(false);
-                new LOG_IN_WINDOW(this.Server);
-            }else{
-                new ERROR_WINDOW();
+            if(Info_V(ID, Pass_0).equals("PC_0_L")){
+                new ERROR_WINDOW_LENGTH_ERROR();
+                setEmpty();
+            }else if(Info_V(ID, Pass_0).equals("PC_0_E")){
+                new ERROR_WINDOW_ID_EXISTS();
+                setEmpty();
+            }else if(Info_V(ID, Pass_0).equals("PC_1")){
+                boolean is_Equal = Pass_0.equals(Pass_1);
+                boolean is_Empty = ID.isEmpty() || Pass_0.isEmpty() || Pass_1.isEmpty();
+                if(is_Equal && !is_Empty){
+                    this.Server.addUser(ID,Pass_0);
+                    this.setVisible(false);
+                    new LOG_IN_WINDOW(this.Server);
+                }else{
+                    new ERROR_WINDOW_NOT_EQUAL();
+                    setEmpty();
+                }
             }
         }
+    }
+    public String Info_V(String Email, String Password){
+        if(Email.length() < 6 || Password.length() < 6){
+            return "PC_0_L";
+        }
+        if(this.Server.Has_ID(Email)){
+            return "PC_0_E";
+        }
+        return "PC_1";
+    }
+    public void setEmpty(){
+        this.Email.setText("");
+        this.Password_0.setText("");
+        this.Password_1.setText("");
     }
 }
