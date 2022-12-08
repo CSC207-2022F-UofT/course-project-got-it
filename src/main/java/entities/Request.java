@@ -1,6 +1,8 @@
 package entities;
 
-// Entity layer
+/**
+ * Entity later for request that includes item name, item description, item address, delivery address, delivery notes and requester
+ */
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
