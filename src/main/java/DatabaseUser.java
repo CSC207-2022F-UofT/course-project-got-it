@@ -79,12 +79,10 @@ public class DatabaseUser implements DatabaseGateway {
         newRequest.append("itemAddress", Arrays.asList(request.getItemAddress()[0], request.getItemAddress()[1]));
         newRequest.append("deliveryNotes", request.getDeliveryNotes());
         newRequest.append("startTime", request.getStartTime());
+        newRequest.append("itemName", request.getItemName());
         newRequest.append("completed", false);
         try{
             this.requestsCollection.insertOne(newRequest);
-            System.out.println("\n\n\n\n\n");
-            System.out.println(newRequest.get("_id").toString());
-            System.out.println("\n\n\n\n\n");
             return newRequest.get("_id").toString();
         }catch(MongoException me){
             System.err.println("An error occurred: " + me);
@@ -101,7 +99,7 @@ public class DatabaseUser implements DatabaseGateway {
 
     @Override
     public double[] getDriverLocation(String requestID) {
-        System.out.println(requestID);
+        System.out.println("REQUEST: " + requestID);
         Bson filter = Filters.in("_id", new ObjectId(requestID));
         Document request = this.requestsCollection.find(filter).first();
         assert request != null;
@@ -122,7 +120,7 @@ public class DatabaseUser implements DatabaseGateway {
             double[] itemAddressArray = {itemAddress.get(0), itemAddress.get(1)};
             ArrayList<Double> deliveryAddress = (ArrayList<Double>) request.get("deliveryAddress");
             double[] deliveryAddressArray = {deliveryAddress.get(0), deliveryAddress.get(1)};
-            Request newRequest = new Request((String) request.get("name"), (String) request.get("description"),
+            Request newRequest = new Request((String) request.get("itemName"), (String) request.get("description"),
                     itemAddressArray, deliveryAddressArray, (String) request.get("deliveryNotes"), user);
             newRequest.setRequestId((request.get("_id").toString()));
             newRequest.setStartTime(request.get("startTime").toString());
