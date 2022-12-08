@@ -4,9 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Objects;
 
-public class NewRequestScreen extends JFrame implements ActionListener, Screen{
+public class NewRequestScreen extends JFrame implements ActionListener, Screen, Backable{
     private RequestController controller;
+    private UserResponseController backController;
 
     private final Canvas Background;
     private final JTextField Item_Name;
@@ -75,10 +78,12 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
         Item_Description.setOpaque(true);
         Item_Description.setBackground(Color.white);
         this.Back = new JButton("Back");
+        this.Back.setActionCommand("back");
         Back.setBounds(10, 435, 75, 25);
         Back.setOpaque(true);
         Back.setBackground(Color.pink);
         this.Create = new JButton("Create");
+        this.Create.setActionCommand("create");
         Create.setBounds(215, 435, 75, 25);
         Create.setOpaque(true);
         Create.setBackground(Color.pink);
@@ -94,18 +99,29 @@ public class NewRequestScreen extends JFrame implements ActionListener, Screen{
         this.setVisible(true);
 
         Create.addActionListener(this);
-        //Back.addActionListener(this);
+        Back.addActionListener(this);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.controller.request(this.Item_Name.getText(), this.Delivery_Location.getText(), this.Item_Location.getText(),
-                this.Item_Description.getText(), this.Delivery_Description.getText());
+            if(Objects.equals(e.getActionCommand(), "create")){
+                this.controller.request(this.Item_Name.getText(), this.Delivery_Location.getText(), this.Item_Location.getText(),
+                        this.Item_Description.getText(), this.Delivery_Description.getText());
+            }
+            if(Objects.equals(e.getActionCommand(), "back")) {
+                this.backController.goBack();
+            }
+
     }
 
     @Override
     public void setController(Controller controller) {
         this.controller = (RequestController) controller;
+    }
+
+    @Override
+    public void setBackController(UserResponseController backController){
+        this.backController = backController;
     }
 }
