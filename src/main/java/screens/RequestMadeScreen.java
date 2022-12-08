@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * JFrame for request made which shows that the request has been made
+ */
 public class RequestMadeScreen extends JFrame implements ActionListener, Screen {
 
     public RequestMadeScreen(){
