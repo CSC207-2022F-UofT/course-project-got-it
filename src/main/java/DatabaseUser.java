@@ -104,10 +104,14 @@ public class DatabaseUser implements DatabaseGateway {
         Document request = this.requestsCollection.find(filter).first();
         assert request != null;
         String driverId = (String) request.get("driver");
-        Bson driverFilter = Filters.in("_id", new ObjectId(driverId));
-        Document driver = this.driversCollection.find(driverFilter).first();
-        assert driver != null;
-        return new double[]{(double) driver.get("latitude"), (double) driver.get("longitude")};
+        if(driverId.length() < 1){
+            Bson driverFilter = Filters.in("_id", new ObjectId(driverId));
+            Document driver = this.driversCollection.find(driverFilter).first();
+            assert driver != null;
+            return new double[]{(double) driver.get("latitude"), (double) driver.get("longitude")};
+        }else{
+            return new double[]{0.0,0.0};
+        }
     }
 
     @Override
@@ -127,6 +131,38 @@ public class DatabaseUser implements DatabaseGateway {
             allValidRequests.add(newRequest);
         }
         return allValidRequests;
+    }
+
+    @Override
+    public ArrayList<Request> getPassedRequests(User user) {
+        Bson filter = Filters.and(Filters.eq("completed", true),
+                Filters.eq("requester", user.getUid()));
+        FindIterable<Document> completedRequests = this.requestsCollection.find(filter);
+        ArrayList<Request> allCompletedRequests = new ArrayList<>();
+        for(Document request: completedRequests){
+            System.out.println(request);
+            ArrayList<Double> itemAddress = (ArrayList<Double>) request.get("itemAddress");
+            double[] itemAddressArray = {itemAddress.get(0), itemAddress.get(1)};
+            ArrayList<Double> deliveryAddress = (ArrayList<Double>) request.get("deliveryAddress");
+            double[] deliveryAddressArray = {deliveryAddress.get(0), deliveryAddress.get(1)};
+            Request newRequest = new Request((String) request.get("name"), (String) request.get("description"),
+                    itemAddressArray, deliveryAddressArray, (String) request.get("deliveryNotes"), user);
+            newRequest.setRequestId((request.get("_id").toString()));
+            newRequest.setStartTime(request.get("startTime").toString());
+            allCompletedRequests.add(newRequest);
+        }
+        return allCompletedRequests;
+    }
+
+    @Override
+    public String getDriverName(String requestId) {
+        Bson filter = Filters.in("_id", new ObjectId(requestId));
+        Document request = this.requestsCollection.find(filter).first();
+        assert request != null;
+        Bson driverFilter = Filters.in("_id", new ObjectId(request.get("driver").toString()));
+        Document driver = this.driversCollection.find(driverFilter).first();
+        assert driver != null;
+        return driver.get("name").toString();
     }
 
     @Override
@@ -208,6 +244,6 @@ public class DatabaseUser implements DatabaseGateway {
             return false;
         }
     }
-}
+
 
 }
