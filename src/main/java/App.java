@@ -15,7 +15,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 /**
- * The main interface that presents all the screens for the user to view
+ * The main file that presents all the screens from presenter for the user to view
  */
 public class App implements PresenterObserver {
 
