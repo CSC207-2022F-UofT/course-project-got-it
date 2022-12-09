@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * JFrame of Finding a Driver Screen which displays the message that a driver is being found
+ */
 public class FindingADriverScreen extends JFrame {
     private final Canvas Background;
     private final JLayeredPane LP;

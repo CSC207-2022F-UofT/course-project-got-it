@@ -1,4 +1,7 @@
 package screens;
+/**
+ * JFrame for login screen where the user can login
+ */
 
 import javax.swing.*;
 import java.awt.*;

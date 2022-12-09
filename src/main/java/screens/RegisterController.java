@@ -3,6 +3,9 @@ import RegisterUseCase.RegisterInputBoundary;
 import RegisterUseCase.RegisterRequest;
 import RegisterUseCase.RegisterResponse;
 
+/**
+ * The register controller has a create method which allows the user to create an account
+ */
 public class RegisterController implements Controller {
     final RegisterInputBoundary inputBoundary;
 

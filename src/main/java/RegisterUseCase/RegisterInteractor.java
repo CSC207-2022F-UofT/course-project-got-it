@@ -9,6 +9,9 @@ import screens.Presenter;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ *Interactor for register that stores the new user information to the database
+ */
 public class RegisterInteractor implements RegisterInputBoundary {
     private final DatabaseGateway gateway;
     private final UserFactory factory;

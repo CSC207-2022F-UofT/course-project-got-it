@@ -1,11 +1,13 @@
 package HomescreenUseCase;
-//KEEP MINE
 import APIGateway.APIGateway;
 import DatabaseGateway.DatabaseGateway;
 import entities.Request;
 import entities.User;
 import screens.Presenter;
 
+/**
+ * Interactor for homescreen that helps the presenter to navigate through the screens
+ */
 import java.util.ArrayList;
 
 public class HomescreenInteractor {

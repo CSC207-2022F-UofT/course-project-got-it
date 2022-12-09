@@ -15,7 +15,12 @@ import screens.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
-//ADD CURRENT USER TO REQUEST CONTROLLER
+
+/**
+ * Observes the presenter. Creates a screen hashmap that stores the screen, controller and interactor for all the components
+ * When notified by presenter, changes the screen to the screen name mentioned in the screen hashmap
+ * Also sets up external functionalities such as PositionStackAPI and MongoDB API
+ */
 public class App implements PresenterObserver {
 
     private final Presenter presenter;

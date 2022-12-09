@@ -13,6 +13,9 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Interactor for request that stores the new request information to the database
+ */
 public class RequestInteractor implements RequestInputBoundary{
 
     private final DatabaseGateway dbGateway;

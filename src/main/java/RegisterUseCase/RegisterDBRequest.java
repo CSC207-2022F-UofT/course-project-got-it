@@ -1,5 +1,8 @@
 package RegisterUseCase;
 
+/**
+ * Contains RegisterDBRequest method which is a data transfer object from the interactor to the databse gateway
+ */
 public class RegisterDBRequest {
     private final String email;
     private String password;

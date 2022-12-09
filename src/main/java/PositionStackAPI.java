@@ -6,7 +6,10 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
-//keep mine
+
+/**
+ * API to convert address to geocode and vice-versa.
+ */
 public class PositionStackAPI implements APIGateway {
     private final String apiKey;
     public PositionStackAPI(String apiKey){

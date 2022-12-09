@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
+/**
+ * JFrame for current request screen where the app shows the current request made by the user to the user
+ */
 public class Currentrequestscreen extends JFrame implements ActionListener, Backable, Screen{
     private UserResponseController backController;
     private DeliveryController controller;

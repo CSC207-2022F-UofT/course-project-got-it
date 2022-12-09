@@ -2,6 +2,9 @@ package screens;
 import LoginUseCase.LoginInputBoundary;
 import LoginUseCase.LoginRequest;
 
+/**
+ * Calls the interactor to handle the user login function
+ */
 public class LoginController implements Controller {
 
     final LoginInputBoundary inputBoundary;

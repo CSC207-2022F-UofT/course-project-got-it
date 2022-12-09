@@ -2,6 +2,9 @@ package MakeRequestUseCase;
 // keep
 import entities.User;
 
+/**
+ * Request to interactor to make a new request
+ */
 public class RequestRequest {
 
     private String req_loc, item_loc, description, deliveryNotes, itemName;

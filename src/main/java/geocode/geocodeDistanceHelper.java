@@ -1,5 +1,7 @@
 package geocode;
-//KEEP MINE
+/**
+ * Helper method to calculate the distance between two different coordinates
+ */
 public class geocodeDistanceHelper {
     public double getDistance(double longA, double latA, double longB, double latB){
         double longitudeARadians = Math.toRadians(longA);

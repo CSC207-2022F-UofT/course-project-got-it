@@ -13,7 +13,7 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
 
     private final DatabaseGateway gateway;
     private final Presenter presenter;
-    final double AVG_SPEED = 1.6666667e-11;
+    final double AVG_SPEED = 5.5555556e-11;
     private String itemName;
 
     public DeliveryInteractor(DatabaseGateway dbGateway, Presenter presenter){

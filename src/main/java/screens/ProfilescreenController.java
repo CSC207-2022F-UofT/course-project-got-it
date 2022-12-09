@@ -6,6 +6,9 @@ import entities.User;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * The profile screen controller has a change method which allows the user to change their name, password and email
+ */
 public class ProfilescreenController implements Controller{
     public  ProfilescreenInteractor interactor;
     public User user;

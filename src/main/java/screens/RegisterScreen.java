@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * JFrame for register screen which displays registration for user to complete
+ */
 public class RegisterScreen extends JFrame implements ActionListener, Screen, Backable {
 
     private RegisterController controller;

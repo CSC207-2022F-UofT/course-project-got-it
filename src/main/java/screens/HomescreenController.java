@@ -2,6 +2,11 @@ package screens;
 
 import HomescreenUseCase.HomescreenInteractor;
 
+/**
+ * Homescreen controller has a navigate function which allows the user to navigate from homescreen to profile,
+ * new request, past request and current request screens
+ */
+
 import java.util.Objects;
 
 public class HomescreenController implements Controller{

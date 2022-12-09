@@ -1,7 +1,9 @@
 package entities;
 
 // Entity layer
-//keep aziz
+/**
+ * Entity later for request that includes item name, item description, item address, delivery address, delivery notes and requester
+ */
 
 import java.time.LocalTime;
 import java.util.HashMap;

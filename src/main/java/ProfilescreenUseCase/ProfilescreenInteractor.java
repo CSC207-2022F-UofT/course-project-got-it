@@ -4,6 +4,9 @@ import DatabaseGateway.DatabaseGateway;
 import entities.User;
 import screens.Presenter;
 
+/**
+ * Interactor for profile screen that allows user to change their information
+ */
 public class ProfilescreenInteractor {
     private final DatabaseGateway dbGateway;
 

@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * JFrame for past request screen where the user can view three past requests
+ */
 public class Pastrequestsscreen extends JFrame implements ActionListener, Screen, Backable{
     private PastrequestsController controller;
     private UserResponseController backController;
