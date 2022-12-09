@@ -14,10 +14,12 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
     private final DatabaseGateway gateway;
     private final Presenter presenter;
     final double AVG_SPEED = 1.6666667e-11;
+    private String itemName;
 
     public DeliveryInteractor(DatabaseGateway dbGateway, Presenter presenter){
         this.gateway = dbGateway;
         this.presenter = presenter;
+        this.itemName = "";
     }
 
     @Override
@@ -28,8 +30,10 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
         ArrayList<Request> requestInfo = gateway.getRequests(user);  // DB function
         geocodeDistanceHelper helper = new geocodeDistanceHelper();
         HashMap<String, String> requestTimes = new HashMap<>();
+        String itemName;
         for (Request request : requestInfo) {
             // calculating time
+            System.out.println("REQUEST: " + request.getRequestId());
             double[] driverLocation = gateway.getDriverLocation(request.getRequestId()); // DB function
             double[] itemLocation = request.getItemAddress();
 
@@ -37,8 +41,6 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
                     itemLocation[1]) +
                     (long) helper.getDistance(itemLocation[0], itemLocation[1], userLocation[0], userLocation[1]);
             long totalTime = (long) (distance / AVG_SPEED); // should be nano
-            System.out.println("TIME:");
-            System.out.println(request.getStartTime());
             LocalTime estimatedArrival = LocalTime.parse(request.getStartTime()).plusNanos(totalTime);
             String arrivalFinal = estimatedArrival.getHour() + ":" + estimatedArrival.getMinute();
 
@@ -47,20 +49,15 @@ public class DeliveryInteractor implements DeliveryInputBoundary{
                 gateway.completeRequest(request.getRequestId());
                 // gateway.driverAvailable()
             } else {
+                this.itemName = request.getItemName();
                 requestTimes.put(request.getItemName(), arrivalFinal);
             }
         }
         if (requestTimes.isEmpty()){
-            //presenter.noRequests();
-            System.out.println("\n\n\n\n");
-            System.out.println(requestTimes);
-            System.out.println("\n\n\n\n");
+            presenter.showDeliveryTimeFailed();
         }
         else{
-            System.out.println("\n\n\n\n");
-            System.out.println(requestTimes);
-            System.out.println("\n\n\n\n");
-            //presenter.statusScreen(requestTimes);
+            presenter.showDeliveryTime(requestTimes.get(this.itemName));
         }
     }
 }
