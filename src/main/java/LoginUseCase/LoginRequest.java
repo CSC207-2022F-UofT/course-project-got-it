@@ -1,5 +1,8 @@
 package LoginUseCase;
 
+/**
+ * Request to interactor to attempt to login
+ */
 public class LoginRequest {
 
     private String email;
