@@ -14,6 +14,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
+/**
+ * The main interface that presents all the screens for the user to view
+ */
 public class App implements PresenterObserver {
 
     private final Presenter presenter;
