@@ -1,12 +1,15 @@
 package screens;
 
+import entities.Request;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Pastrequestsscreen extends JFrame implements ActionListener, Screen, Backable{
-    private RequestController controller;
+    private PastrequestsController controller;
     private UserResponseController backController;
     private final Canvas Background;
     private final JLayeredPane LP;
@@ -22,7 +25,7 @@ public class Pastrequestsscreen extends JFrame implements ActionListener, Screen
         this.Past_Request_2.setOpaque(false);
         this.Back.setOpaque(false);
     }
-    public Pastrequestsscreen(String Request_0, String Request_1, String Request_2){
+    public Pastrequestsscreen(String request1, String request2, String request3){
         // I assume all three past_request_information will be passed as parameters in order to display
         // such info in the window. #PC_01.
         this.Background = new Canvas(){
@@ -37,18 +40,23 @@ public class Pastrequestsscreen extends JFrame implements ActionListener, Screen
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.requestFocus(true);
-        this.Past_Request_0 = new JButton(Request_0);
-        Past_Request_0.setOpaque(true);
-        Past_Request_0.setBackground(Color.pink);
-        Past_Request_0.setBounds(20, 81, 261, 45);
-        this.Past_Request_1 = new JButton(Request_1);
-        Past_Request_1.setOpaque(true);
-        Past_Request_1.setBackground(Color.pink);
-        Past_Request_1.setBounds(20, 171, 261, 45);
-        this.Past_Request_2 = new JButton(Request_2);
-        Past_Request_2.setOpaque(true);
-        Past_Request_2.setBackground(Color.pink);
-        Past_Request_2.setBounds(20, 261, 261, 45);
+
+            this.Past_Request_0 = new JButton(request1);
+            Past_Request_0.setOpaque(true);
+            Past_Request_0.setBackground(Color.pink);
+            Past_Request_0.setBounds(20, 81, 261, 45);
+            this.Past_Request_1 = new JButton(request2);
+            Past_Request_1.setOpaque(true);
+            Past_Request_1.setBackground(Color.pink);
+            Past_Request_1.setBounds(20, 171, 261, 45);
+            this.Past_Request_2 = new JButton(request3);
+            Past_Request_2.setOpaque(true);
+            Past_Request_2.setBackground(Color.pink);
+            Past_Request_2.setBounds(20, 261, 261, 45);
+
+
+
+
         Background.setBounds(0, 0, 300, 400);
         Background.setBackground(Color.pink);
         this.Back = new JButton("Back");
@@ -65,10 +73,7 @@ public class Pastrequestsscreen extends JFrame implements ActionListener, Screen
         this.add(LP);
         this.setVisible(true);
         this.Back.addActionListener(this);
-
-
 }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         this.backController.goBack();
@@ -77,7 +82,7 @@ public class Pastrequestsscreen extends JFrame implements ActionListener, Screen
 
     @Override
     public void setController(Controller controller) {
-        this.controller = (RequestController) controller;
+        this.controller = (PastrequestsController) controller;
     }
     public void setBackController(UserResponseController backController){
         this.backController = backController;
