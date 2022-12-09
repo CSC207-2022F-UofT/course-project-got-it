@@ -24,8 +24,14 @@ The Got It! application provides a sleek interface for users to request any item
 
 
 ## API Keys
+Please add this to app configuration in order to run the application.
+(This was done for security reasons)
+MONGOURI=mongodb+srv://GotItAdmin:Hmh8R4YZtTuKX1dI@cluster0.ef2wfei.mongodb.net/?retryWrites=true&w=majority;APIKey=58a2aad93a1525cc2adf7f5e6e3932d0;APIKEY=58a2aad93a1525cc2adf7f5e6e3932d0
+
+<img width="1037" alt="scscscs" src="https://user-images.githubusercontent.com/66842156/206624792-b895fd5d-c1c9-409f-9f72-5b7f6bf19d41.png">
 
 ## Core Features
+
 ### User Authentication and Updates
 #### Login
 - The application verifys the account exists in the database
