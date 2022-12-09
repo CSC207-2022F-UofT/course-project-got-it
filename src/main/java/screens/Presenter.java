@@ -1,6 +1,7 @@
 package screens;
 
 import LoginUseCase.LoginResponse;
+import entities.Request;
 import entities.User;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ public class Presenter{
 
     private final ArrayList<PresenterObserver> screenObservers;
     private final LinkedHashMap<String, Screen> screens;
-    private String currentScreen;
+    public String currentScreen;
 
 
     public Presenter(){
@@ -48,10 +49,24 @@ public class Presenter{
         this.currentScreen = "profilescreen";
         addScreen(this.currentScreen, profilescreen);
     }
-    public void showPastRequests(){
-        Pastrequestsscreen pastrequestsscreen = new Pastrequestsscreen("","","");
-        this.currentScreen = "pastrequests";
-        addScreen(this.currentScreen, pastrequestsscreen);
+    public void showPastRequests(ArrayList<Request> pastRequests){
+        if(pastRequests.size() > 2){
+            this.currentScreen = "pastrequests";
+            this.addScreen(this.currentScreen, new Pastrequestsscreen(pastRequests.get(0).getItemName(),
+                    pastRequests.get(1).getItemName(), pastRequests.get(2).getItemName()));
+        } else if (pastRequests.size() == 2) {
+            this.currentScreen = "pastrequests";
+            this.addScreen(this.currentScreen, new Pastrequestsscreen(pastRequests.get(0).getItemName(),
+                    pastRequests.get(1).getItemName(), ""));
+        } else if (pastRequests.size() == 1) {
+            this.currentScreen = "pastrequests";
+            this.addScreen(this.currentScreen, new Pastrequestsscreen(
+                    pastRequests.get(0).getItemName(), "", ""));
+        }
+        else {
+            this.currentScreen = "noRequests";
+            this.addScreen("noRequests", new Norequestscreen());
+        }
     }
 
     public void registerFailView(){
@@ -102,8 +117,21 @@ public class Presenter{
         notifyObservers();
     }
 
-    public void showCurrentrequest() {
-        Currentrequestscreen currentrequestscreen = new Currentrequestscreen("","","","","","", "");
+    public void showDeliveryTime(String time){
+        Deliverytimescreen deliverytimescreen = new Deliverytimescreen(time);
+        this.currentScreen = "deliveryTime";
+        addScreen(this.currentScreen, deliverytimescreen);
+        notifyObservers();
+    }
+
+    public void showDeliveryTimeFailed(){
+        DeliveryTimeFailed deliveryTimeFailed = new DeliveryTimeFailed();
+        this.currentScreen = "deliveryTimeFailed";
+        addScreen(this.currentScreen, deliveryTimeFailed);
+    }
+    public void showCurrentrequest(String itemName, String itemDescription, String itemLocation,
+                                   String deliveryLocation, String driverName) {
+        Currentrequestscreen currentrequestscreen = new Currentrequestscreen(itemName,itemDescription,itemLocation,deliveryLocation,driverName);
         this.currentScreen = "currenttrequests";
         addScreen(this.currentScreen, currentrequestscreen);
     }
