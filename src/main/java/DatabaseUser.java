@@ -21,7 +21,9 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 /**
- *
+ * Where we access the database and return values as needed.
+ * Is set up using environment variables given by App
+ * Implements the DatabaseGateway interface to prevent strong coupling
  */
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
