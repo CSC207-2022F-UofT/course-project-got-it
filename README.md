@@ -1,39 +1,87 @@
-# Project Template
+# Got It: Request Item Delivery System
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+## Screenshots
+#<img width="629" alt="Screenshot 2022-12-08 at 11 04 53 PM" src="https://user-images.githubusercontent.com/66842156/206622807-5430d4f1-24cd-4023-8356-7227844fff08.png">
+<img width="305" alt="Screenshot 2022-12-08 at 11 07 22 PM" src="https://user-images.githubusercontent.com/66842156/206622791-88d994ea-6dc8-4b23-b871-da425a8b1920.png">
+<img width="607" alt="Screenshot 2022-12-08 at 11 06 33 PM" src="https://user-images.githubusercontent.com/66842156/206622798-449c6cd9-b31a-4367-a8ca-ac427f4d36b2.png">
+<img width="307" alt="Screenshot 2022-12-08 at 11 06 16 PM" src="https://user-images.githubusercontent.com/66842156/206622804-6b032232-4175-4bd7-9042-a350672441ec.png">
+<img width="407" alt="Screenshot 2022-12-08 at 11 05 07 PM" src="https://user-images.githubusercontent.com/66842156/206622805-fc474919-5b86-41d4-b69b-5fafee34b840.png">
 
-## Checklist For Your Project
-- [ ] Verify the correct settings for your project repository
-- [ ] Set up Github Projects
-- [ ] Create the implementation plan using issues and Github Projects
-- [ ] Create deveopment branches for your features
-- [ ] Use pull requests to merge finished features into main branch
-- [ ] Conduct code reviews
+## Demo
+https://www.youtube.com/watch?v=Rvkmhezc3rg
 
-**If your team has trouble with any of these steps, please ask on Piazza. For example, with how GitHub Classroom works, your team *may* not have permissions to do some of the first few steps, in which case we'll post alternative instructions as needed.**
+## Summary
+Got It! is an app that helps you get what you need, when you need it. 
+With Got It you can quickly get an item delivered to you by our many drivers!
+Just submit a request, and we've got it!
 
-## Workflow Documents
+## Problem
+A User needs an item delievered to them.
+This item could be anything they are unable to procure themselves due to varying circumstances (ex. long commute, disability, illness, etc.). The item could be a necessity (ex. groceries) or items they may have lost or forgotten. 
 
-* Github Workflow: Please refer to the workflow that was introduced in the first lab. You should follow this when working on your code. The following document provides additional details too.
+## Solution
 
-* [Project Planning and Development Guide](project_plan_dev.md): This document helps you to understand how to create and maintain a project plan for your class project. **This document helps you to complete the Implementation Plan Milestone.**
+The Got It! application provides a sleek interface for users to request any items they need delivered to them by one of our drivers. They simply fill out delivery information and item descriptions, and are then assigned a driver and given their estimated delviery time. 
 
-## Gradle Project
-Import this project into your Intellij editor. It should automatically recognise this as a gradle repository.
-The starter code was built using SDK version 11.0.1. Ensure that you are using this version for this project. (You can, of course, change the SDK version as per your requirement if your team has all agreed to use a different version)
 
-You have been provided with two starter files for demonstration: HelloWorld and HelloWorldTest.
+## API Keys
+Please add this to app configuration in order to run the application.
+(This was done for security reasons)
+MONGOURI=mongodb+srv://GotItAdmin:Hmh8R4YZtTuKX1dI@cluster0.ef2wfei.mongodb.net/?retryWrites=true&w=majority;APIKey=58a2aad93a1525cc2adf7f5e6e3932d0;APIKEY=58a2aad93a1525cc2adf7f5e6e3932d0
 
-You will find HelloWorld in `src/main/java/tutorial` directory. Right click on the HelloWorld file and click on `Run HelloWorld.main()`.
-This should run the program and print on your console.
+<img width="1037" alt="scscscs" src="https://user-images.githubusercontent.com/66842156/206624792-b895fd5d-c1c9-409f-9f72-5b7f6bf19d41.png">
 
-You will find HelloWorldTest in `src/test/java/tutorial` directory. Right click on the HelloWorldTest file and click on `Run HelloWorldTest`.
-All tests should pass. Your team can remove this sample of how testing works once you start adding your project code to the repo.
+## Core Features
 
-Moving forward, we expect you to maintain this project structure. You *should* use Gradle as the build environment, but it is fine if your team prefers to use something else -- just remove the gradle files and push your preferred project setup. Assuming you stick with Gradle, your source code should go into `src/main/java` (you can keep creating more subdirectories as per your project requirement). Every source class can auto-generate a test file for you. For example, open HelloWorld.java file and click on the `HelloWorld` variable as shown in the image below. You should see an option `Generate` and on clicking this your should see an option `Test`. Clicking on this will generate a JUnit test file for `HelloWorld` class. This was used to generate the `HelloWorldTest`.
+### User Authentication and Updates
+#### Login
+- The application verifys the account exists in the database
+- Navigates to Home Screen and Sets the current
+#### Register
+- Users can create an account within the database
+- The password/email fields are validated
+- The address is converted into a longitude/latitude format using the PositionStack API
+#### Updates
+- Users can update their account information
+- Passwords are hidden for security reasons
+- The address string is converted to a longitude/latitude format using the PositionStack API
+### Creating/Viewing a Request
+#### Creating a Request
+- Users can create a request which is stored in the database
+- Users get assigned a closest driver from the drivers collection in the database
+- Address are converted from Strings to geocodes in the database
+#### Viewing Requests
+- Users can view past requests on the Past Requests screen
+- Users can view their active request on the current request screen
+- Users can see an estimated time of arrival by clicking the get time of delivery button
+### Navigation
+#### Back Functionality
+- Users can go back from any screen to their previous screen
+- Some screens automatically go back once the user submits a response (e.g. confirmation screens)
+#### Presenting New Screen
+- Screens are implemented using the observer pattern and a hash map
+- When the app is notified about a screen change from presenter, it searches through its screen hash map to get the controller and interactor to complete the use case
 
-![image](https://user-images.githubusercontent.com/5333020/196066655-d3c97bf4-fdbd-46b0-b6ae-aeb8dbcf351d.png)
+## Design Patterns & Clean Architecture
+### Observer/Observerable
+- We used the observer/observerable pattern to implement the presenter
+- We used Clean Architecture to follow SOLID principles
+- Accessed the database and APIs through gateways to prevent dependence
+### Factory Pattern
+- Implemented on Register Screen 
+- Creates a User Entity
 
-You can create another simple class and try generating a test for this class.
+## Contributions
+Home Screen, Past Requests and Current Request were a collective effort of Pranav Agarwal, Arjun Saili, Varchas Sharma, Aziz Shahid and Hailey Ng. Though the commits are attributed to a few individuals, this work was a team effort. 
+
+Aziz Shahid implemented the interactor and controller for the MakeRequest use case which takes input from the user and stores the request information in the database. He also implemented the interactor and controller for the Delivery use case which calculates the estimated delivery time. @ArjunSaili1 helped to integrate shahi7's work into the main branch (so the commits are attributed to Arjun but the work was mostly by @shahi7). 
+
+Hailey Ng helped create the first draft GUI for the MakeRequest and Delivery use cases. She also created the tests for the program and created the presentation slides. She created the entities and helped Aziz Shahid with the controllers. Work was integrated in a PR by Arjun Saili so the commits were attributed to him but the work was done by Hailey
+
+Varchas Sharma implemented the BackButton functionality which allows navigation to the previous screen. He also helped create the presentation and added all the documentation/comments to the code. Intially helped with allocate driver before being reassigned to back functionality.
+
+Arjun Saili created the database and the functions which access it, and established the connection to a geocoder API which converts String addresses to latitude/longitude coordinates. He also implemented the Login use case which handles user authentication and login, and helped to integrate branches and resolve merge conflicts. He also created the presenter observer system to show screens. 
+
+Pranav Agarwal implemented the Register use case and assisted Arjun Saili with the Login use case. He also created the past and current request screens which display estimated delivery time and up to the past three requests the user had made. He also independetly made the update profile functionality and intergrated the JFrames screens created by Zhaolin Chen. 
+
+Zhaolin Chen created most of the JFrames for the GUI.
