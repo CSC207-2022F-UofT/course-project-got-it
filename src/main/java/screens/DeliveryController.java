@@ -10,11 +10,13 @@ import screens.Controller;
 public class DeliveryController implements Controller {
 
     final DeliveryInputBoundary inputBoundary;
-    public DeliveryController(DeliveryInputBoundary inputBoundary){
+    private final User currentUser;
+    public DeliveryController(DeliveryInputBoundary inputBoundary, User currentUser){
         this.inputBoundary = inputBoundary;
+        this.currentUser = currentUser;
     }
 
-    public void request(User currentUser){
+    public void request(){
         DeliveryRequest request = new DeliveryRequest(currentUser);
         inputBoundary.status(request);
     }
