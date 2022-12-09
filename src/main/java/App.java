@@ -15,7 +15,9 @@ import java.awt.*;
 import java.util.HashMap;
 
 /**
- * The main file that presents all the screens from presenter for the user to view
+ * Observes the presenter. Creates a screen hashmap that stores the screen, controller and interactor for all the components
+ * When notified by presenter, changes the screen to the screen name mentioned in the screen hashmap
+ * Also sets up external functionalities such as PositionStackAPI and MongoDB API
  */
 public class App implements PresenterObserver {
 

@@ -20,6 +20,9 @@ import org.bson.types.ObjectId;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ *
+ */
 public class DatabaseUser implements DatabaseGateway {
     private final ConnectionString mongoURI;
     private HashMap<String, Object> loggedInUser;
