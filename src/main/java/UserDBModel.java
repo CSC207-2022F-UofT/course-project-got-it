@@ -1,5 +1,8 @@
 import org.bson.codecs.pojo.annotations.BsonProperty;
 
+/**
+ *
+ */
 public class UserDBModel {
     private int longitude;
     @BsonProperty(value = "longitude")
