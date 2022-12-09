@@ -27,4 +27,9 @@ public interface DatabaseGateway {
     double[] getDriverLocation(String requestId);
 
     ArrayList<Request> getRequests(User user);
+
+    ArrayList<Request> getPassedRequests(User user);
+    
+    String getDriverName(String requestId);
+
 }
