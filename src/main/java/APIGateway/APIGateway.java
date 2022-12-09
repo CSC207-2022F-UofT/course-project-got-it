@@ -1,7 +1,7 @@
 package APIGateway;
 
 /**
- * Interface for API Gateway to convert address to coordinates
+ * Interface for API Gateway for the PositionStack API that converts geocodes to addresses and vice-versa
  */
 public interface APIGateway {
     public double[] getGeocode(String address);
