@@ -6,10 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-/**
- * JFrame for login failed view to inform the user about the invalid credentials
- */
-public class LoginFailed extends JFrame implements ActionListener, Screen{
+
+public class DeliveryTimeFailed extends JFrame implements ActionListener, Screen{
     private UserResponseController controller;
     private final JLayeredPane LP;
     private final Canvas Background;
@@ -20,14 +18,14 @@ public class LoginFailed extends JFrame implements ActionListener, Screen{
         this.Background.setSize(0, 0);
         this.Try_Again.setOpaque(true);
     }
-    public LoginFailed() {
+    public DeliveryTimeFailed() {
         this.setTitle("Error_00");
         this.Background = new Canvas() {
             @Override
             public void paint(Graphics g) {
                 g.setFont(new Font("Monaco", Font.BOLD, 12));
-                g.drawString("Sorry, Login failed", 118, 50);
-                g.drawString("Please provide a valid email address and password", 25, 75);
+                g.drawString("Sorry, Delivery failed", 118, 50);
+                g.drawString("No delivery", 25, 75);
             }
         };
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

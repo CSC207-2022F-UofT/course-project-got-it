@@ -1,5 +1,5 @@
 package MakeRequestUseCase;
-
+//KEEP MINE
 public class RequestResponse {
 
     private boolean validInput;

@@ -4,30 +4,26 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
-/**
- * JFrame for login failed view to inform the user about the invalid credentials
- */
-public class LoginFailed extends JFrame implements ActionListener, Screen{
+public class Nocurrentrequestscreen extends JFrame implements ActionListener, Screen{
     private UserResponseController controller;
     private final JLayeredPane LP;
     private final Canvas Background;
-    private final JButton Try_Again;
+    private final JButton Back;
     public void f0(){
         // Ignore this method. #PC_01.
         this.LP.setOpaque(true);
         this.Background.setSize(0, 0);
-        this.Try_Again.setOpaque(true);
+        this.Back.setOpaque(true);
     }
-    public LoginFailed() {
+    public Nocurrentrequestscreen() {
         this.setTitle("Error_00");
         this.Background = new Canvas() {
             @Override
             public void paint(Graphics g) {
-                g.setFont(new Font("Monaco", Font.BOLD, 12));
-                g.drawString("Sorry, Login failed", 118, 50);
-                g.drawString("Please provide a valid email address and password", 25, 75);
+                g.setFont(new Font("Monaco", Font.BOLD, 15));
+                g.drawString("Sorry", 178, 50);
+                g.drawString("You have no ongoing request!", 82, 75);
             }
         };
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,17 +36,21 @@ public class LoginFailed extends JFrame implements ActionListener, Screen{
         this.setLocationRelativeTo(null);
         this.requestFocus(true);
         this.setLocationRelativeTo(null);
-        this.Try_Again = new JButton("Try Again");
-        Try_Again.setBounds(140, 115, 120, 30);
-        Try_Again.setOpaque(true);
-        Try_Again.setBackground(new Color(255, 255, 255));
+        this.Back = new JButton("back");
+        Back.setBounds(140, 115, 120, 30);
+        Back.setOpaque(true);
+        Back.setBackground(new Color(255, 255, 255));
         this.LP = new JLayeredPane();
         LP.setBounds(0, 0, 400, 190);
-        LP.add(Try_Again, Integer.valueOf(0));
+        LP.add(Back, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
         this.add(LP);
         this.setVisible(true);
-        Try_Again.addActionListener(this);
+        Back.addActionListener(this);
+    }
+
+    public static void main(String[] args){
+        new Nocurrentrequestscreen();
     }
 
     @Override

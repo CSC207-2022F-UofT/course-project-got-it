@@ -1,15 +1,14 @@
 package screens;
 
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
-/**
- * JFrame for login failed view to inform the user about the invalid credentials
- */
-public class LoginFailed extends JFrame implements ActionListener, Screen{
+
+public class RequestMakeFailed extends JFrame implements ActionListener, Screen{
     private UserResponseController controller;
     private final JLayeredPane LP;
     private final Canvas Background;
@@ -20,14 +19,14 @@ public class LoginFailed extends JFrame implements ActionListener, Screen{
         this.Background.setSize(0, 0);
         this.Try_Again.setOpaque(true);
     }
-    public LoginFailed() {
+    public RequestMakeFailed() {
         this.setTitle("Error_00");
         this.Background = new Canvas() {
             @Override
             public void paint(Graphics g) {
-                g.setFont(new Font("Monaco", Font.BOLD, 12));
-                g.drawString("Sorry, Login failed", 118, 50);
-                g.drawString("Please provide a valid email address and password", 25, 75);
+                g.setFont(new Font("Monaco", Font.BOLD, 15));
+                g.drawString("Sorry", 178, 50);
+                g.drawString("Request Failed. There may be no drivers available...", 45, 75);
             }
         };
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,7 +39,7 @@ public class LoginFailed extends JFrame implements ActionListener, Screen{
         this.setLocationRelativeTo(null);
         this.requestFocus(true);
         this.setLocationRelativeTo(null);
-        this.Try_Again = new JButton("Try Again");
+        this.Try_Again = new JButton("Try Again later");
         Try_Again.setBounds(140, 115, 120, 30);
         Try_Again.setOpaque(true);
         Try_Again.setBackground(new Color(255, 255, 255));
@@ -51,6 +50,9 @@ public class LoginFailed extends JFrame implements ActionListener, Screen{
         this.add(LP);
         this.setVisible(true);
         Try_Again.addActionListener(this);
+    }
+    public static void main(String[] args){
+        new RequestMakeFailed();
     }
 
     @Override
