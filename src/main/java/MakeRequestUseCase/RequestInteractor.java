@@ -41,6 +41,9 @@ public class RequestInteractor implements RequestInputBoundary{
         if(checkForAnyEmptyField(requestObj.getDetails()) && itemGeoCode.length > 1 && deliveryGeoCode.length > 1 &&
                 !Objects.equals(requestID, "save_failed")){
             if(this.dbGateway.assignClosestDriver(requestID)){
+                //DeliveryInteractor deliveryInteractor = new DeliveryInteractor(this.dbGateway, this.presenter);
+                //DeliveryController deliveryController = new DeliveryController(deliveryInteractor);
+                //deliveryController.request(this.currentuser);
                 this.presenter.showPreviousScreen();
             }
             else{
@@ -50,9 +53,6 @@ public class RequestInteractor implements RequestInputBoundary{
         else{
             this.presenter.showMakeRequestFail();
         }
-        DeliveryInteractor deliveryInteractor = new DeliveryInteractor(this.dbGateway, this.presenter);
-        DeliveryController deliveryController = new DeliveryController(deliveryInteractor);
-        deliveryController.request(this.currentuser);
     }
 
     private String addZeroIfNeeded(String time){
