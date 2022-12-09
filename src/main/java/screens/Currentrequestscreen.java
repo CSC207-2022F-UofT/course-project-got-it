@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class Currentrequestscreen extends JFrame implements ActionListener, Backable, Screen{
     private UserResponseController backController;
+    private DeliveryController controller;
     private final Canvas Background;
     private final JLayeredPane LP;
     private final JTextField Item_Name;
@@ -14,8 +16,7 @@ public class Currentrequestscreen extends JFrame implements ActionListener, Back
     private final JTextField Item_Location;
     private final JTextField Delivery_Location;
     private final JTextField Driver;
-    private final JTextField Delivery_Status;
-    private final JTextField Time_Of_Delivery;
+    private final JButton Deliverytime;
     private final JButton Back;
     public void f0(){
         // Please ignore this method. #PC_01.
@@ -26,14 +27,12 @@ public class Currentrequestscreen extends JFrame implements ActionListener, Back
         this.Item_Location.setBackground(Color.BLACK);
         this.Delivery_Location.setBackground(Color.black);
         this.Driver.setBackground(Color.pink);
-        this.Delivery_Status.setBackground(Color.BLACK);
-        this.Time_Of_Delivery.setBackground(Color.BLUE);
         this.Back.setBackground(Color.BLUE);
+        this.Deliverytime.setBackground(Color.BLUE);
     }
 
     public Currentrequestscreen(String Item_Name_0, String Item_description_0
-            , String Item_Location_0, String Delivery_Location_0, String Driver_0,
-                                String Delivery_Status_0, String Time_Of_Delivery_0){
+            , String Item_Location_0, String Delivery_Location_0, String Driver_0){
         this.Background = new Canvas(){
             public void paint(Graphics g){
                 g.setFont(new Font("Monaco", Font.BOLD, 29));
@@ -42,12 +41,11 @@ public class Currentrequestscreen extends JFrame implements ActionListener, Back
                 g.drawString("Item Location:", 29, 180);
                 g.drawString("Delivery Location:", 29, 240);
                 g.drawString("Driver:", 29, 300);
-                g.drawString("Delivery Status:", 29, 360);
-                g.drawString("Time of Delivery:", 29, 420);
+
             }
         };
         Background.setBackground(Color.pink);
-        Background.setSize(600, 600);
+        Background.setSize(600, 550);
         this.Item_Name = new JTextField();
         Item_Name.setBounds(210, 32, 290, 39);
         Item_Name.setOpaque(true);
@@ -68,23 +66,25 @@ public class Currentrequestscreen extends JFrame implements ActionListener, Back
         Driver.setBounds(155, 270, 250, 39);
         Driver.setOpaque(true);
         Driver.setEditable(false);
-        this.Delivery_Status = new JTextField();
-        Delivery_Status.setBounds(305, 330, 280, 39);
-        Delivery_Status.setOpaque(true);
-        Delivery_Status.setEditable(false);
         this.Back = new JButton("Back");
         Back.setOpaque(true);
         Back.setBackground(Color.pink);
-        Back.setBounds(260, 500, 90, 41);
+        Back.setBounds(260, 400, 90, 41);
+        this.Back.setActionCommand("back");
+        this.Deliverytime = new JButton("Time of Delivery");
+        Deliverytime.setOpaque(true);
+        Deliverytime.setBackground(Color.pink);
+        Deliverytime.setBounds(210, 350, 200, 41);
+        this.Deliverytime.setActionCommand("time");
         this.LP = new JLayeredPane();
         this.LP.setSize(600, 600);
-        this.Time_Of_Delivery = new JTextField();
-        Time_Of_Delivery.setBounds(320, 390, 270, 39);
-        Time_Of_Delivery.setOpaque(true);
-        Time_Of_Delivery.setEditable(false);
+        Delivery_Location.setText(Delivery_Location_0);
+        Driver.setText(Driver_0);
+        Item_Name.setText(Item_Name_0);
+        Item_Description.setText(Item_description_0);
+        Item_Location.setText(Item_Location_0);
         LP.add(Back);
-        LP.add(Time_Of_Delivery);
-        LP.add(Delivery_Status, Integer.valueOf(0));
+        LP.add(Deliverytime);
         LP.add(Driver, Integer.valueOf(0));
         LP.add(Delivery_Location, Integer.valueOf(0));
         LP.add(Item_Location, Integer.valueOf(0));
@@ -92,27 +92,24 @@ public class Currentrequestscreen extends JFrame implements ActionListener, Back
         LP.add(Item_Description, Integer.valueOf(0));
         LP.add(Background, Integer.valueOf(0));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(600,600);
+        this.setSize(600,550);
         this.add(LP);
 //        LP.add();
-        Delivery_Location.setText(Delivery_Location_0);
-        Driver.setText(Driver_0);
-        Delivery_Status.setText(Delivery_Status_0);
-        Item_Name.setText(Item_Name_0);
-        Item_Description.setText(Item_description_0);
-        Item_Location.setText(Item_Location_0);
-        Time_Of_Delivery.setText(Time_Of_Delivery_0);
+
         this.setVisible(true);
         Back.addActionListener(this);
+        Deliverytime.addActionListener(this);
     }
 
-    public static void main(String[] args) {
-        new Currentrequestscreen("Item_Name_Text", "Item_Description_Text",
-                "Item_Location_Text", "Delivery_Location_Text", "Driver_Text", "Delivery_Status_Text", "Time_Text");
-    }
+
 
     public void actionPerformed(ActionEvent e) {
-        this.backController.goBack();
+        if(Objects.equals(e.getActionCommand(), "time")) {
+            this.controller.request();
+        }
+        if(Objects.equals(e.getActionCommand(), "back")) {
+            this.backController.goBack();
+        }
     }
     @Override
     public void setBackController(UserResponseController backController){
@@ -121,6 +118,7 @@ public class Currentrequestscreen extends JFrame implements ActionListener, Back
 
     @Override
     public void setController(Controller controller) {
+        this.controller = (DeliveryController) controller;
 
     }
 }
