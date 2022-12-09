@@ -1,4 +1,6 @@
 import APIGateway.APIGateway;
+import DeliveryUseCase.DeliveryInputBoundary;
+import DeliveryUseCase.DeliveryInteractor;
 import MakeRequestUseCase.RequestInputBoundary;
 import MakeRequestUseCase.RequestInteractor;
 import DatabaseGateway.DatabaseGateway;
@@ -34,17 +36,25 @@ public class App implements PresenterObserver {
         this.apiGateway = new PositionStackAPI(apiKey);
         this.screenMap = new HashMap<>();
         this.screenMap.put(
+                "deliveryTime", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        this.screenMap.put("currenttrequests",
+                new DeliveryController((DeliveryInputBoundary) new DeliveryInteractor(this.dbGateway, this.presenter),
+                        this.currentUser));
+        this.screenMap.put(
                 "requestFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        this.screenMap.put(
+                "noRequests", new UserResponseController(new UserResponseInteractor(this.presenter)));
         this.screenMap.put(
                 "login", new LoginController(new LoginInteractor(this.dbGateway, this.apiGateway, this.presenter, this.currentUser)));
         this.screenMap.put(
                 "register", new RegisterController(new RegisterInteractor(this.dbGateway, this.apiGateway, new UserFactory(), this.presenter)));
-        this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter, this.currentUser, this.apiGateway)));
+        this.screenMap.put("homescreen", new screens.HomescreenController(new HomescreenInteractor(this.presenter, this.currentUser, this.apiGateway, this.dbGateway)));
         this.screenMap.put("profilescreen", new screens.ProfilescreenController(new ProfilescreenInteractor(this.dbGateway,
                 this.currentUser, this.presenter)));
         this.screenMap.put("makeRequest", new RequestController(
-                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter), this.currentUser));
+                (RequestInputBoundary) new RequestInteractor(this.apiGateway, this.dbGateway, this.presenter, this.currentUser), this.currentUser));
         this.screenMap.put("loginFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
+        this.screenMap.put("deliveryTimeFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
         this.screenMap.put("registerFailed", new UserResponseController(new UserResponseInteractor(this.presenter)));
     }
 
